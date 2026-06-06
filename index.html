@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vegamarcon — Build. Design. Deliver.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* === WHITE & GREY PALETTE === */
+  --ivory:#FFFFFF;
+  --ivory-2:#F8F8F8;
+  --ivory-3:#F2F2F2;
+  --sand:#E8E8E8;
+  --bronze:#000000;
+  --bronze-light:#222222;
+  --bronze-dark:#111111;
+  --ink:#1A1A1A;
+  --ink-soft:#3A3A3A;
+  --stone:#6B6B6B;
+  --stone-light:#9B9B9B;
+  --charcoal:#4A4A4A;
+  --warm-white:#FFFFFF;
+  --navy:#1B2A4A;
+  --navy-dark:#0F1E36;
+  --navy-light:#2C3E6A;
+  --dgrey:#2E2E2E;
+  --dgrey-dark:#1A1A1A;
+  --dgrey-light:#3D3D3D;
+  --line:rgba(0,0,0,0.08);
+  --line-strong:rgba(0,0,0,0.15);
+  --dark-bg:#F2F2F2;
+  --dark-bg-deep:#E8E8E8;
+  --accent:#2E2E2E;
+  --accent-hover:#1A1A1A;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Outfit',sans-serif;background:#FFFFFF;color:#1A1A1A;overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cursor{position:fixed;width:10px;height:10px;background:var(--bronze);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s;mix-blend-mode:multiply}
+#cursor-ring{position:fixed;width:38px;height:38px;border:1px solid var(--bronze);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.6;transition:width .3s,height .3s,opacity .3s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 4%;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
+nav.scrolled{background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-logo{font-family:'Georgia',serif;font-size:1.65rem;font-weight:500;letter-spacing:1px;color:#2a2a2a;text-decoration:none;display:flex;align-items:center;gap:3px}
+.nav-logo sup{font-size:.55rem;letter-spacing:2px;color:var(--bronze);font-family:'Outfit',sans-serif;font-weight:500;text-transform:uppercase;margin-top:-8px}
+.nav-center{display:flex;gap:2.5rem;list-style:none}
+.nav-center a{font-size:.78rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;color:#4a4a4a;text-decoration:none;transition:color .2s;position:relative}
+.nav-center a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--bronze);transform:scaleX(0);transition:transform .25s}
+.nav-center a:hover{color:#1a1a1a}
+.nav-center a:hover::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-tel{font-size:.78rem;letter-spacing:.5px;color:#4a4a4a;font-weight:400}
+.nav-cta{background:var(--dgrey);color:#fff;border:none;padding:.6rem 1.5rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;cursor:none;transition:background .25s}
+.nav-cta:hover{background:var(--dgrey-dark)}
+
+/* HERO */
+#hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:url('https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=85') center/cover no-repeat;will-change:transform}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,8,5,0.72) 0%,rgba(15,12,8,0.45) 40%,rgba(10,8,5,0.75) 75%,rgba(8,6,3,0.92) 100%)}
+.hero-content{position:relative;z-index:2;width:100%;padding:0 4% 6%;display:grid;grid-template-columns:1fr;align-items:flex-end;gap:3rem}
+.hero-eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem}
+.hero-line{width:40px;height:1px;background:var(--bronze-light);opacity:.9}
+.hero-eyebrow span{font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.9);font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.hero-h1{font-family:'Georgia',serif;font-size:clamp(3.8rem,8vw,7.5rem);font-weight:300;line-height:.95;color:#fff;letter-spacing:-1px;margin-bottom:2rem;text-shadow:0 2px 24px rgba(0,0,0,.7),0 4px 48px rgba(0,0,0,.5)}
+.hero-h1 em{font-style:italic;color:#ffffff;text-shadow:none}
+.hero-h1 .line-offset{display:block;padding-left:clamp(2rem,8vw,8rem)}
+.hero-desc{max-width:420px;font-size:.98rem;color:rgba(255,255,255,.88);line-height:1.8;font-weight:300;margin-bottom:2.5rem;text-shadow:0 1px 12px rgba(0,0,0,.7)}
+.hero-actions{display:flex;gap:1.2rem;align-items:center}
+.btn-hero-primary{background:var(--dgrey);color:#fff;border:none;padding:.9rem 2.2rem;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:none;transition:background .25s}
+.btn-hero-primary:hover{background:var(--dgrey-dark)}
+.btn-hero-ghost{background:transparent;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.25);padding:.9rem 2.2rem;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;cursor:none;transition:all .25s}
+.btn-hero-ghost:hover{border-color:rgba(255,255,255,.6);color:#fff}
+.hero-stats-mini{display:flex;flex-direction:column;gap:1.8rem;align-items:flex-end}
+.hero-stat{border-right:1px solid rgba(255,255,255,.35);padding-right:1.5rem}
+.hero-stat-num{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:600;color:#fff;line-height:1;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.hero-stat-label{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:.2rem}
+.hero-scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.scroll-mouse{width:22px;height:34px;border:1px solid rgba(255,255,255,.3);border-radius:11px;display:flex;justify-content:center;padding-top:5px}
+.scroll-dot{width:3px;height:7px;background:var(--bronze-light);border-radius:2px;animation:scrollDot 2s ease-in-out infinite}
+@keyframes scrollDot{0%,100%{transform:translateY(0);opacity:1}60%{transform:translateY(10px);opacity:0}}
+.scroll-text{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+
+/* MARQUEE */
+.marquee-strip{background:#F2F2F2;padding:.9rem 0;overflow:hidden;border-top:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06)}
+.marquee-track{display:flex;animation:marquee 30s linear infinite;width:max-content}
+.marquee-item{display:flex;align-items:center;gap:1.5rem;padding:0 2rem;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(40,40,40,.75);white-space:nowrap;font-weight:500}
+.marquee-dot{width:4px;height:4px;background:var(--bronze);border-radius:50%;flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* COMMONS */
+.s-pad{padding:4rem 4%}
+.s-pad-sm{padding:3rem 4%}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .8s ease,transform .8s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.eyebrow{display:inline-flex;align-items:center;gap:.8rem;font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--bronze);font-weight:500;margin-bottom:1.2rem}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--bronze)}
+.sec-title{font-family:'Georgia',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:400;line-height:1.08;color:#1a1a1a;letter-spacing:-.5px}
+.sec-title em{font-style:italic;color:var(--bronze)}
+.sec-body{font-size:.95rem;color:var(--stone);line-height:1.85;font-weight:300;max-width:500px}
+.divider{width:48px;height:1px;background:var(--bronze);margin:1.2rem 0}
+
+/* WHO */
+#who{background:#FFFFFF;overflow:hidden}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+
+/* Media column — extra bottom padding to make room for float image */
+.who-media{
+  position:relative;
+  padding:0 0 4rem 2.5rem; /* left pad for badge, bottom pad for float */
+}
+
+/* Main image */
+.who-img-main{
+  width:100%;height:580px;
+  object-fit:cover;object-position:center 30%;
+  display:block;
+  filter:contrast(1.03) saturate(0.9);
+  box-shadow:0 24px 64px rgba(0,0,0,.1);
+}
+
+/* Floating accent image — anchored inside the padded container, won't clip */
+.who-img-float{
+  position:absolute;
+  bottom:0;right:-1.5rem;
+  width:185px;height:240px;
+  object-fit:cover;object-position:center;
+  border:5px solid #fff;
+  box-shadow:0 16px 48px rgba(26,21,16,.18);
+  filter:contrast(1.03) saturate(0.88);
+}
+
+/* Badge — sits on the left edge inside the padding lane */
+.who-badge{
+  position:absolute;
+  top:2.5rem;left:0;
+  background:var(--dgrey);
+  padding:1.4rem 1.6rem;
+  text-align:center;
+  box-shadow:0 8px 32px rgba(46,46,46,.25);
+  z-index:2;
+}
+.who-badge-num{font-family:'Outfit',sans-serif;font-size:2.6rem;font-weight:400;color:#fff;line-height:1}
+.who-badge-text{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:.3rem;display:block}
+
+/* Text column */
+.who-text-block{padding-left:0}
+.who-text-block .sec-title{margin:1rem 0 1.5rem}
+.who-attributes{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
+.attr{border-top:1px solid rgba(0,0,0,.08);padding-top:1rem}
+.attr h4{font-family:'Georgia',serif;font-size:1.05rem;font-weight:500;color:#1a1a1a;margin-bottom:.3rem}
+.attr p{font-size:.8rem;color:var(--stone-light);line-height:1.6;font-weight:300}
+
+/* SERVICES — original CSS kept for modal */
+#services-old{background:#F5F5F5;position:relative;overflow:hidden}
+.svc-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem}
+.svc-header .sec-title{color:#1a1a1a}
+.svc-header .eyebrow{color:#555}
+.svc-header .eyebrow::before{background:#555}
+.svc-link-all{font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:#4a4a4a;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.2);padding-bottom:.2rem;transition:color .2s,border-color .2s}
+.svc-link-all:hover{color:var(--bronze-dark);border-color:var(--bronze)}
+.svc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.04)}
+.svc-card{background:#FFFFFF;padding:3rem 2.5rem 3.5rem;position:relative;overflow:hidden;transition:background .4s,transform .3s,box-shadow .4s;cursor:pointer}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--bronze);transform:scaleX(0);transform-origin:left;transition:transform .45s ease}
+.svc-card:hover{background:#FFFFFF;box-shadow:0 16px 48px rgba(0,0,0,.08)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-num{font-family:'Outfit',sans-serif;font-size:5rem;font-weight:300;color:rgba(0,0,0,.06);position:absolute;top:1.5rem;right:2rem;line-height:1;pointer-events:none;transition:color .4s}
+.svc-card:hover .svc-num{color:rgba(42,111,219,.18)}
+.svc-icon-wrap{width:48px;height:48px;margin-bottom:2rem}
+.svc-icon-wrap svg{width:100%;height:100%}
+.svc-card h3{font-family:'Georgia',serif;font-size:1.9rem;font-weight:400;color:#1a1a1a;margin-bottom:1rem;line-height:1.1;letter-spacing:-.3px}
+.svc-card p{font-size:.875rem;color:#4a4a4a;line-height:1.85;font-weight:300;margin-bottom:2rem}
+.svc-list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.svc-list li{font-size:.78rem;color:#5a5a5a;display:flex;align-items:center;gap:.7rem;font-weight:300;letter-spacing:.3px}
+.svc-list li::before{content:'';width:18px;height:1px;background:var(--bronze);opacity:.7;flex-shrink:0}
+/* Explore button visible always, more prominent */
+.svc-card-explore{display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;padding:.65rem 1.4rem;background:var(--dgrey);color:#fff;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:background .25s,transform .2s;position:relative;z-index:2}
+.svc-card-explore:hover{background:var(--dgrey-dark);transform:translateX(4px)}
+.svc-card-explore svg{width:14px;height:14px;transition:transform .25s}
+.svc-card:hover .svc-card-explore svg{transform:translateX(4px)}
+
+/* ======= SERVICE CARDS — CLEAN & CRISP ======= */
+
+#services{
+  background:#F8F8F8;
+  position:relative;overflow:hidden;padding-bottom:0;
+}
+
+.svc-header{margin-bottom:3rem;position:relative;z-index:1}
+.svc-header .sec-title{color:#1a1a1a}
+.svc-header .eyebrow{color:#555}
+.svc-header .eyebrow::before{background:#555}
+#services .svc-link-all{color:var(--stone);border-bottom-color:rgba(0,0,0,.15)}
+#services .svc-link-all:hover{color:#1a1a1a;border-color:#1a1a1a}
+
+.svc-cards-v3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+  position:relative;z-index:1;
+}
+
+/* BASE CARD */
+.svc3-card{
+  position:relative;
+  display:flex;flex-direction:column;
+  cursor:pointer;
+  border-radius:12px;
+  padding:2.2rem 2rem 2.4rem;
+  background:#fff;
+  border:1.5px solid rgba(0,0,0,.07);
+  border-top:3px solid #2E2E2E;
+  box-shadow:0 2px 12px rgba(0,0,0,.04),0 8px 32px rgba(0,0,0,.04);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.svc3-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 8px 28px rgba(0,0,0,.1),0 20px 48px rgba(0,0,0,.08);
+  border-color:rgba(0,0,0,.18);
+}
+
+/* Ghost number — solid color, no clip-path tricks */
+.svc3-bg-num{
+  position:absolute;bottom:-1.5rem;right:-.5rem;
+  font-family:'Outfit',sans-serif;
+  font-size:9rem;font-weight:300;line-height:1;
+  letter-spacing:-4px;pointer-events:none;user-select:none;
+  color:rgba(0,0,0,.04);
+}
+
+/* Icon */
+.svc3-icon-block{
+  width:52px;height:52px;border-radius:10px;
+  background:#F2F2F2;
+  border:1px solid rgba(0,0,0,.08);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.4rem;
+  flex-shrink:0;
+}
+.svc3-icon-block svg{width:24px;height:24px;stroke:#2E2E2E;fill:none;stroke-width:1.4}
+
+/* Text */
+.svc3-num-label{
+  font-size:.6rem;letter-spacing:3px;text-transform:uppercase;
+  color:#888;font-weight:600;margin-bottom:.5rem;display:block;
+}
+.svc3-title{
+  font-family:'Georgia',serif;font-size:2.1rem;
+  font-weight:500;color:#1a1a1a;line-height:1.05;
+  letter-spacing:-.3px;margin-bottom:.6rem;
+}
+.svc3-title em{font-style:italic;color:#4a4a4a}
+.svc3-tagline{
+  font-size:.88rem;color:#3a3a3a;line-height:1.7;
+  font-weight:400;margin-bottom:1.4rem;
+}
+
+/* Proof strip */
+.svc3-proof{
+  display:flex;gap:0;margin-bottom:1.4rem;
+  background:#F5F5F5;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:8px;overflow:hidden;
+}
+.svc3-proof-item{
+  flex:1;text-align:center;padding:.7rem .4rem;
+  border-right:1px solid rgba(0,0,0,.06);
+}
+.svc3-proof-item:last-child{border-right:none}
+.svc3-proof-num{
+  font-family:'Georgia',serif;font-size:1.45rem;
+  font-weight:600;color:#1a1a1a;display:block;line-height:1;
+}
+.svc3-proof-label{
+  font-size:.55rem;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--stone);font-weight:500;display:block;margin-top:.25rem;
+}
+
+/* Divider */
+.svc3-divider{
+  width:100%;height:1px;
+  background:rgba(0,0,0,.08);
+  margin-bottom:1.2rem;
+}
+
+/* Features */
+.svc3-features{
+  list-style:none;display:flex;flex-direction:column;
+  gap:.55rem;margin-bottom:1.8rem;flex:1;
+}
+.svc3-features li{
+  font-size:.84rem;color:#2a2a2a;display:flex;
+  align-items:flex-start;gap:.7rem;line-height:1.5;font-weight:400;
+}
+.svc3-check{
+  width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:.15rem;
+  background:var(--dgrey);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.5rem;color:#fff;font-weight:700;
+}
+
+/* CTA row */
+.svc3-cta-row{
+  display:flex;gap:.7rem;align-items:center;
+  flex-wrap:wrap;margin-top:auto;
+}
+.svc3-btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--dgrey);
+  color:#fff;border:none;
+  padding:.75rem 1.4rem;border-radius:6px;
+  font-family:'Outfit',sans-serif;font-size:.72rem;
+  font-weight:500;letter-spacing:.8px;text-transform:uppercase;
+  cursor:pointer;
+  transition:background .2s ease,transform .2s ease;
+}
+.svc3-btn:hover{background:var(--dgrey-dark);transform:translateY(-1px)}
+.svc3-btn svg{width:13px;height:13px;transition:transform .2s}
+.svc3-btn:hover svg{transform:translateX(3px)}
+
+.svc3-btn-outline{
+  display:inline-flex;align-items:center;
+  background:transparent;
+  color:var(--stone);
+  border:1.5px solid rgba(46,46,46,.3);
+  padding:.75rem 1.2rem;border-radius:6px;
+  font-family:'Outfit',sans-serif;font-size:.72rem;
+  font-weight:400;letter-spacing:.8px;text-transform:uppercase;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.svc3-btn-outline:hover{border-color:var(--dgrey);color:var(--dgrey-dark);background:rgba(46,46,46,.05)}
+
+/* Featured card */
+.svc3-card--featured{
+  background:#F8F8F8;
+  border-top:3px solid #1A1A1A;
+  border-color:rgba(0,0,0,.1);
+  box-shadow:0 4px 20px rgba(0,0,0,.08),0 12px 48px rgba(0,0,0,.07);
+}
+.svc3-card--featured .svc3-title{font-size:2.2rem;color:#1a1a1a}
+
+.svc3-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--dgrey);
+  color:#fff;font-size:.58rem;letter-spacing:1.5px;
+  text-transform:uppercase;font-weight:600;
+  padding:.3rem .75rem;border-radius:4px;
+  margin-bottom:1rem;
+}
+
+/* Trust ribbon */
+.svc3-trust{
+  display:flex;
+  background:#F2F2F2;
+  border-top:1px solid rgba(0,0,0,.06);
+  margin:2rem -4% 0;padding:0 4%;
+}
+.svc3-trust-item{
+  flex:1;display:flex;align-items:center;gap:.75rem;
+  padding:1.2rem 0;
+  border-right:1px solid rgba(0,0,0,.06);
+}
+.svc3-trust-item:last-child{border-right:none}
+.svc3-trust-icon{
+  width:30px;height:30px;border-radius:6px;flex-shrink:0;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  display:flex;align-items:center;justify-content:center;
+}
+.svc3-trust-icon svg{width:15px;height:15px;stroke:#2E2E2E;fill:none;stroke-width:1.5}
+.svc3-trust-text{display:flex;flex-direction:column;gap:.1rem}
+.svc3-trust-label{font-size:.62rem;letter-spacing:1.2px;text-transform:uppercase;color:#1a1a1a;font-weight:600}
+.svc3-trust-sub{font-size:.62rem;color:var(--stone);font-weight:300}
+
+/* Responsive */
+@media(max-width:1100px){
+  .svc-cards-v3{gap:1.2rem}
+  .svc3-card{padding:2rem 1.7rem 2.2rem}
+  .svc3-title{font-size:1.9rem}
+  .svc3-card--featured .svc3-title{font-size:2rem}
+}
+@media(max-width:900px){
+  .svc-cards-v3{grid-template-columns:1fr;gap:1.2rem}
+  .svc3-trust{flex-wrap:wrap;margin:1.5rem -4% 0}
+  .svc3-trust-item{flex:50%;padding:1rem 0}
+  .svc3-trust-item:nth-child(even){border-right:none;padding-left:1rem}
+  .svc3-trust-item:nth-child(odd){padding-right:1rem}
+  .svc3-trust-item:nth-child(3),.svc3-trust-item:nth-child(4){border-bottom:1px solid rgba(42,111,219,.12)}
+}
+@media(max-width:600px){
+  .svc3-card{padding:1.6rem 1.4rem 2rem;border-radius:10px}
+  .svc3-title{font-size:1.8rem}
+  .svc3-card--featured .svc3-title{font-size:1.9rem}
+  .svc3-cta-row{flex-direction:column;align-items:stretch}
+  .svc3-btn,.svc3-btn-outline{justify-content:center;width:100%}
+  .svc3-trust-item{flex:100%;border-right:none;border-bottom:1px solid rgba(42,111,219,.12)}
+  .svc3-trust-item:last-child{border-bottom:none}
+  .svc3-trust-item:nth-child(even){padding-left:0}
+}
+/* Modal overlay */
+.svc-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(4px)}
+.svc-modal-overlay.open{opacity:1;pointer-events:all}
+.svc-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);z-index:801;width:min(680px,92vw);max-height:88vh;overflow-y:auto;background:#FFFFFF;box-shadow:0 32px 100px rgba(0,0,0,.18);opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;scrollbar-width:thin}
+.svc-modal-overlay.open .svc-modal{opacity:1;transform:translate(-50%,-50%);pointer-events:all}
+.svc-modal-header{background:#F8F8F8;padding:2.5rem 3rem 2rem;position:relative;border-bottom:2px solid #2E2E2E}
+.svc-modal-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:1px solid rgba(0,0,0,.15);width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#4a4a4a;cursor:pointer;transition:all .2s}
+.svc-modal-close:hover{background:var(--dgrey);color:#fff;border-color:var(--dgrey)}
+.svc-modal-icon{width:52px;height:52px;margin-bottom:1.2rem}
+.svc-modal-icon svg{width:100%;height:100%}
+.svc-modal-title{font-family:'Georgia',serif;font-size:2.2rem;font-weight:400;color:#1a1a1a;margin-bottom:.5rem}
+.svc-modal-sub{font-size:.82rem;color:#5a5a5a;font-weight:300;letter-spacing:.3px}
+.svc-modal-body{padding:2.5rem 3rem}
+.svc-modal-desc{font-size:.95rem;color:#3a3a3a;line-height:1.9;font-weight:300;margin-bottom:2rem}
+.svc-modal-features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.svc-feat{background:#F5F5F5;padding:1.2rem 1.4rem;border-left:3px solid #2E2E2E}
+.svc-feat h5{font-family:'Georgia',serif;font-size:1rem;font-weight:500;color:#1a1a1a;margin-bottom:.25rem}
+.svc-feat p{font-size:.78rem;color:#5a5a5a;font-weight:300;line-height:1.6}
+.svc-modal-cta{display:inline-flex;align-items:center;gap:.8rem;background:var(--dgrey);color:#fff;border:none;padding:.9rem 2rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .25s}
+.svc-modal-cta:hover{background:var(--dgrey-dark)}
+
+/* WHY */
+#why{background:#FFFFFF;position:relative}
+.why-layout{display:grid;grid-template-columns:4fr 6fr;gap:4rem;align-items:start}
+.why-sticky{position:sticky;top:10rem}
+@media(max-width:900px){.why-layout{grid-template-columns:1fr;gap:2rem}.why-sticky{position:static;top:auto}.why-item{grid-template-columns:auto 1fr auto;gap:1rem}.why-cta-body{margin-top:1rem}.why-items{margin-top:0}}
+.why-sticky .sec-title{margin:1rem 0 1.5rem}
+.why-cta-body{font-size:.875rem;color:var(--stone);line-height:1.8;font-weight:300;margin-bottom:1.5rem;margin-top:2rem}
+.btn-bronze{display:inline-flex;align-items:center;gap:.8rem;background:var(--dgrey);color:#fff;border:none;padding:.85rem 2rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:none;transition:background .25s}
+.btn-bronze:hover{background:var(--dgrey-dark)}
+.why-items{display:flex;flex-direction:column}
+.why-item{border-top:1px solid rgba(0,0,0,.07);padding:2rem 0;display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:start;cursor:none}
+.why-item:last-child{border-bottom:1px solid rgba(0,0,0,.07)}
+.why-item-num{font-family:'Outfit',sans-serif;font-size:1rem;color:var(--bronze);font-weight:500;padding-top:.1rem;min-width:24px}
+.why-item h3{font-family:'Georgia',serif;font-size:1.35rem;font-weight:500;color:#1a1a1a;margin-bottom:.5rem}
+.why-item p{font-size:.85rem;color:var(--stone);line-height:1.75;font-weight:300}
+.why-item-plus{font-size:1.2rem;color:var(--stone-light);transition:transform .3s,color .3s;margin-top:.1rem}
+.why-item:hover .why-item-plus{transform:rotate(45deg);color:var(--bronze)}
+
+/* STATS — Refined dark editorial style */
+#stats{
+  background:linear-gradient(135deg,#F0F0F0 0%,#E8E8E8 40%,#F2F2F2 100%);
+  padding:5rem 4%;position:relative;overflow:hidden
+}
+#stats::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 80% at 10% 50%,rgba(0,0,0,.03) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 60% at 90% 50%,rgba(0,0,0,.02) 0%,transparent 65%);
+}
+.stats-intro{text-align:center;margin-bottom:2.5rem;position:relative;z-index:1}
+.stats-intro .eyebrow{color:var(--dgrey);margin-bottom:.8rem}
+.stats-intro .eyebrow::before{background:var(--dgrey)}
+.stats-intro h2{font-family:'Georgia',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:#1a1a1a;letter-spacing:-.3px}
+.stats-intro h2 em{font-style:italic;color:var(--dgrey)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:1;gap:0;background:#fff;border:1px solid rgba(0,0,0,.06)}
+.stat-cell{
+  padding:2.2rem 2rem;
+  border-right:1px solid rgba(0,0,0,.06);
+  text-align:center;
+  position:relative;
+  transition:background .35s;
+}
+.stat-cell:last-child{border-right:none}
+.stat-cell:hover{background:rgba(0,0,0,.02)}
+.stat-icon{width:36px;height:36px;margin:0 auto 1.2rem;opacity:.7}
+.stat-icon svg{width:100%;height:100%;stroke:#2E2E2E;fill:none;stroke-width:1.2}
+.stat-val{font-family:'Outfit',sans-serif;font-size:clamp(3rem,5vw,4.5rem);font-weight:300;color:#1a1a1a;line-height:1;display:block;letter-spacing:-1px}
+.stat-val span{color:#4a4a4a;font-style:italic}
+.stat-desc{font-size:.95rem;color:#3a3a3a;margin-top:.5rem;display:block;font-weight:300;line-height:1.5}
+.stat-label{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(0,0,0,.4);margin-top:.4rem;display:block;font-weight:500}
+.stat-bar{width:32px;height:1px;background:#2E2E2E;margin:1rem auto 0;opacity:.3;transition:width .45s,opacity .45s}
+.stat-cell:hover .stat-bar{width:56px;opacity:.7}
+.stats-footnote{text-align:center;margin-top:2rem;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(90,80,64,.35);position:relative;z-index:1}
+
+/* FAQ */
+#faq{background:#F8F8F8}
+.faq-layout{display:grid;grid-template-columns:1fr 1.8fr;gap:4rem;align-items:start}
+.faq-left{position:sticky;top:8rem}
+.faq-left .sec-title{margin:1rem 0 1.5rem}
+.faq-left .sec-body{font-size:.88rem}
+.faq-list{display:flex;flex-direction:column}
+.faq-item{border-top:1px solid rgba(0,0,0,.08);overflow:hidden;transition:background .2s}
+.faq-item:last-child{border-bottom:1px solid rgba(0,0,0,.08)}
+.faq-item.open{background:rgba(0,0,0,.02)}
+.faq-q{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;padding:1.4rem 0;cursor:pointer;transition:color .2s}
+.faq-q h4{font-family:'Georgia',serif;font-size:1.15rem;font-weight:500;color:#1a1a1a;line-height:1.3;transition:color .2s}
+.faq-item.open .faq-q h4{color:var(--bronze-dark)}
+.faq-icon{width:26px;height:26px;border-radius:50%;border:1px solid rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;color:var(--stone-light);font-size:.9rem}
+.faq-item.open .faq-icon{background:var(--dgrey);border-color:var(--dgrey);color:#fff;transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),padding .3s}
+.faq-a p{font-size:.875rem;color:var(--stone);line-height:1.85;font-weight:300;padding-bottom:1.4rem}
+.faq-item.open .faq-a{max-height:300px}
+
+/* MAP */
+#map-section{background:#F8F8F8}
+.map-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:4rem;align-items:stretch}
+.map-left{display:flex;flex-direction:column}
+.map-left .sec-title{margin:1rem 0 1rem}
+.map-office-card{background:#FFFFFF;border:1px solid rgba(0,0,0,.07);padding:2rem 2rem 2rem;margin-top:1.5rem;position:relative;overflow:hidden}
+.map-office-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#555,#1a1a1a)}
+.map-office-name{font-family:'Georgia',serif;font-size:1.35rem;font-weight:500;color:#1a1a1a;margin-bottom:.3rem;display:flex;align-items:center;gap:.7rem}
+.map-office-name span{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;background:var(--dgrey);color:#fff;padding:.2rem .55rem;font-family:'Outfit',sans-serif;font-weight:500;border-radius:2px}
+.map-office-addr{font-size:.88rem;color:var(--stone);font-weight:300;line-height:1.65;margin-bottom:1.4rem}
+.map-office-details{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.map-detail{display:flex;gap:.75rem;align-items:flex-start}
+.map-detail-icon{width:30px;height:30px;background:#F2F2F2;border:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.map-detail-icon svg{width:13px;height:13px;stroke:#2E2E2E;fill:none;stroke-width:1.5}
+.map-detail-label{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--stone-light);font-weight:500;display:block}
+.map-detail-val{font-size:.82rem;color:#2a2a2a;font-weight:400;display:block;margin-top:.1rem;line-height:1.4}
+.map-cta-row{display:flex;gap:.8rem;margin-top:1.8rem;flex-wrap:wrap}
+.map-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1.4rem;font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;transition:all .25s;text-decoration:none}
+.map-btn-primary{background:var(--dgrey);color:#fff;border:none}
+.map-btn-primary:hover{background:var(--dgrey-dark)}
+.map-btn-outline{background:transparent;color:var(--stone);border:1px solid var(--line-strong)}
+.map-btn-outline:hover{border-color:var(--bronze);color:var(--bronze-dark)}
+.map-right{position:sticky;top:6rem}
+.map-frame{height:100%;min-height:420px;overflow:hidden;position:relative;border:1px solid rgba(0,0,0,.08)}
+.map-frame::after{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.map-frame iframe{width:100%;height:100%;border:none;filter:sepia(15%) contrast(1.05)}
+
+/* REVIEWS */
+#reviews{background:#FFFFFF}
+.reviews-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem}
+.big-score{font-family:'Outfit',sans-serif;font-size:4rem;font-weight:300;color:#1a1a1a;line-height:1}
+.star-row{color:var(--bronze);font-size:1rem;letter-spacing:3px;margin:.3rem 0}
+.review-count{font-size:.75rem;color:var(--stone-light);letter-spacing:.5px}
+.reviews-scroll-wrap{overflow:hidden;position:relative;padding-bottom:3rem}
+.reviews-scroll-wrap::after{content:'';position:absolute;right:0;top:0;bottom:0;width:120px;background:linear-gradient(to left,#fff,transparent);pointer-events:none;z-index:1}
+.reviews-track{display:flex;gap:1.5rem;animation:reviewScroll 40s linear infinite;width:max-content}
+.reviews-track:hover{animation-play-state:paused}
+@keyframes reviewScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.review-card{background:#FFFFFF;border:1px solid rgba(0,0,0,.06);padding:2.2rem 2rem;width:340px;flex-shrink:0;transition:box-shadow .3s}
+.review-card:hover{box-shadow:0 12px 48px rgba(26,21,16,.08)}
+.review-quote{font-family:'Georgia',serif;font-size:3rem;color:var(--bronze-light);line-height:1;margin-bottom:-.5rem;opacity:.5}
+.review-text{font-size:.88rem;color:var(--stone);line-height:1.85;font-weight:300;margin-bottom:1.5rem;font-style:italic}
+.review-footer{display:flex;align-items:center;gap:.9rem;border-top:1px solid rgba(0,0,0,.06);padding-top:1.2rem}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:#F2F2F2;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:500;color:var(--bronze-dark);flex-shrink:0}
+.review-name{font-size:.82rem;font-weight:500;color:#1a1a1a}
+.review-role{font-size:.72rem;color:var(--stone-light);font-weight:300}
+.review-stars{margin-left:auto;color:var(--bronze);font-size:.7rem;letter-spacing:1px}
+
+/* CHATBOT */
+.chat-fab{position:fixed;bottom:2.5rem;right:2.5rem;z-index:400}
+.chat-fab-btn{width:56px;height:56px;border-radius:50%;background:var(--dgrey);color:#fff;border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(46,46,46,.25);transition:background .25s,transform .2s;position:relative;z-index:2}
+.chat-fab-btn:hover{background:var(--dgrey-dark);color:#fff;transform:scale(1.05)}
+.chat-fab-btn svg{width:22px;height:22px}
+.chat-pulse{position:absolute;top:0;right:0;width:12px;height:12px;background:var(--dgrey);border-radius:50%;border:2px solid var(--ivory);z-index:3}
+.chat-panel{position:absolute;bottom:70px;right:0;width:340px;background:#FFFFFF;border:1px solid rgba(0,0,0,.12);box-shadow:0 24px 80px rgba(26,21,16,.2);display:none;flex-direction:column;overflow:hidden}
+.chat-panel.open{display:flex}
+.chat-panel-header{background:var(--dgrey);padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.9rem}
+.chat-panel-avatar{width:36px;height:36px;background:var(--dgrey-dark);display:flex;align-items:center;justify-content:center}
+.chat-panel-avatar svg{width:18px;height:18px;stroke:#fff}
+.chat-panel-info h4{color:#fff;font-size:.85rem;font-weight:500}
+.chat-panel-info span{font-size:.7rem;color:rgba(255,255,255,.6);letter-spacing:.3px}
+.chat-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.4);cursor:none;font-size:1.1rem;transition:color .2s}
+.chat-close:hover{color:#fff}
+.chat-msgs{flex:1;padding:1.2rem;display:flex;flex-direction:column;gap:.8rem;max-height:260px;overflow-y:auto;background:#F8F8F8;scrollbar-width:thin;scrollbar-color:var(--sand) transparent}
+.cmsg{max-width:82%}
+.cmsg.bot{align-self:flex-start}
+.cmsg.usr{align-self:flex-end}
+.cmsg-bubble{padding:.65rem 1rem;font-size:.82rem;line-height:1.6}
+.bot .cmsg-bubble{background:#FFFFFF;border:1px solid rgba(0,0,0,.07);color:var(--ink);border-radius:0 8px 8px 8px}
+.usr .cmsg-bubble{background:var(--dgrey);color:#fff;border-radius:8px 0 8px 8px}
+.chat-quick-btns{display:flex;flex-wrap:wrap;gap:.4rem;padding:.6rem 1.2rem .8rem;background:#F8F8F8;border-top:1px solid rgba(0,0,0,.06)}
+.qbtn{font-size:.72rem;padding:.3rem .7rem;background:#FFFFFF;border:1px solid rgba(0,0,0,.12);color:var(--stone);cursor:none;font-family:'Outfit',sans-serif;font-weight:400;transition:all .2s;letter-spacing:.2px}
+.qbtn:hover{background:var(--dgrey);color:#fff;border-color:var(--dgrey)}
+.chat-input-area{display:flex;border-top:1px solid var(--line);background:var(--warm-white)}
+.chat-input-area input{flex:1;border:none;outline:none;padding:.85rem 1rem;font-family:'Outfit',sans-serif;font-size:.82rem;background:transparent;color:var(--ink)}
+.chat-input-area input::placeholder{color:var(--stone-light)}
+.chat-send{background:none;border:none;border-left:1px solid var(--line);width:44px;cursor:none;color:var(--stone-light);transition:color .2s;display:flex;align-items:center;justify-content:center}
+.chat-send:hover{color:var(--bronze)}
+.chat-send svg{width:16px;height:16px}
+
+/* FOOTER */
+footer{
+  background:linear-gradient(170deg,#1e1e1e 0%,#252525 50%,#1a1a1a 100%);
+  color:rgba(240,240,240,.55);
+  position:relative;overflow:hidden;
+}
+footer::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 0%,rgba(255,255,255,.03) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 60% at 90% 100%,rgba(255,255,255,.02) 0%,transparent 60%);
+}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;padding:4rem 4% 3rem;border-bottom:1px solid rgba(255,255,255,.08);position:relative;z-index:1}
+.footer-brand .logo{font-family:'Georgia',serif;font-size:1.8rem;font-weight:400;color:rgba(255,255,255,.92);letter-spacing:.5px;margin-bottom:1.2rem;display:block}
+.footer-brand .logo em{color:var(--bronze-light);font-style:italic}
+.footer-brand p{font-size:.85rem;line-height:1.85;max-width:280px;color:rgba(255,255,255,.4);font-weight:300}
+.footer-brand .rera{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(200,200,200,.5);font-weight:400}
+.footer-brand .rera::before{content:'';width:8px;height:8px;border:1px solid var(--bronze);border-radius:50%;flex-shrink:0}
+.footer-col h5{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(200,200,200,.55);font-weight:500;margin-bottom:1.5rem;font-family:'Outfit',sans-serif}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+.footer-col a{font-size:.85rem;color:rgba(255,255,255,.38);text-decoration:none;font-weight:300;transition:color .2s}
+.footer-col a:hover{color:var(--bronze-light)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding:1.6rem 4%;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.06)}
+.footer-bottom p{font-size:.75rem;color:rgba(255,255,255,.25);font-weight:300}
+.footer-socials{display:flex;gap:1rem}
+.fsoc{width:32px;height:32px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:rgba(255,255,255,.4);text-decoration:none;transition:all .25s;cursor:none}
+.fsoc:hover{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.08)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .who-grid,.map-layout,.why-layout{grid-template-columns:1fr}
+  .who-sticky,.map-right,.why-sticky{position:static}
+  .who-media{padding:0 0 3.5rem 2rem}
+  .who-img-float{width:150px;height:195px;right:-1rem}
+  .svc-cards{grid-template-columns:1fr}
+  /* stats-grid stays 4-column — intentionally not overridden */
+  .footer-top{grid-template-columns:1fr 1fr}
+  .hero-content{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  }
+@media(max-width:600px){
+  .hero-h1{font-size:3rem}
+  .why-layout{gap:1.5rem}
+  .why-item{grid-template-columns:auto 1fr auto;gap:.8rem;padding:1.4rem 0}
+  .why-item h3{font-size:1.1rem}
+  .why-item p{font-size:.8rem}
+  /* stats-grid stays 4-column on all screen sizes */
+  .stat-cell{padding:1.6rem 1rem}
+  .stat-val{font-size:clamp(2rem,5vw,3rem)}
+  .footer-top{grid-template-columns:1fr}
+  nav .nav-center,.nav-tel{display:none}
+  .mob-menu-btn{display:flex}
+  .proc-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+    .svc-modal-features{grid-template-columns:1fr}
+  .svc-modal-header,.svc-modal-body{padding:1.8rem}
+}
+
+/* MOBILE NAV TOGGLE */
+.mob-menu-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.mob-menu-btn span{display:block;width:22px;height:1.5px;background:#2a2a2a;transition:all .3s}
+.mob-nav{display:none;position:fixed;inset:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:'Georgia',serif;font-size:2.5rem;font-weight:300;color:#1a1a1a;text-decoration:none;letter-spacing:-.5px;transition:color .2s}
+.mob-nav a:hover{color:var(--bronze)}
+.mob-nav-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:1.5rem;color:#4a4a4a;cursor:pointer}
+
+
+
+/* HOW WE WORK */
+#process{background:#F2F2F2;position:relative;overflow:hidden}
+#process::before{content:'PROCESS';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Outfit',sans-serif;font-size:18vw;font-weight:300;color:rgba(0,0,0,.05);white-space:nowrap;pointer-events:none;letter-spacing:-3px}
+.proc-intro{text-align:center;max-width:600px;margin:0 auto 3rem}
+.proc-intro .sec-title{color:#1a1a1a}
+.proc-intro .sec-body{margin:1rem auto 0;max-width:480px}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;z-index:1}
+.proc-step{padding:2.2rem 2rem 2.8rem;position:relative;border-right:1px solid rgba(0,0,0,.07);transition:background .3s}
+.proc-step:last-child{border-right:none}
+.proc-step:hover{background:rgba(255,255,255,.5)}
+.proc-step-num{font-family:'Outfit',sans-serif;font-size:4rem;font-weight:300;color:rgba(0,0,0,.09);line-height:1;margin-bottom:1.5rem;transition:color .3s}
+.proc-step:hover .proc-step-num{color:rgba(0,0,0,.2)}
+.proc-step-icon{width:40px;height:40px;margin-bottom:1.5rem}
+.proc-step-icon svg{width:100%;height:100%}
+.proc-step h3{font-family:'Georgia',serif;font-size:1.25rem;font-weight:500;color:#1a1a1a;margin-bottom:.8rem}
+.proc-step p{font-size:.82rem;color:#5a5a5a;line-height:1.8;font-weight:300}
+.proc-connector{position:absolute;top:4rem;right:-1px;width:2px;height:28px;background:var(--bronze);opacity:0;transition:opacity .3s}
+.proc-step:hover .proc-connector{opacity:.6}
+
+/* TEAM */
+#team{background:#FFFFFF}
+.team-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.team-card{position:relative;overflow:hidden}
+.team-card-img-wrap{overflow:hidden;margin-bottom:1.4rem;position:relative}
+.team-card-img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(20%);transition:transform .6s ease,filter .4s}
+.team-card:hover .team-card-img{transform:scale(1.04);filter:grayscale(0)}
+.team-card-badge{position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);opacity:0;transition:opacity .35s;display:flex;align-items:center;gap:.5rem}
+.team-card:hover .team-card-badge{opacity:1}
+.team-social{width:28px;height:28px;border:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:rgba(255,255,255,.8);text-decoration:none;transition:all .2s}
+.team-social:hover{background:var(--dgrey);border-color:var(--dgrey)}
+.team-name{font-family:'Georgia',serif;font-size:1.15rem;font-weight:500;color:#1a1a1a;margin-bottom:.2rem}
+.team-role{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);font-weight:500}
+.team-dept{font-size:.78rem;color:var(--stone-light);font-weight:300;margin-top:.3rem}
+
+/* CONTACT / QUOTE FORM */
+#contact{background:#F8F8F8;position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;border-radius:50%;background:rgba(0,0,0,.02);pointer-events:none}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;position:relative;z-index:1}
+.contact-left .sec-title{color:#1a1a1a;margin:1rem 0 1.5rem}
+.contact-details{display:flex;flex-direction:column;gap:1.2rem;margin-top:1.8rem}
+.contact-detail{display:flex;gap:1.2rem;align-items:flex-start}
+.contact-detail-icon{width:40px;height:40px;background:var(--dgrey);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-detail-icon svg{width:18px;height:18px;stroke:#fff}
+.contact-detail-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,.4);font-weight:500;margin-bottom:.2rem}
+.contact-detail-val{font-size:.9rem;color:#2a2a2a;font-weight:400}
+.contact-form-wrap{background:#FFFFFF;padding:3rem;box-shadow:0 20px 60px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.07)}
+.form-title{font-family:'Georgia',serif;font-size:1.8rem;font-weight:400;color:#1a1a1a;margin-bottom:.5rem}
+.form-sub{font-size:.82rem;color:#5a5a5a;font-weight:300;margin-bottom:2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-label{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:#5a5a5a;font-weight:500}
+.form-input,.form-select,.form-textarea{width:100%;background:#F8F8F8;border:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.2);padding:.8rem 1rem;font-family:'Outfit',sans-serif;font-size:.85rem;color:#1a1a1a;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:#2E2E2E;background:#FFFFFF}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(0,0,0,.3)}
+.form-textarea{resize:vertical;min-height:110px}
+.form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5a5a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+.form-submit{width:100%;background:var(--dgrey);color:#fff;border:none;padding:1rem 2rem;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .25s,transform .2s;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.8rem}
+.form-submit:hover{background:var(--dgrey-dark)}
+.form-submit:active{transform:scale(.99)}
+.form-success{display:none;text-align:center;padding:3rem 2rem}
+.form-success-icon{width:56px;height:56px;background:var(--dgrey);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem}
+.form-success-icon svg{width:26px;height:26px;stroke:#fff}
+.form-success h3{font-family:'Georgia',serif;font-size:1.8rem;color:#1a1a1a;margin-bottom:.6rem}
+.form-success p{font-size:.88rem;color:#5a5a5a;font-weight:300;line-height:1.7}
+
+/* CTA BANNER */
+#cta-band{background:var(--dgrey);padding:3.5rem 4%;text-align:center;position:relative;overflow:hidden}
+#cta-band::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--dgrey-dark) 0%,var(--dgrey) 50%,var(--dgrey-light) 100%);opacity:.5}
+.cta-band-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.cta-band-inner h2{font-family:'Georgia',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:300;color:#fff;margin-bottom:1rem;line-height:1.1}
+.cta-band-inner p{font-size:.95rem;color:rgba(255,255,255,.8);line-height:1.8;margin-bottom:2.2rem;font-weight:300}
+.cta-band-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-cta-white{background:#fff;color:var(--dgrey-dark);border:none;padding:.9rem 2.2rem;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.btn-cta-white:hover{background:var(--ivory);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.btn-cta-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);padding:.9rem 2.2rem;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-cta-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<!-- VEGAMARCON TOPBAR -->
+<style>
+#vmtb{
+  position:fixed;top:0;left:0;right:0;
+  height:32px;
+  background:#111;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3%;
+  z-index:99999;
+  box-sizing:border-box;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-family:'Outfit','Inter',system-ui,sans-serif;
+}
+.vmtb-left{display:flex;align-items:center;gap:0}
+.vmtb-logo{
+  font-family:Georgia,serif;font-size:.8rem;font-weight:500;
+  color:rgba(255,255,255,.7);text-decoration:none;
+  letter-spacing:.5px;padding-right:.75rem;margin-right:.75rem;
+  border-right:1px solid rgba(255,255,255,.12);
+  white-space:nowrap;
+}
+.vmtb-link{
+  font-size:.62rem;font-weight:500;letter-spacing:1.2px;
+  text-transform:uppercase;text-decoration:none;
+  padding:.2rem .55rem;transition:color .15s,background .15s;
+  white-space:nowrap;border-radius:3px;
+}
+.vmtb-link:hover{color:#fff!important;background:rgba(255,255,255,.1)!important}
+.vmtb-right{
+  font-size:.58rem;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,.25);white-space:nowrap;
+}
+@media(max-width:640px){
+  .vmtb-right{display:none}
+  .vmtb-link{padding:.2rem .4rem;font-size:.58rem}
+  .vmtb-logo{display:none}
+}
+@media(max-width:420px){
+  #vmtb a[href="construction.html"],
+  #vmtb a[href="digital.html"]{display:none}
+}
+</style>
+<div id="vmtb">
+  <div class="vmtb-left">
+    <a href="index.html" class="vmtb-logo">Vegamarcon</a>
+    <a href="index.html" class="vmtb-link" style="color:#fff;background:rgba(255,255,255,.12);border-radius:3px;">Home</a><a href="projects.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Properties</a><a href="interiors.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Interiors</a><a href="construction.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Construction</a><a href="digital.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Digital</a><a href="careers.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Careers</a>
+  </div>
+  <div class="vmtb-right">One group &middot; Five divisions</div>
+</div>
+<!-- END VEGAMARCON TOPBAR -->
+<style>
+/* VMTB nudge */
+nav#mainNav{top:32px!important}
+body{padding-top:32px}
+</style>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="mainNav">
+  <a class="nav-logo" href="index.html">Vegamarcon<sup>®</sup></a>
+  <ul class="nav-center">
+    <li><a href="#who">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#reviews">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-tel">+91 98765 43210</span>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+    <button class="mob-menu-btn" onclick="document.getElementById('mobNav').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <button class="mob-nav-close" onclick="document.getElementById('mobNav').classList.remove('open')">✕</button>
+  <a href="#who" onclick="document.getElementById('mobNav').classList.remove('open')">About</a>
+  <a href="#services" onclick="document.getElementById('mobNav').classList.remove('open')">Services</a>
+    <a href="#why" onclick="document.getElementById('mobNav').classList.remove('open')">Why Us</a>
+  <a href="#reviews" onclick="document.getElementById('mobNav').classList.remove('open')">Clients</a>
+  <a href="#contact" onclick="document.getElementById('mobNav').classList.remove('open')">Contact</a>
+</div>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-line"></div>
+        <span>Premium Real Estate &amp; Construction · Est. 2013</span>
+      </div>
+      <h1 class="hero-h1">
+        Building
+        <em>spaces</em>
+        <span class="line-offset">worth living.</span>
+      </h1>
+      <p class="hero-desc">From curated flat sales to bespoke interiors and landmark construction — Vegamarcon delivers end-to-end excellence with artisanal precision.</p>
+      <div class="hero-actions">
+        <button class="btn-hero-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+        <button class="btn-hero-ghost" onclick="document.getElementById('who').scrollIntoView({behavior:'smooth'})">Our Story</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<div class="marquee-strip"><div class="marquee-track" id="mtrack"></div></div>
+
+<section id="who" class="s-pad">
+  <div class="who-grid">
+    <div class="who-media reveal-left">
+      <div class="who-badge"><div class="who-badge-num">12+</div><span class="who-badge-text">Years of Excellence</span></div>
+      <img class="who-img-main" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=85" alt="Vegamarcon story">
+      <img class="who-img-float" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=85" alt="Interior detail">
+    </div>
+    <div class="who-text-block reveal">
+      <span class="eyebrow">Who We Are</span>
+      <h2 class="sec-title">A legacy built on<br><em>trust &amp; craft</em></h2>
+      <div class="divider"></div>
+      <p class="sec-body">Vegamarcon is a full-spectrum real estate and construction company rooted in the belief that great spaces shape great lives. For over 12 years, we've transformed blueprints into beloved homes, offices, and landmarks.</p>
+      <p class="sec-body" style="margin-top:1rem">Our in-house architects, engineers, interior designers, and legal advisors work in concert — ensuring every project is delivered with precision, transparency, and artisanal care.</p>
+      <div class="who-attributes">
+        <div class="attr"><h4>Certified Engineers</h4><p>Licensed civil &amp; structural experts on every site</p></div>
+        <div class="attr"><h4>Award-Winning Design</h4><p>Interiors recognised for excellence across India</p></div>
+        <div class="attr"><h4>RERA Registered</h4><p>Full compliance, total transparency, always</p></div>
+        <div class="attr"><h4>Client-First Culture</h4><p>Every decision begins and ends with your vision</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="s-pad">
+  <div class="svc-header reveal">
+    <div>
+      <span class="eyebrow" style="color:var(--bronze-dark)">Our Services</span>
+      <h2 class="sec-title">Everything you need,<br><em>under one roof</em></h2>
+    </div>
+    <a class="svc-link-all" href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Get a Free Consultation →</a>
+  </div>
+
+  <div class="svc-cards-v3">
+
+    <!-- 01 FLAT SALES -->
+    <div class="svc3-card reveal" onclick="openSvcModal(0)">
+      
+      
+      <div class="svc3-icon-block">
+        <svg viewBox="0 0 40 40" fill="none" stroke="var(--bronze-light)" stroke-width="1.3"><rect x="5" y="15" width="30" height="20" rx="1"/><path d="M2 15L20 3l18 12"/><rect x="14" y="24" width="12" height="11" rx="1"/><line x1="20" y1="24" x2="20" y2="35"/></svg>
+      </div>
+      <span class="svc3-num-label">Service · 01</span>
+      <h3 class="svc3-title">Flat<br><em>Sales</em></h3>
+      <p class="svc3-tagline">Curated residential &amp; commercial properties across Bengaluru — matched to your lifestyle and long-term goals.</p>
+      <div class="svc3-proof">
+        <div class="svc3-proof-item">
+          <span class="svc3-proof-num">500+</span>
+          <span class="svc3-proof-label">Families Served</span>
+        </div>
+        <div class="svc3-proof-item" style="padding-left:.8rem">
+          <span class="svc3-proof-num">2.4M+</span>
+          <span class="svc3-proof-label">Sq Ft Sold</span>
+        </div>
+        <div class="svc3-proof-item" style="padding-left:.8rem">
+          <span class="svc3-proof-num">Zero</span>
+          <span class="svc3-proof-label">Hidden Charges</span>
+        </div>
+      </div>
+      <div class="svc3-divider"></div>
+      <ul class="svc3-features">
+        <li><span class="svc3-check">✓</span>Luxury apartments, penthouses &amp; villas</li>
+        <li><span class="svc3-check">✓</span>Affordable &amp; government-approved schemes</li>
+        <li><span class="svc3-check">✓</span>Virtual tours &amp; guided site visits</li>
+        <li><span class="svc3-check">✓</span>Legal, title &amp; documentation handled</li>
+        <li><span class="svc3-check">✓</span>In-house home loan assistance</li>
+      </ul>
+      <div class="svc3-cta-row">
+        <a href="projects.html" class="svc3-btn">Explore Properties <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <button class="svc3-btn-outline" onclick="event.stopPropagation();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+      </div>
+    </div>
+
+    <!-- 02 INTERIOR DESIGN — FEATURED -->
+    <div class="svc3-card svc3-card--featured reveal" style="transition-delay:.12s" onclick="openSvcModal(1)">
+      
+      
+      <div class="svc3-icon-block">
+        <svg viewBox="0 0 40 40" fill="none" stroke="var(--bronze-light)" stroke-width="1.3"><rect x="4" y="4" width="32" height="32" rx="1"/><path d="M4 14h32M14 4v32"/><circle cx="9" cy="9" r="2" fill="var(--bronze-light)" opacity=".6"/><path d="M18 20h13M18 26h9"/></svg>
+      </div>
+      <span class="svc3-num-label">Service · 02</span>
+      <h3 class="svc3-title">Interior<br><em>Design</em></h3>
+      <p class="svc3-tagline">Award-winning interiors from concept to turnkey handover — residential, commercial, and everything between.</p>
+      <div class="svc3-proof">
+        <div class="svc3-proof-item">
+          <span class="svc3-proof-num">350+</span>
+          <span class="svc3-proof-label">Spaces Done</span>
+        </div>
+        <div class="svc3-proof-item" style="padding-left:.8rem">
+          <span class="svc3-proof-num">4.9★</span>
+          <span class="svc3-proof-label">Client Rating</span>
+        </div>
+        <div class="svc3-proof-item" style="padding-left:.8rem">
+          <span class="svc3-proof-num">98%</span>
+          <span class="svc3-proof-label">Satisfaction</span>
+        </div>
+      </div>
+      <div class="svc3-divider"></div>
+      <ul class="svc3-features">
+        <li><span class="svc3-check">✓</span>Photorealistic 3D renders &amp; walkthroughs</li>
+        <li><span class="svc3-check">✓</span>Precision-engineered modular kitchens &amp; wardrobes</li>
+        <li><span class="svc3-check">✓</span>Premium imported &amp; domestic materials</li>
+        <li><span class="svc3-check">✓</span>Architectural lighting design</li>
+        <li><span class="svc3-check">✓</span>Turnkey delivery — move-in ready</li>
+      </ul>
+      <div class="svc3-cta-row">
+        <a href="interiors.html" class="svc3-btn">See Design Work <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <button class="svc3-btn-outline" onclick="event.stopPropagation();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+      </div>
+    </div>
+
+    <!-- 03 CONSTRUCTION -->
+    <div class="svc3-card reveal" style="transition-delay:.24s" onclick="openSvcModal(2)">
+      
+      
+      <div class="svc3-icon-block">
+        <svg viewBox="0 0 40 40" fill="none" stroke="var(--bronze-light)" stroke-width="1.3"><rect x="3" y="34" width="34" height="4" rx="1"/><path d="M8 34V18l12-12 12 12v16"/><rect x="15" y="25" width="10" height="9" rx="1"/><line x1="8" y1="26" x2="14" y2="26"/><line x1="26" y1="26" x2="32" y2="26"/></svg>
+      </div>
+      <span class="svc3-num-label">Service · 03</span>
+      <h3 class="svc3-title">Construc<em>tion</em></h3>
+      <p class="svc3-tagline">Our newest offering — bringing the same Vegamarcon precision to ground-up builds. Fresh service, uncompromising standards.</p>
+      <div class="svc3-proof">
+        <div class="svc3-proof-item">
+          <span class="svc3-proof-num">New</span>
+          <span class="svc3-proof-label">Service Launch</span>
+        </div>
+        <div class="svc3-proof-item" style="padding-left:.8rem">
+          <span class="svc3-proof-num">Grade A</span>
+          <span class="svc3-proof-label">Materials Only</span>
+        </div>
+        <div class="svc3-proof-item" style="padding-left:.8rem">
+          <span class="svc3-proof-num">Fixed</span>
+          <span class="svc3-proof-label">Price Guarantee</span>
+        </div>
+      </div>
+      <div class="svc3-divider"></div>
+      <ul class="svc3-features">
+        <li><span class="svc3-check">✓</span>Villas, apartments &amp; commercial spaces</li>
+        <li><span class="svc3-check">✓</span>Licensed structural &amp; civil engineers on-site</li>
+        <li><span class="svc3-check">✓</span>Fixed-price contracts — no cost overruns</li>
+        <li><span class="svc3-check">✓</span>Monthly site progress reports &amp; photos</li>
+        <li><span class="svc3-check">✓</span>1-year post-handover defect warranty</li>
+      </ul>
+      <div class="svc3-cta-row">
+        <a href="construction.html" class="svc3-btn">Start Your Build <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <button class="svc3-btn-outline" onclick="event.stopPropagation();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TRUST RIBBON -->
+  <div class="svc3-trust">
+    <div class="svc3-trust-item">
+      <div class="svc3-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+      <div class="svc3-trust-text"><span class="svc3-trust-label">RERA Registered</span><span class="svc3-trust-sub">Full legal compliance</span></div>
+    </div>
+    <div class="svc3-trust-item">
+      <div class="svc3-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+      <div class="svc3-trust-text"><span class="svc3-trust-label">Zero Hidden Charges</span><span class="svc3-trust-sub">Detailed cost breakdowns</span></div>
+    </div>
+    <div class="svc3-trust-item">
+      <div class="svc3-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+      <div class="svc3-trust-text"><span class="svc3-trust-label">On-Time Delivery</span><span class="svc3-trust-sub">Milestone-guaranteed</span></div>
+    </div>
+    <div class="svc3-trust-item">
+      <div class="svc3-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
+      <div class="svc3-trust-text"><span class="svc3-trust-label">Free Consultation</span><span class="svc3-trust-sub">No obligation, ever</span></div>
+    </div>
+    <div class="svc3-trust-item">
+      <div class="svc3-trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+      <div class="svc3-trust-text"><span class="svc3-trust-label">In-House Experts</span><span class="svc3-trust-sub">50+ specialists, one roof</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SERVICE MODAL -->
+<div class="svc-modal-overlay" id="svcModalOverlay" onclick="closeSvcModal(event)">
+  <div class="svc-modal" id="svcModal">
+    <div class="svc-modal-header">
+      <div class="svc-modal-icon" id="svcModalIcon"></div>
+      <h2 class="svc-modal-title" id="svcModalTitle"></h2>
+      <p class="svc-modal-sub" id="svcModalSub"></p>
+      <button class="svc-modal-close" onclick="closeSvcModalDirect()">✕</button>
+    </div>
+    <div class="svc-modal-body">
+      <p class="svc-modal-desc" id="svcModalDesc"></p>
+      <div class="svc-modal-features" id="svcModalFeatures"></div>
+      <button class="svc-modal-cta" onclick="toggleChat();closeSvcModalDirect()">Book a Free Consultation →</button>
+    </div>
+  </div>
+</div>
+
+<section id="why" class="s-pad">
+  <div class="why-layout">
+    <div class="why-sticky reveal-left">
+      <span class="eyebrow">Why Vegamarcon</span>
+      <h2 class="sec-title">The difference<br>is in the<br><em>details</em></h2>
+      <div class="divider"></div>
+      <p class="why-cta-body">We don't just build structures. We build relationships, trust, and spaces that shape lives for generations to come.</p>
+      <button class="btn-bronze">Schedule a Consultation</button>
+    </div>
+    <div class="why-items reveal">
+      <div class="why-item"><span class="why-item-num">01</span><div><h3>Proven Track Record</h3><p>Over 12 years and 500+ successful projects across residential, commercial, and institutional sectors.</p></div><span class="why-item-plus">+</span></div>
+      <div class="why-item"><span class="why-item-num">02</span><div><h3>On-Time, Every Time</h3><p>We honour deadlines without compromise. Milestone-based project management ensures handover on schedule.</p></div><span class="why-item-plus">+</span></div>
+      <div class="why-item"><span class="why-item-num">03</span><div><h3>Premium Material Standards</h3><p>Only grade-A materials from verified suppliers. Longevity and safety are non-negotiable at Vegamarcon.</p></div><span class="why-item-plus">+</span></div>
+      <div class="why-item"><span class="why-item-num">04</span><div><h3>Radical Transparency</h3><p>No hidden charges. Detailed cost breakdowns and real-time progress updates come as standard.</p></div><span class="why-item-plus">+</span></div>
+      <div class="why-item"><span class="why-item-num">05</span><div><h3>Integrated In-House Team</h3><p>Architects, engineers, designers, and legal advisors under one roof — eliminating fragmentation.</p></div><span class="why-item-plus">+</span></div>
+      <div class="why-item"><span class="why-item-num">06</span><div><h3>Lifetime After-Sales Care</h3><p>Our commitment extends beyond handover. Maintenance and dedicated support ensure lasting peace of mind.</p></div><span class="why-item-plus">+</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="stats-intro reveal">
+    <span class="eyebrow">By the Numbers</span>
+    <h2>A decade of <em>delivering results</em></h2>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-cell reveal">
+      <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="stat-val">500<span>+</span></span>
+      <span class="stat-desc">Served Happy Families</span>
+      <span class="stat-label">Across 3 cities</span>
+      <div class="stat-bar"></div>
+    </div>
+    <div class="stat-cell reveal" style="transition-delay:.1s">
+      <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="stat-val">2.4<span>M+</span></span>
+      <span class="stat-desc">Square Feet Sold</span>
+      <span class="stat-label">Residential &amp; Commercial</span>
+      <div class="stat-bar"></div>
+    </div>
+    <div class="stat-cell reveal" style="transition-delay:.2s">
+      <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="stat-val">4.9<span>★</span></span>
+      <span class="stat-desc">Google Rating</span>
+      <span class="stat-label">Based on 340+ reviews</span>
+      <div class="stat-bar"></div>
+    </div>
+    <div class="stat-cell reveal" style="transition-delay:.3s">
+      <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="stat-val">4<span>+</span></span>
+      <span class="stat-desc">Years of Excellence</span>
+      <span class="stat-label">Est. 2020 · </span>
+      <div class="stat-bar"></div>
+    </div>
+  </div>
+  <div class="stats-footnote reveal">All figures independently verified · Updated 2025</div>
+</section>
+
+<!-- ===== FAQ SECTION ===== -->
+<section id="faq" class="s-pad">
+  <div class="faq-layout">
+    <div class="faq-left reveal-left">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="sec-title">Questions<br>we hear <em>often</em></h2>
+      <div class="divider"></div>
+      <p class="sec-body">Everything you need to know before you begin. Can't find your answer here? Call us or chat — we respond fast.</p>
+      <button class="btn-bronze" style="margin-top:2rem" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Ask Us Directly</button>
+    </div>
+    <div class="faq-list reveal">
+
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>What cities does Vegamarcon operate in?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>We currently operate across Bengaluru (head office), Chennai, and Pune. Our flat sales portfolio covers 200+ active listings across all three cities, and our interior design and construction teams are available in all locations. We are expanding to Hyderabad and Mumbai — reach out to be notified.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>How much does interior design cost?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Interior design costs depend on scope, size, and material choices. For a standard 2BHK in Bengaluru, our packages start at ₹5.5 lakhs for a modular package and go up to ₹18+ lakhs for full premium turnkey. We provide a detailed, itemised quote after a free consultation — no surprises, no hidden charges.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>How long does interior design take?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>A typical 2–3BHK interior project takes 45–70 working days from design sign-off to handover. Larger or custom projects may take longer. We share a detailed milestone schedule upfront and send weekly site progress reports so you're always informed.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>Is construction a new service? What should I expect?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Yes, construction is our newest offering — launched with the same commitment to precision that defines our interior and sales work. We use licensed structural engineers on every site, Grade A materials, and offer a fixed-price contract so there are zero cost overruns. We currently take on residential villas, apartments, and small commercial builds.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>Do you help with home loan assistance?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Absolutely. Our in-house finance team works with leading banks and NBFCs to help you find the most competitive home loan rates. We assist with documentation, eligibility checks, and follow-up — completely free of charge as part of our flat sales service.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>Are all your properties RERA registered?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Yes. Every property in our portfolio is RERA registered and we handle full title verification and legal due diligence in-house before any listing goes live. Our legal advisors accompany you through registration and you receive complete documentation at handover.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>What warranty do you offer after handover?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Interior design projects come with a 1-year comprehensive defect warranty covering workmanship and materials. Construction projects carry a 1-year structural defect warranty. Beyond warranty, our dedicated after-sales team remains available for maintenance and support — this is a promise, not a policy.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="map-section" class="s-pad">
+  <div class="map-layout">
+    <div class="map-left reveal-left">
+      <span class="eyebrow">Visit Us</span>
+      <h2 class="sec-title">Our<br><em>office</em></h2>
+      <div class="divider"></div>
+      <p class="sec-body">We're based in the heart of Bengaluru. Walk in, sit down, and let's talk about your project over coffee — no obligation, just honest conversation.</p>
+
+      <div class="map-office-card">
+        <div class="map-office-name">Vegamarcon Head Office <span>Main</span></div>
+        <div class="map-office-addr">No. 42, 2nd Floor, Brigade Road,<br>MG Road Area, Bengaluru, Karnataka 560001</div>
+        <div class="map-office-details">
+          <div class="map-detail">
+            <div class="map-detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><span class="map-detail-label">Working Hours</span><span class="map-detail-val">Mon – Sat<br>9:00 AM – 6:00 PM</span></div>
+          </div>
+          <div class="map-detail">
+            <div class="map-detail-icon"><svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><span class="map-detail-label">Phone</span><span class="map-detail-val">+91 98765 43210<br>+91 80 4567 8901</span></div>
+          </div>
+          <div class="map-detail">
+            <div class="map-detail-icon"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><span class="map-detail-label">Email</span><span class="map-detail-val">hello@vegamarcon.com<br>sales@vegamarcon.com</span></div>
+          </div>
+          <div class="map-detail">
+            <div class="map-detail-icon"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 13l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 0V4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><span class="map-detail-label">Nearest Landmark</span><span class="map-detail-val">Brigade Road Metro<br>100m from MG Road</span></div>
+          </div>
+        </div>
+        <div class="map-cta-row">
+          <a class="map-btn map-btn-primary" href="https://maps.google.com/?q=MG+Road+Bengaluru" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Get Directions
+          </a>
+          <a class="map-btn map-btn-outline" href="tel:+919876543210">Call Before Visiting</a>
+        </div>
+      </div>
+    </div>
+    <div class="map-right reveal" style="transition-delay:.2s">
+      <div class="map-frame">
+        <iframe id="mapIframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.88641404457!2d77.46612880000001!3d12.953847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="s-pad-sm">
+  <div style="padding:0 4%">
+    <div class="reviews-top reveal">
+      <div>
+        <span class="eyebrow">Client Stories</span>
+        <h2 class="sec-title">Voices that<br><em>matter most</em></h2>
+      </div>
+      <div style="text-align:right">
+        <div class="big-score">4.9</div>
+        <div class="star-row">★★★★★</div>
+        <div class="review-count">Based on 340+ verified reviews</div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-scroll-wrap" style="margin-top:3rem">
+    <div class="reviews-track" id="reviewTrack"></div>
+  </div>
+</section>
+
+
+
+<!-- ===== CTA BAND ===== -->
+<section id="cta-band">
+  <div class="cta-band-inner reveal">
+    <h2>Ready to build something <em>extraordinary?</em></h2>
+    <p>Whether you're buying your first home, designing your dream interior, or breaking ground on a landmark project — Vegamarcon is ready.</p>
+    <div class="cta-band-btns">
+      <button class="btn-cta-white" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Free Quote</button>
+      <a class="btn-cta-outline" href="tel:+919876543210">Call Us Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT / GET A QUOTE ===== -->
+<section id="contact" class="s-pad">
+  <div class="contact-grid">
+    <div class="contact-left reveal-left">
+      <span class="eyebrow">Get in Touch</span>
+      <h2 class="sec-title">Let's build<br>your <em>dream</em> together</h2>
+      <div class="divider"></div>
+      <p class="sec-body">Fill in the form and our team will reach out within 24 hours with a personalised plan and transparent quote — completely free, no obligation.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><div class="contact-detail-label">Phone</div><div class="contact-detail-val">+91 98765 43210</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><div class="contact-detail-label">Email</div><div class="contact-detail-val">hello@vegamarcon.com</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><div class="contact-detail-label">Head Office</div><div class="contact-detail-val">MG Road, Bengaluru 560001</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><div class="contact-detail-label">Working Hours</div><div class="contact-detail-val">Mon – Sat · 9:00 AM to 6:00 PM</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <div id="quoteForm">
+        <div class="form-title">Get a Free Quote</div>
+        <div class="form-sub">We'll respond within 24 hours with a detailed estimate.</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" type="text" placeholder="Rahul" id="fFirstName"></div>
+          <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" type="text" placeholder="Sharma" id="fLastName"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Phone *</label><input class="form-input" type="tel" placeholder="+91 98765 43210" id="fPhone"></div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="rahul@email.com" id="fEmail"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service Interested In *</label>
+          <select class="form-select form-input" id="fService">
+            <option value="" disabled selected>Select a service…</option>
+            <option>Flat Sales — Buy a Property</option>
+            <option>Interior Design — Home / Office</option>
+            <option>Construction — New Build</option>
+            <option>Renovation — Existing Space</option>
+            <option>Property Management</option>
+            <option>Multiple / Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <select class="form-select form-input" id="fCity">
+            <option value="" disabled selected>Select city…</option>
+            <option>Bengaluru</option><option>Chennai</option><option>Pune</option>
+            <option>Hyderabad</option><option>Mumbai</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell us about your project</label>
+          <textarea class="form-textarea" placeholder="e.g. 2BHK interior design in Whitefield, budget approx. ₹8–10L, ready to start in 3 months…" id="fMsg"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitQuoteForm()">
+          Send My Request
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 10h12M12 6l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Thank You!</h3>
+        <p>Your request has been received. Our team will reach out within 24 hours with a personalised quote and next steps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="chat-fab">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel-header">
+      <div class="chat-panel-avatar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="chat-panel-info"><h4>Vegamarcon Assistant</h4><span>Usually replies in seconds</span></div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="cmsg bot"><div class="cmsg-bubble">Welcome to Vegamarcon. How may I assist you today?</div></div>
+    </div>
+    <div class="chat-quick-btns">
+      <button class="qbtn" onclick="qr('Buy a flat')">Buy a flat</button>
+      <button class="qbtn" onclick="qr('Interior design')">Interiors</button>
+      <button class="qbtn" onclick="qr('Construction project')">Construction</button>
+      <button class="qbtn" onclick="qr('Get a quote')">Get a quote</button>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatIn" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChat()">
+      <button class="chat-send" onclick="sendChat()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+  <button class="chat-fab-btn" onclick="toggleChat()">
+    <div class="chat-pulse"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo">Vega<em>marcon</em></span>
+      <p>Transforming visions into landmark properties since 2013. Premium real estate, bespoke interiors, and end-to-end construction across India.</p>
+      <div class="rera">RERA Registered · MH-2013-00892</div>
+    </div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="projects.html">Flat Sales</a></li><li><a href="interiors.html">Interior Design</a></li><li><a href="construction.html">Construction</a></li><li><a href="construction.html">Renovation</a></li><li><a href="index.html#contact">Property Management</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a href="index.html#who">About Us</a></li><li><a href="projects.html">Projects</a></li><li><a href="careers.html">Careers</a></li><li><a href="index.html#contact">Press &amp; Media</a></li><li><a href="index.html#contact">Partners</a></li></ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul><li><a href="tel:+919876543210">+91 98765 43210</a></li><li><a href="mailto:hello@vegamarcon.com">hello@vegamarcon.com</a></li><li><a href="#">MG Road, Bengaluru 560001</a></li><li><a href="#">Mon–Sat · 9am to 6pm</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Vegamarcon Pvt. Ltd. All rights reserved. · <a href="#" style="color:inherit;text-decoration:none">Privacy Policy</a> · <a href="#" style="color:inherit;text-decoration:none">Terms</a></p>
+    <div class="footer-socials">
+      <a class="fsoc" href="#">in</a>
+      <a class="fsoc" href="#">fb</a>
+      <a class="fsoc" href="#">yt</a>
+      <a class="fsoc" href="#">ig</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  const t=e.target;
+  const isHover=t.closest('a,button,.svc-card,.why-item,.office-item,.review-card,.svc-modal-cta,.svc-modal-close');
+  cur.style.width=isHover?'22px':'10px';
+  cur.style.height=isHover?'22px':'10px';
+  ring.style.width=isHover?'60px':'38px';
+  ring.style.height=isHover?'60px':'38px';
+  ring.style.opacity=isHover?'.2':'.6';
+});
+(function animateRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateRing)})();
+
+// NAV
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);
+});
+
+// MARQUEE
+const mItems=['Flat Sales','Interior Design','Construction','Turnkey Projects','Premium Properties','12+ Years','500+ Projects','RERA Certified','On-Time Delivery'];
+const t=document.getElementById('mtrack');
+let mH='';
+for(let i=0;i<4;i++)mItems.forEach(s=>{mH+=`<div class="marquee-item"><span class="marquee-dot"></span>${s}</div>`});
+t.innerHTML=mH;
+
+// REVIEWS
+const rd=[
+  {text:"Vegamarcon delivered our dream home exactly on time. The interior team's attention to detail was extraordinary — every corner felt intentionally designed.",name:"Ravi Prasad",role:"Homeowner, Bengaluru",initials:"RP",stars:"★★★★★"},
+  {text:"Purchasing a commercial flat through Vegamarcon was seamless. Their legal team made paperwork stress-free and the process felt guided and professional.",name:"Sujata Nair",role:"Business Owner, Chennai",initials:"SN",stars:"★★★★★"},
+  {text:"The construction quality is exceptional. Vegamarcon handled our entire office building — foundation to finish — without a single delay.",name:"Arjun Kumar",role:"Developer, Pune",initials:"AK",stars:"★★★★★"},
+  {text:"Their interior designers are genuinely gifted. A blank 2BHK transformed into a warm, modern home I'm proud to show off. Worth every rupee.",name:"Priya Mehta",role:"Homeowner, Bengaluru",initials:"PM",stars:"★★★★★"},
+  {text:"Outstanding team and communication throughout. The finishing quality far exceeded expectations at the price point offered.",name:"Venkat Rao",role:"IT Professional, Hyderabad",initials:"VR",stars:"★★★★☆"},
+  {text:"From first consultation to handover, Vegamarcon was professional, transparent, and invested in getting every detail right. 10 out of 10.",name:"Deepa Sharma",role:"Entrepreneur, Mumbai",initials:"DS",stars:"★★★★★"},
+  {text:"The modular kitchen and wardrobes are top quality. The design team listened carefully and delivered exactly what we envisioned.",name:"Kiran Reddy",role:"Architect, Bengaluru",initials:"KR",stars:"★★★★★"},
+  {text:"We've used Vegamarcon for three projects now. Their consistency across project types is what sets them apart. A partner you can truly rely on.",name:"Meera Iyer",role:"Property Investor, Chennai",initials:"MI",stars:"★★★★★"},
+];
+const rt=document.getElementById('reviewTrack');
+let rH='';
+for(let i=0;i<2;i++)rd.forEach(r=>{rH+=`<div class="review-card"><div class="review-quote">"</div><p class="review-text">${r.text}</p><div class="review-footer"><div class="review-avatar">${r.initials}</div><div><div class="review-name">${r.name}</div><div class="review-role">${r.role}</div></div><span class="review-stars">${r.stars}</span></div></div>`});
+rt.innerHTML=rH;
+
+// REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left').forEach(el=>obs.observe(el));
+
+// MAP
+function switchMap(src,el){
+  document.getElementById('mapIframe').src=src;
+  document.querySelectorAll('.office-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// CHAT
+const botR={
+  'buy a flat':"We have a wonderful range of 1BHK, 2BHK, 3BHK, and penthouse options across Bengaluru, Chennai and Pune. Would you like to schedule a site visit?",
+  'interior design':"Our studio handles everything — concept to completion. Modular kitchens, wardrobes, false ceilings, flooring and more. Shall I share our portfolio?",
+  'construction project':"Vegamarcon offers end-to-end construction with civil, structural, and finishing work. What type of project do you have in mind?",
+  'get a quote':"Happy to help. Could you share the project type and approximate area in sq. ft.? Our team will send a detailed estimate within 24 hours.",
+};
+function toggleChat(){document.getElementById('chatPanel').classList.toggle('open')}
+function qr(txt){
+  addMsg(txt,'usr');
+  setTimeout(()=>addMsg(botR[txt.toLowerCase()]||"Thank you for reaching out! Our team will get back to you shortly.",  'bot'),650);
+}
+function sendChat(){
+  const inp=document.getElementById('chatIn'),v=inp.value.trim();
+  if(!v)return;addMsg(v,'usr');inp.value='';
+  setTimeout(()=>addMsg("Thank you! Our team will respond shortly. You can also call +91 98765 43210.",'bot'),700);
+}
+function addMsg(text,type){
+  const d=document.getElementById('chatMsgs');
+  d.innerHTML+=`<div class="cmsg ${type}"><div class="cmsg-bubble">${text}</div></div>`;
+  d.scrollTop=d.scrollHeight;
+}
+
+// STAT COUNTERS
+function animCounters(){
+  document.querySelectorAll('.stat-val').forEach(el=>{
+    const orig=el.innerHTML;
+    const num=parseFloat(orig.replace(/[^0-9.]/g,''));
+    if(!num)return;
+    let cur2=0;const dur=1600,step=16,inc=num/(dur/step);
+    const t2=setInterval(()=>{
+      cur2=Math.min(cur2+inc,num);
+      const v=num%1===0?Math.floor(cur2):cur2.toFixed(0);
+      el.innerHTML=orig.replace(/[0-9]+(\.[0-9]+)?/,v);
+      if(cur2>=num)clearInterval(t2);
+    },step);
+  });
+}
+const sObs=new IntersectionObserver(e=>{if(e[0].isIntersecting){animCounters();sObs.disconnect()}},{threshold:.3});
+sObs.observe(document.getElementById('stats'));
+
+// SERVICE CARDS — simple hover handled by CSS only
+const svcData=[
+  {
+    title:'Flat Sales',
+    sub:'Premium Residential & Commercial Properties',
+    icon:`<svg viewBox="0 0 48 48" fill="none" stroke="rgba(42,111,219,.9)" stroke-width="1.2"><rect x="6" y="18" width="36" height="24" rx="1"/><path d="M2 18L24 4l22 14"/><rect x="18" y="28" width="12" height="14" rx="1"/><line x1="24" y1="28" x2="24" y2="42"/></svg>`,
+    desc:'Our curated property portfolio spans Bengaluru, Chennai, and Pune — featuring over 200 active listings across luxury, mid-range, and affordable segments. We offer complete end-to-end guidance from property selection through legal registration, ensuring a stress-free experience whether you are buying your first home or expanding your investment portfolio.',
+    features:[
+      {title:'Luxury Apartments & Penthouses',body:'Exclusive properties in prime locations with world-class amenities and breathtaking views.'},
+      {title:'Affordable Housing Schemes',body:'Government-approved schemes and budget-friendly options without compromising on quality.'},
+      {title:'Commercial Office Spaces',body:'Prime business addresses in key tech and business hubs across major Indian cities.'},
+      {title:'Virtual Tours & Site Visits',body:'Experience properties remotely via immersive 3D tours before scheduling your on-site visit.'},
+      {title:'Legal & Documentation Support',body:'Dedicated legal advisors handle RERA verification, title checks, and registration.'},
+      {title:'Home Loan Assistance',body:'In-house finance team to help you navigate the best loan options and interest rates.'},
+    ]
+  },
+  {
+    title:'Interior Design',
+    sub:'Bespoke Spaces Tailored to Your Vision',
+    icon:`<svg viewBox="0 0 48 48" fill="none" stroke="rgba(42,111,219,.9)" stroke-width="1.2"><rect x="6" y="6" width="36" height="36" rx="1"/><path d="M6 18h36M18 6v36"/><circle cx="12" cy="12" r="2" fill="rgba(42,111,219,.5)"/><path d="M22 24h14M22 30h10"/></svg>`,
+    desc:'Our award-winning interior design studio has transformed over 350 spaces across India, from intimate 1BHK apartments to expansive corporate headquarters. Every project begins with a deep listening session — we understand your vision, lifestyle, and aspirations before a single line is drawn. The result is a space that is unmistakably yours.',
+    features:[
+      {title:'Concept to Completion',body:'Full-service design covering concept boards, 3D renders, material selection, and site supervision.'},
+      {title:'3D Visualisation',body:'Photorealistic renders and virtual walkthroughs so you see your space before work begins.'},
+      {title:'Modular Kitchens & Wardrobes',body:'Precision-engineered modular units in 60+ finishes, built for Indian climates and lifestyles.'},
+      {title:'Premium Material Sourcing',body:'Access to exclusive imported and domestic materials through our network of verified suppliers.'},
+      {title:'False Ceilings & Lighting',body:'Architectural lighting design that enhances mood, function, and the beauty of every room.'},
+      {title:'Turnkey Delivery',body:'Complete handover with quality checks — all you need to do is move in.'},
+    ]
+  },
+  {
+    title:'Construction',
+    sub:'End-to-End Construction with Zero Compromise',
+    icon:`<svg viewBox="0 0 48 48" fill="none" stroke="rgba(42,111,219,.9)" stroke-width="1.2"><rect x="4" y="38" width="40" height="4" rx="1"/><path d="M10 38V20l14-14 14 14v18"/><rect x="20" y="28" width="8" height="10" rx="1"/><line x1="10" y1="28" x2="16" y2="28"/><line x1="32" y1="28" x2="38" y2="28"/></svg>`,
+    desc:'From foundation to finishing touches, Vegamarcon manages every phase of construction through our integrated in-house team of structural engineers, civil contractors, and site supervisors. Our milestone-based project management system delivers real-time transparency, ensuring you are always in the loop on progress, spend, and timelines.',
+    features:[
+      {title:'Residential Builds',body:'Villas, row houses, apartment complexes — delivered to specification, on time and within budget.'},
+      {title:'Commercial Construction',body:'Office buildings, retail spaces, and hospitality projects with focus on efficiency and aesthetics.'},
+      {title:'Structural Engineering',body:'Licensed engineers on every site ensuring code compliance, safety, and long-term durability.'},
+      {title:'Renovation & Retrofitting',body:'Sensitive, quality-driven renovation of existing structures with minimal disruption.'},
+      {title:'Green Building Practices',body:'Sustainable construction methods, energy-efficient systems, and eco-friendly material choices.'},
+      {title:'Lifetime Post-Handover Support',body:'Dedicated maintenance team for warranty claims and post-handover care, always available.'},
+    ]
+  }
+];
+
+function openSvcModal(idx){
+  const d=svcData[idx];
+  document.getElementById('svcModalTitle').textContent=d.title;
+  document.getElementById('svcModalSub').textContent=d.sub;
+  document.getElementById('svcModalIcon').innerHTML=d.icon;
+  document.getElementById('svcModalDesc').textContent=d.desc;
+  document.getElementById('svcModalFeatures').innerHTML=d.features.map(f=>`<div class="svc-feat"><h5>${f.title}</h5><p>${f.body}</p></div>`).join('');
+  document.getElementById('svcModalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSvcModal(e){if(e.target===document.getElementById('svcModalOverlay'))closeSvcModalDirect();}
+function closeSvcModalDirect(){document.getElementById('svcModalOverlay').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSvcModalDirect();});
+
+// QUOTE FORM
+function submitQuoteForm(){
+  const fn=document.getElementById('fFirstName').value.trim();
+  const ph=document.getElementById('fPhone').value.trim();
+  const svc=document.getElementById('fService').value;
+  if(!fn||!ph||!svc){
+    alert('Please fill in the required fields (Name, Phone, Service).');
+    return;
+  }
+  document.getElementById('quoteForm').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+}
+
+// FAQ ACCORDION
+function toggleFaq(qEl){
+  const item = qEl.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+// PARALLAX HERO
+window.addEventListener('scroll',()=>{
+  const bg=document.querySelector('.hero-bg');
+  if(bg)bg.style.transform=`translateY(${scrollY*.3}px)`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homes in Bangalore — Vegamarcon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   GRAY + WHITE PALETTE — STRICT
+   #ffffff  pure white
+   #f7f7f7  off-white / section bg
+   #f0f0f0  light gray
+   #e2e2e2  border gray
+   #c8c8c8  mid gray
+   #888888  muted text
+   #444444  body text
+   #222222  headings
+   #111111  black text
+═══════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --w:  #ffffff;
+  --g1: #f7f7f7;
+  --g2: #f0f0f0;
+  --g3: #e2e2e2;
+  --g4: #c8c8c8;
+  --g5: #888888;
+  --g6: #444444;
+  --g7: #222222;
+  --g8: #111111;
+  --ff:'Cormorant Garamond',Georgia,serif;
+  --fs:'Inter','Helvetica Neue',sans-serif;
+  --r8:8px;--r12:12px;--r16:16px;--r24:24px;--r999:999px;
+  --sh1:0 2px 8px rgba(0,0,0,.06);
+  --sh2:0 8px 32px rgba(0,0,0,.10);
+  --sh3:0 20px 60px rgba(0,0,0,.14);
+}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--g1);color:var(--g8);font-family:var(--fs);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;object-fit:cover;}
+a{text-decoration:none;color:inherit;}
+button{border:none;background:none;cursor:pointer;font-family:var(--fs);}
+input,select,textarea{font-family:var(--fs);}
+
+/* ─── REVEAL ANIMATIONS ─── */
+[data-r]{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+[data-r].vis{opacity:1;transform:none;transition-delay:var(--d,0ms);}
+
+/* ─── LAYOUT UTILS ─── */
+.wrap{max-width:1300px;margin:0 auto;padding:0 40px;}
+.sec{padding:88px 0;background:var(--g1);}
+.sec-w{padding:88px 0;background:var(--w);}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g5);margin-bottom:14px;}
+.eyebrow::after{content:'';width:24px;height:1.5px;background:var(--g4);}
+.hd1{font-family:var(--ff);font-size:clamp(48px,5.5vw,84px);font-weight:700;line-height:1.02;letter-spacing:-.02em;color:var(--w);}
+.hd2{font-family:var(--ff);font-size:clamp(34px,4vw,58px);font-weight:600;line-height:1.06;letter-spacing:-.02em;color:var(--g8);}
+.lead{font-size:17px;font-weight:300;line-height:1.85;color:var(--g6);}
+
+/* ─── BUTTONS — gray/white only ─── */
+.btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--g8);color:var(--w);font-size:13px;font-weight:600;padding:13px 26px;border-radius:var(--r8);transition:all .2s;cursor:pointer;letter-spacing:.02em;border:none;}
+.btn-dark:hover{background:var(--g7);transform:translateY(-1px);box-shadow:var(--sh2);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--g3);color:var(--g8);font-size:13px;font-weight:600;padding:12px 24px;border-radius:var(--r8);transition:all .2s;cursor:pointer;letter-spacing:.02em;background:var(--w);}
+.btn-outline:hover{border-color:var(--g7);background:var(--g7);color:var(--w);}
+.btn-ghost-w{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.35);color:var(--w);font-size:13px;font-weight:600;padding:12px 24px;border-radius:var(--r8);transition:all .2s;cursor:pointer;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);}
+.btn-ghost-w:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.6);}
+.pill{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:4px 11px;border-radius:var(--r999);background:var(--g2);color:var(--g6);border:1px solid var(--g3);}
+
+/* ════════════════════════════════════
+   NAVBAR — transparent on hero, solid on scroll
+════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  transition:background .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+#nav .nav-logo{color:var(--w);}
+#nav .nav-logo span{color:rgba(255,255,255,.55);}
+#nav .nav-links a{color:rgba(255,255,255,.75);}
+#nav .nav-links a:hover,#nav .nav-links a.on{color:var(--w);background:rgba(255,255,255,.12);}
+#nav .nav-tel{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:var(--w);}
+#nav .nav-tel:hover{background:rgba(255,255,255,.22);}
+#nav .nav-cta{background:var(--w);color:var(--g8);}
+#nav .nav-cta:hover{background:var(--g2);}
+#nav .nav-ham span{background:var(--w);}
+/* Scrolled state — solid white */
+#nav.scrolled{
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--g3);
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+#nav.scrolled .nav-logo{color:var(--g8);}
+#nav.scrolled .nav-logo span{color:var(--g5);}
+#nav.scrolled .nav-links a{color:var(--g5);}
+#nav.scrolled .nav-links a:hover,#nav.scrolled .nav-links a.on{color:var(--g8);background:var(--g2);}
+#nav.scrolled .nav-tel{background:var(--g2);border-color:var(--g3);color:var(--g8);}
+#nav.scrolled .nav-tel:hover{background:var(--g3);}
+#nav.scrolled .nav-cta{background:var(--g8);color:var(--w);}
+#nav.scrolled .nav-cta:hover{background:var(--g7);}
+#nav.scrolled .nav-ham span{background:var(--g8);}
+.nav-in{max-width:1300px;margin:0 auto;padding:0 40px;height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.nav-logo{font-family:var(--ff);font-size:23px;font-weight:700;color:var(--g8);letter-spacing:-.01em;flex-shrink:0;}
+.nav-logo span{color:var(--g5);}
+.nav-links{display:flex;gap:2px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;padding:7px 14px;border-radius:var(--r8);color:var(--g5);transition:all .2s;}
+.nav-links a:hover,.nav-links a.on{color:var(--g8);background:var(--g2);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-tel{font-size:13px;font-weight:600;color:var(--g8);display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r8);background:var(--g2);border:1px solid var(--g3);transition:background .2s;}
+.nav-tel:hover{background:var(--g3);}
+.nav-tel svg{width:13px;height:13px;flex-shrink:0;}
+.nav-cta{background:var(--g8);color:var(--w);font-size:13px;font-weight:600;padding:9px 20px;border-radius:var(--r8);transition:all .2s;}
+.nav-cta:hover{background:var(--g7);transform:translateY(-1px);box-shadow:var(--sh2);}
+.nav-ham{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;}
+.nav-ham span{display:block;width:20px;height:2px;background:var(--g8);border-radius:2px;}
+.mob-menu{display:none;position:fixed;inset:0;z-index:850;background:var(--w);padding:88px 32px 40px;flex-direction:column;gap:0;overflow-y:auto;}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-family:var(--ff);font-size:26px;padding:16px 0;border-bottom:1px solid var(--g2);color:var(--g8);display:block;}
+.mob-x{position:absolute;top:22px;right:26px;font-size:26px;cursor:pointer;color:var(--g4);}
+
+/* ════════════════════════════════════
+   HERO — SCROLLING 3-IMAGE SLIDESHOW
+════════════════════════════════════ */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding-top:0;
+}
+/* Slideshow layers */
+.hero-slides{position:absolute;inset:0;z-index:0;}
+.hero-slide{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center 40%;
+  opacity:0;
+  transition:opacity 1.6s cubic-bezier(.4,0,.2,1);
+}
+.hero-slide.active{opacity:1;}
+.hero-slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=90');}
+.hero-slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1920&q=90');}
+.hero-slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&q=90');}
+/* Gradient overlay */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(105deg,rgba(10,10,10,.78) 0%,rgba(10,10,10,.55) 55%,rgba(10,10,10,.40) 100%);
+}
+/* Slide indicators */
+.hero-dots{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;z-index:10;
+}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;transition:all .35s;padding:0;}
+.hero-dot.on{background:var(--w);width:22px;border-radius:4px;}
+/* Hero content */
+.hero-in{
+  position:relative;z-index:3;
+  width:100%;max-width:1300px;margin:0 auto;padding:80px 40px 100px;
+  display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center;
+}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);margin-bottom:20px;
+}
+.hero-kicker::before{content:'';width:24px;height:1.5px;background:rgba(255,255,255,.45);}
+.hero .hd1{margin-bottom:18px;}
+.hero .hd1 em{font-style:italic;color:rgba(255,255,255,.75);}
+.hero .lead{color:rgba(255,255,255,.7);font-size:16px;max-width:500px;margin-bottom:32px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:32px;margin-top:44px;padding-top:28px;border-top:1px solid rgba(255,255,255,.12);}
+.hero-stat-v{font-family:var(--ff);font-size:28px;font-weight:700;color:var(--w);line-height:1;}
+.hero-stat-l{font-size:11px;color:rgba(255,255,255,.45);margin-top:4px;font-weight:500;letter-spacing:.04em;}
+/* ─── HERO CARD ROTATOR — REDESIGNED ─── */
+.hero-cards-wrap{
+  position:relative;
+  width:360px;
+  height:500px;
+  flex-shrink:0;
+  align-self:center;
+}
+.hero-cards-scene{
+  position:relative;
+  width:100%;
+  height:460px;
+}
+/* Each card absolutely positioned, stacked with offset */
+.hero-sc-card{
+  position:absolute;
+  width:320px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:20px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,.32),0 4px 16px rgba(0,0,0,.14);
+  transition:opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
+  will-change:transform,opacity;
+}
+/* States: active (front), next (peeking behind), hidden */
+.hero-sc-card[data-state="active"]{
+  opacity:1;
+  transform:translateX(-50%) translateY(0px) scale(1);
+  z-index:4;
+  pointer-events:all;
+}
+.hero-sc-card[data-state="next"]{
+  opacity:.6;
+  transform:translateX(-50%) translateY(18px) scale(.93);
+  z-index:3;
+  pointer-events:none;
+}
+.hero-sc-card[data-state="next2"]{
+  opacity:.3;
+  transform:translateX(-50%) translateY(34px) scale(.86);
+  z-index:2;
+  pointer-events:none;
+}
+.hero-sc-card[data-state="hidden"]{
+  opacity:0;
+  transform:translateX(-50%) translateY(54px) scale(.80);
+  z-index:1;
+  pointer-events:none;
+}
+/* Image */
+.hero-sc-img{position:relative;height:170px;overflow:hidden;}
+.hero-sc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease;}
+.hero-sc-card[data-state="active"]:hover .hero-sc-img img{transform:scale(1.05);}
+.hero-sc-img-fade{position:absolute;bottom:0;left:0;right:0;height:70px;background:linear-gradient(to top,rgba(0,0,0,.32) 0%,transparent 100%);pointer-events:none;}
+.hero-sc-badge{position:absolute;top:12px;left:12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:var(--r999);backdrop-filter:blur(8px);display:inline-flex;align-items:center;gap:4px;}
+.hero-sc-badge-dk{background:rgba(17,17,17,.88);color:#fff;}
+.hero-sc-badge-md{background:rgba(55,55,55,.88);color:#fff;}
+/* Body */
+.hero-sc-body{padding:18px 20px 20px;}
+.hero-sc-area{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--g5);margin-bottom:3px;}
+.hero-sc-name{font-family:var(--ff);font-size:22px;font-weight:700;color:var(--g8);margin-bottom:3px;line-height:1.1;}
+.hero-sc-loc{font-size:11px;color:var(--g5);display:flex;align-items:center;gap:4px;margin-bottom:12px;font-weight:500;}
+.hero-sc-loc svg{width:9px;height:9px;flex-shrink:0;}
+.hero-sc-specs{display:flex;gap:0;border-top:1px solid var(--g2);border-bottom:1px solid var(--g2);padding:9px 0;margin-bottom:11px;}
+.hero-sc-spec{flex:1;text-align:center;border-right:1px solid var(--g2);padding:0 3px;}
+.hero-sc-spec:first-child{text-align:left;padding-left:0;}
+.hero-sc-spec:last-child{border-right:none;}
+.hero-sc-sv{display:block;font-family:var(--ff);font-size:13px;font-weight:700;color:var(--g8);}
+.hero-sc-sl{display:block;font-size:9px;color:var(--g5);text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-top:1px;}
+/* Progress */
+.hero-sc-prog-wrap{margin-bottom:11px;}
+.hero-sc-prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--g5);font-weight:600;margin-bottom:5px;}
+.hero-sc-prog-bar{height:3px;background:var(--g2);border-radius:3px;overflow:hidden;}
+.hero-sc-prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--g6),var(--g8));}
+/* Price + CTA */
+.hero-sc-price-row{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-bottom:14px;}
+.hero-sc-price{font-family:var(--ff);font-size:18px;font-weight:700;color:var(--g8);line-height:1;}
+.hero-sc-price-sub{font-size:10px;color:var(--g5);margin-top:2px;}
+/* Actions — full width, perfectly aligned */
+.hero-sc-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.hero-sc-btn-sec{
+  width:100%;padding:10px 8px;
+  background:transparent;color:var(--g8);
+  font-size:11.5px;font-weight:600;
+  border:1.5px solid var(--g3);border-radius:var(--r8);
+  cursor:pointer;transition:all .2s;
+  white-space:nowrap;text-align:center;
+  font-family:var(--fs);
+}
+.hero-sc-btn-sec:hover{background:var(--g2);border-color:var(--g7);}
+.hero-sc-btn-pri{
+  width:100%;padding:10px 8px;
+  background:var(--g8);color:var(--w);
+  font-size:11.5px;font-weight:700;
+  border:none;border-radius:var(--r8);
+  cursor:pointer;transition:all .2s;
+  white-space:nowrap;text-align:center;
+  font-family:var(--fs);
+}
+.hero-sc-btn-pri:hover{background:var(--g7);box-shadow:0 4px 14px rgba(0,0,0,.25);}
+/* Nav arrows */
+.hero-cards-arrow{
+  position:absolute;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.16);
+  border:1.5px solid rgba(255,255,255,.28);
+  backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:20;
+  transition:all .2s;
+}
+.hero-cards-arrow:hover{background:rgba(255,255,255,.30);border-color:rgba(255,255,255,.6);}
+.hero-cards-arrow svg{width:14px;height:14px;stroke:#fff;}
+.hero-cards-arrow-l{bottom:0;left:calc(50% - 44px);}
+.hero-cards-arrow-r{bottom:0;right:calc(50% - 44px);}
+/* Dots */
+.hero-cards-dots{
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  display:flex;gap:7px;
+}
+.hero-cards-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.28);border:none;cursor:pointer;transition:all .3s;padding:0;}
+.hero-cards-dot.on{background:var(--w);width:20px;border-radius:3px;}
+
+/* ════════════════════════════════════
+   TRUST BAR
+════════════════════════════════════ */
+.trust-bar{background:var(--w);border-top:1px solid var(--g3);border-bottom:1px solid var(--g3);padding:16px 0;}
+.trust-in{max-width:1300px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;justify-content:space-between;}
+.trust-item{display:flex;align-items:center;gap:9px;color:var(--g6);font-size:12.5px;font-weight:500;}
+.trust-item svg{width:15px;height:15px;color:var(--g8);flex-shrink:0;}
+.trust-item strong{color:var(--g8);}
+.trust-div{width:1px;height:22px;background:var(--g3);}
+
+/* showcase-sec removed */
+
+/* ════════════════════════════════════
+   URGENCY TICKER
+════════════════════════════════════ */
+.urgency{background:var(--g8);padding:11px 0;}
+.urgency-in{max-width:1300px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.urgency-dot{width:7px;height:7px;border-radius:50%;background:var(--w);opacity:.5;flex-shrink:0;animation:pulse-dot 1.5s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{opacity:.5;}50%{opacity:1;}}
+.urgency-items{display:flex;gap:28px;flex-wrap:wrap;}
+.urgency-item{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.7);}
+.urgency-item strong{color:var(--w);}
+.urgency-cta{margin-left:auto;background:var(--w);color:var(--g8);font-size:12px;font-weight:700;padding:7px 18px;border-radius:var(--r8);border:none;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.urgency-cta:hover{background:var(--g2);}
+
+/* ════════════════════════════════════
+   PROJECT TABS
+════════════════════════════════════ */
+.tab-shell{background:var(--w);border-bottom:1px solid var(--g3);position:sticky;top:66px;z-index:700;}
+.tab-in{max-width:1300px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.tabs{display:flex;gap:0;}
+.tab{padding:16px 24px;font-size:13.5px;font-weight:600;color:var(--g5);border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:-1px;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.tab.on{color:var(--g8);border-bottom-color:var(--g8);}
+.tab:hover{color:var(--g7);}
+.tab-badge{background:var(--g8);color:var(--w);font-size:10px;font-weight:700;padding:2px 7px;border-radius:var(--r999);}
+.tab-sort{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--g5);}
+.tab-sort select{border:1px solid var(--g3);background:var(--w);padding:6px 12px;border-radius:var(--r8);font-size:13px;color:var(--g8);cursor:pointer;}
+.proj-list{display:none;}
+.proj-list.on{display:block;background:var(--g1);}
+
+/* ════════════════════════════════════
+   PROJECT CARDS
+════════════════════════════════════ */
+.cards-wrap{padding:48px 0 60px;max-width:1300px;margin:0 auto;padding-left:40px;padding-right:40px;}
+.proj-card{
+  display:grid;grid-template-columns:400px 1fr;
+  border:1px solid var(--g3);border-radius:var(--r16);overflow:hidden;
+  margin-bottom:24px;background:var(--w);position:relative;
+  box-shadow:var(--sh1);transition:box-shadow .3s,transform .25s,border-color .3s;
+}
+.proj-card:hover{box-shadow:var(--sh3);transform:translateY(-4px);border-color:var(--g4);}
+.proj-card.featured{border-color:var(--g7);border-width:2px;}
+.feat-ribbon{background:var(--g8);color:var(--w);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;position:absolute;top:0;left:0;z-index:6;}
+.pc-img{position:relative;overflow:hidden;}
+.pc-img img{width:100%;height:100%;object-fit:cover;min-height:300px;transition:transform .8s ease;}
+.proj-card:hover .pc-img img{transform:scale(1.04);}
+.pc-badge{position:absolute;top:14px;left:14px;padding:5px 13px;border-radius:var(--r999);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:blur(8px);z-index:3;display:inline-flex;align-items:center;gap:4px;}
+.pc-badge-dk{background:rgba(17,17,17,.88);color:#fff;}
+.pc-badge-md{background:rgba(80,80,80,.88);color:#fff;}
+.pc-gallery-cnt{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);color:#fff;font-size:10px;font-weight:600;padding:5px 10px;border-radius:var(--r8);display:flex;align-items:center;gap:5px;z-index:3;}
+.pc-gallery-cnt svg{width:11px;height:11px;}
+.pc-scarcity{position:absolute;bottom:12px;left:12px;background:rgba(30,30,30,.9);color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:var(--r999);animation:scarcity-pulse 2s ease infinite;z-index:3;}
+@keyframes scarcity-pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
+.pc-info{padding:32px 36px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;}
+.pc-name{font-family:var(--ff);font-size:clamp(20px,2.2vw,28px);font-weight:700;margin-bottom:4px;color:var(--g8);}
+.pc-loc{font-size:12.5px;color:var(--g5);display:flex;align-items:center;gap:5px;margin-bottom:16px;font-weight:500;}
+.pc-loc svg{width:12px;height:12px;flex-shrink:0;}
+.pc-specs{display:flex;gap:0;padding:14px 0;border-top:1px solid var(--g2);border-bottom:1px solid var(--g2);}
+.pc-spec{flex:1;text-align:center;padding:0 6px;border-right:1px solid var(--g2);}
+.pc-spec:first-child{padding-left:0;text-align:left;}
+.pc-spec:last-child{border-right:none;}
+.pc-spec-v{font-family:var(--ff);font-size:16px;font-weight:700;margin-bottom:2px;color:var(--g8);}
+.pc-spec-l{font-size:10px;color:var(--g5);text-transform:uppercase;letter-spacing:.07em;font-weight:600;}
+.pc-amenities{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px;}
+.pc-progress{margin-top:12px;}
+.prog-top{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:6px;color:var(--g5);}
+.prog-pct{font-weight:700;color:var(--g8);}
+.prog-track{height:3px;background:var(--g2);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:2px;background:var(--g8);transition:width 1.4s cubic-bezier(.22,1,.36,1);}
+.pc-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+.pc-price{font-family:var(--ff);font-size:clamp(20px,2.2vw,26px);font-weight:700;line-height:1;color:var(--g8);}
+.pc-price-sub{font-size:11px;color:var(--g5);margin-top:3px;}
+.pc-emi{font-size:12px;font-weight:600;color:var(--g6);margin-top:3px;}
+.pc-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.btn-visit{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--g3);color:var(--g8);font-size:12.5px;font-weight:600;padding:10px 16px;border-radius:var(--r8);transition:all .2s;white-space:nowrap;background:var(--w);}
+.btn-visit:hover{border-color:var(--g8);background:var(--g2);}
+.btn-enquire{display:inline-flex;align-items:center;gap:7px;background:var(--g8);color:var(--w);font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:var(--r8);transition:all .2s;white-space:nowrap;border:none;cursor:pointer;}
+.btn-enquire:hover{background:var(--g7);box-shadow:var(--sh2);}
+.btn-brochure{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--g3);color:var(--g6);font-size:12.5px;font-weight:600;padding:10px 16px;border-radius:var(--r8);transition:all .2s;white-space:nowrap;background:var(--w);cursor:pointer;}
+.btn-brochure:hover{background:var(--g2);border-color:var(--g7);color:var(--g8);}
+.btn-brochure svg{width:13px;height:13px;flex-shrink:0;}
+
+/* Lead strip */
+.lead-strip{background:var(--g1);border:1px solid var(--g3);border-radius:var(--r16);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:28px;margin:8px 0 40px;flex-wrap:wrap;}
+.ls-title{font-family:var(--ff);font-size:20px;font-weight:700;color:var(--g8);margin-bottom:4px;}
+.ls-sub{font-size:13px;color:var(--g5);}
+.ls-form{display:flex;gap:8px;flex-wrap:wrap;}
+.ls-input{border:1.5px solid var(--g3);background:var(--w);color:var(--g8);padding:11px 16px;border-radius:var(--r8);font-size:13.5px;width:210px;transition:border-color .2s;}
+.ls-input:focus{outline:none;border-color:var(--g8);}
+.ls-btn{background:var(--g8);color:var(--w);font-size:13px;font-weight:700;padding:11px 22px;border-radius:var(--r8);border:none;cursor:pointer;transition:all .2s;}
+.ls-btn:hover{background:var(--g7);}
+.ls-note{font-size:11px;color:var(--g5);margin-top:6px;}
+
+/* ════════════════════════════════════
+   COMPLETED PROJECTS
+════════════════════════════════════ */
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:0;}
+.comp-card{position:relative;overflow:hidden;border-radius:var(--r12);cursor:pointer;background:var(--g2);box-shadow:var(--sh1);}
+.comp-img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .8s;display:block;}
+.comp-card:hover .comp-img{transform:scale(1.06);}
+.comp-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.08) 60%,transparent 100%);}
+.comp-info{position:absolute;bottom:0;left:0;right:0;padding:20px 16px 16px;}
+.comp-name{font-family:var(--ff);font-size:15px;font-weight:600;color:#fff;margin-bottom:2px;}
+.comp-meta{font-size:11px;color:rgba(255,255,255,.55);}
+.comp-sold{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r999);border:1px solid rgba(255,255,255,.25);}
+.comp-rating{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--r8);backdrop-filter:blur(6px);display:inline-flex;align-items:center;gap:3px;}
+
+/* ════════════════════════════════════
+   SOCIAL PROOF / STATS
+════════════════════════════════════ */
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px;}
+.proof-card{
+  padding:28px 24px;border:1px solid var(--g3);border-radius:var(--r16);background:var(--w);
+  transition:all .3s;box-shadow:var(--sh1);
+}
+.proof-card:hover{box-shadow:var(--sh2);transform:translateY(-3px);border-color:var(--g4);}
+.proof-icon{width:40px;height:40px;border-radius:var(--r8);background:var(--g1);border:1px solid var(--g3);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.proof-icon svg{width:20px;height:20px;color:var(--g7);}
+.proof-val{font-family:var(--ff);font-size:32px;font-weight:700;color:var(--g8);line-height:1;margin-bottom:4px;}
+.proof-lbl{font-size:12.5px;color:var(--g5);font-weight:500;}
+
+/* ════════════════════════════════════
+   TESTIMONIALS — HORIZONTAL SLIDER
+════════════════════════════════════ */
+.testi-sec{
+  background:var(--g8);
+  padding:80px 0;
+  position:relative;
+  overflow:hidden;
+}
+.testi-sec::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 50%,rgba(255,255,255,.04) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.03) 0%,transparent 50%);
+  pointer-events:none;
+}
+.testi-wrap{max-width:1200px;margin:0 auto;padding:0 40px;}
+/* Header row */
+.testi-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:56px;gap:24px;flex-wrap:wrap;
+}
+.testi-header-left .eyebrow{color:rgba(255,255,255,.4);}
+.testi-header-left .eyebrow::before{background:rgba(255,255,255,.25);}
+.testi-hed{
+  font-family:var(--ff);font-size:clamp(32px,3.5vw,46px);
+  font-weight:700;color:var(--w);line-height:1.06;letter-spacing:-.02em;
+  margin-top:10px;
+}
+.testi-sub{font-size:14px;color:rgba(255,255,255,.4);margin-top:8px;font-weight:300;}
+/* Rating badge */
+.testi-rating-badge{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r999);
+  padding:12px 20px;
+  flex-shrink:0;
+}
+.testi-rating-stars{display:flex;gap:3px;}
+.testi-rating-stars svg{width:14px;height:14px;fill:#f5c518;}
+.testi-rating-num{font-family:var(--ff);font-size:22px;font-weight:700;color:var(--w);line-height:1;}
+.testi-rating-lbl{font-size:11px;color:rgba(255,255,255,.45);font-weight:500;margin-top:1px;}
+
+/* Slider shell */
+.testi-slider-shell{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:20px;
+  position:relative;
+}
+/* Single card */
+.testi-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+  padding:32px;
+  position:relative;
+  overflow:hidden;
+  transition:background .3s,border-color .3s,transform .3s;
+  display:flex;flex-direction:column;
+}
+.testi-card::before{
+  content:'\201C';
+  position:absolute;top:-10px;right:24px;
+  font-family:var(--ff);font-size:120px;font-weight:700;line-height:1;
+  color:rgba(255,255,255,.06);
+  pointer-events:none;
+  user-select:none;
+}
+.testi-card:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.2);
+  transform:translateY(-4px);
+}
+/* Featured card — first one bigger */
+.testi-card.featured{
+  grid-column:1 / 2;
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.18);
+}
+.testi-stars{display:flex;gap:3px;margin-bottom:18px;}
+.testi-stars svg{width:13px;height:13px;fill:#f5c518;}
+.testi-text{
+  font-size:14px;line-height:1.78;
+  color:rgba(255,255,255,.75);
+  margin-bottom:24px;
+  flex:1;
+  font-weight:300;
+}
+.testi-card.featured .testi-text{font-size:15px;color:rgba(255,255,255,.88);}
+.testi-author{display:flex;align-items:center;gap:12px;margin-top:auto;}
+.testi-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g4),var(--g6));
+  border:1.5px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff);font-weight:700;color:var(--w);font-size:16px;
+  flex-shrink:0;
+}
+.testi-name{font-size:13px;font-weight:700;color:var(--w);}
+.testi-role{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;}
+.testi-project{
+  font-size:10px;color:rgba(255,255,255,.35);
+  font-weight:600;margin-top:3px;
+  letter-spacing:.03em;text-transform:uppercase;
+}
+/* Tag on featured */
+.testi-tag{
+  display:inline-flex;align-items:center;
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(255,255,255,.12);
+  color:rgba(255,255,255,.6);
+  border-radius:var(--r999);
+  padding:4px 10px;
+  margin-bottom:14px;
+  width:fit-content;
+}
+/* Nav + progress */
+.testi-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:40px;
+}
+.testi-progress-wrap{display:flex;gap:6px;align-items:center;}
+.testi-prog-dot{
+  width:28px;height:3px;border-radius:2px;
+  background:rgba(255,255,255,.18);
+  transition:all .4s;cursor:pointer;border:none;padding:0;
+}
+.testi-prog-dot.on{background:var(--w);width:44px;}
+.testi-nav{display:flex;gap:10px;}
+.testi-nav-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .22s;
+}
+.testi-nav-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.35);}
+.testi-nav-btn svg{width:16px;height:16px;stroke:rgba(255,255,255,.7);transition:stroke .2s;}
+.testi-nav-btn:hover svg{stroke:var(--w);}
+
+@media(max-width:900px){
+  .testi-slider-shell{grid-template-columns:1fr;}
+  .testi-card.featured{grid-column:1;}
+  .testi-header{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:600px){
+  .testi-wrap{padding:0 20px;}
+}
+
+
+/* ════════════════════════════════════
+   WHERE WE BUILD — REDESIGNED
+════════════════════════════════════ */
+.wwb-sec{
+  background:var(--g8);
+  padding:0;
+  overflow:hidden;
+  position:relative;
+}
+.wwb-inner{
+  max-width:1300px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 480px;
+  min-height:640px;
+}
+/* Left — Map Panel */
+.wwb-map{
+  position:relative;
+  overflow:hidden;
+  background:#161616;
+  min-height:600px;
+}
+.wwb-map-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,.04) 0%, transparent 55%),
+    radial-gradient(circle at 75% 65%, rgba(255,255,255,.03) 0%, transparent 45%);
+}
+/* SVG map grid lines */
+.wwb-map svg.map-grid{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  opacity:.12;
+}
+/* Location pins on map */
+.wwb-pin{
+  position:absolute;
+  display:flex;flex-direction:column;align-items:center;
+  cursor:pointer;
+  transition:transform .25s;
+  z-index:4;
+}
+.wwb-pin:hover{transform:scale(1.12);}
+.wwb-pin.active .wwb-pin-dot{background:var(--w);box-shadow:0 0 0 4px rgba(255,255,255,.25),0 0 0 8px rgba(255,255,255,.08);}
+.wwb-pin.active .wwb-pin-label{color:var(--w);font-weight:700;}
+.wwb-pin-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:rgba(255,255,255,.45);
+  border:2px solid rgba(255,255,255,.6);
+  transition:all .3s;
+  margin-bottom:6px;
+}
+.wwb-pin-dot::after{
+  content:'';
+  position:absolute;
+  width:14px;height:14px;border-radius:50%;
+  background:rgba(255,255,255,.2);
+  animation:pin-pulse 2.2s ease-out infinite;
+}
+@keyframes pin-pulse{
+  0%{transform:scale(1);opacity:.8;}
+  100%{transform:scale(2.8);opacity:0;}
+}
+.wwb-pin-label{
+  font-size:10px;font-weight:600;letter-spacing:.04em;
+  color:rgba(255,255,255,.5);
+  white-space:nowrap;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(6px);
+  padding:3px 8px;border-radius:4px;
+  border:1px solid rgba(255,255,255,.1);
+  transition:color .3s;
+}
+/* Pin positions (% of map container) */
+.wwb-pin[data-loc="whitefield"]{top:28%;left:70%;}
+.wwb-pin[data-loc="sarjapur"]{top:52%;left:62%;}
+.wwb-pin[data-loc="bellandur"]{top:46%;left:54%;}
+.wwb-pin[data-loc="electronic-city"]{top:72%;left:48%;}
+.wwb-pin[data-loc="hsr"]{top:58%;left:42%;}
+.wwb-pin[data-loc="koramangala"]{top:44%;left:38%;}
+/* Map overlay gradient toward right panel */
+.wwb-map::after{
+  content:'';
+  position:absolute;top:0;right:0;bottom:0;width:80px;
+  background:linear-gradient(to right,transparent,#0f0f0f);
+  z-index:3;
+  pointer-events:none;
+}
+/* Map header inside left */
+.wwb-map-head{
+  position:absolute;top:0;left:0;right:0;
+  padding:40px 40px 0;
+  z-index:5;
+}
+.wwb-map-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:12px;
+}
+.wwb-map-eyebrow::after{content:'';width:20px;height:1px;background:rgba(255,255,255,.25);}
+.wwb-map-title{
+  font-family:var(--ff);
+  font-size:clamp(32px,3.5vw,50px);
+  font-weight:700;line-height:1.04;
+  color:var(--w);
+  letter-spacing:-.02em;
+}
+.wwb-map-sub{
+  font-size:14px;color:rgba(255,255,255,.45);
+  margin-top:10px;font-weight:300;line-height:1.6;
+  max-width:360px;
+}
+/* Right — Detail Panel */
+.wwb-detail{
+  background:#0f0f0f;
+  padding:0;
+  display:flex;flex-direction:column;
+  border-left:1px solid rgba(255,255,255,.07);
+}
+/* Tab list */
+.wwb-tabs{
+  display:flex;flex-direction:column;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding:48px 0 0;
+}
+.wwb-tab{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 36px;
+  cursor:pointer;
+  border-left:3px solid transparent;
+  transition:all .22s;
+  position:relative;
+}
+.wwb-tab:hover{background:rgba(255,255,255,.04);}
+.wwb-tab.active{
+  background:rgba(255,255,255,.06);
+  border-left-color:var(--w);
+}
+.wwb-tab-num{
+  font-family:var(--ff);font-size:11px;font-weight:700;
+  color:rgba(255,255,255,.2);
+  min-width:20px;
+  transition:color .22s;
+}
+.wwb-tab.active .wwb-tab-num{color:rgba(255,255,255,.5);}
+.wwb-tab-info{flex:1;}
+.wwb-tab-name{
+  font-size:14px;font-weight:600;color:rgba(255,255,255,.5);
+  transition:color .22s;
+  letter-spacing:.01em;
+}
+.wwb-tab.active .wwb-tab-name{color:var(--w);}
+.wwb-tab-status{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:1px;transition:color .22s;}
+.wwb-tab.active .wwb-tab-status{color:rgba(255,255,255,.45);}
+.wwb-tab-arrow{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .22s;
+}
+.wwb-tab.active .wwb-tab-arrow{opacity:1;}
+.wwb-tab-arrow svg{width:10px;height:10px;stroke:rgba(255,255,255,.6);}
+/* Detail content panel */
+.wwb-panel{
+  flex:1;padding:32px 36px;
+  display:none;
+  flex-direction:column;
+  gap:18px;
+}
+.wwb-panel.active{display:flex;}
+.wwb-panel-header{
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.wwb-panel-area{
+  font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);margin-bottom:6px;
+}
+.wwb-panel-name{
+  font-family:var(--ff);font-size:28px;font-weight:700;
+  color:var(--w);line-height:1;margin-bottom:6px;
+}
+.wwb-panel-tagline{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6;font-weight:300;}
+/* Stats row */
+.wwb-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:10px;overflow:hidden;}
+.wwb-stat{padding:14px 12px;background:#0f0f0f;text-align:center;}
+.wwb-stat-v{font-family:var(--ff);font-size:20px;font-weight:700;color:var(--w);line-height:1;}
+.wwb-stat-l{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:3px;}
+/* Highlights */
+.wwb-highlights{display:flex;flex-direction:column;gap:8px;}
+.wwb-highlight{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:12.5px;color:rgba(255,255,255,.5);
+  line-height:1.5;
+}
+.wwb-highlight svg{width:13px;height:13px;stroke:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
+/* Tags */
+.wwb-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.wwb-tag{
+  font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  padding:5px 11px;border-radius:4px;
+  background:rgba(255,255,255,.07);
+  color:rgba(255,255,255,.45);
+  border:1px solid rgba(255,255,255,.1);
+}
+/* CTA */
+.wwb-cta{
+  margin-top:auto;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.wwb-cta-btn{
+  width:100%;padding:12px 20px;
+  background:var(--w);color:var(--g8);
+  font-size:13px;font-weight:700;
+  border:none;border-radius:var(--r8);
+  cursor:pointer;transition:all .2s;
+  font-family:var(--fs);letter-spacing:.01em;
+}
+.wwb-cta-btn:hover{background:var(--g2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,255,255,.12);}
+@media(max-width:900px){
+  .wwb-inner{grid-template-columns:1fr;}
+  .wwb-map{min-height:360px;}
+  .wwb-detail{border-left:none;border-top:1px solid rgba(255,255,255,.07);}
+  .wwb-panel{padding:24px 24px;}
+  .wwb-tab{padding:12px 24px;}
+}
+
+/* ── Real Map Pin Buttons ── */
+.wwb-map-pin-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;
+  background:rgba(0,0,0,.65);color:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.2);cursor:pointer;
+  backdrop-filter:blur(8px);transition:all .22s;white-space:nowrap;
+}
+.wwb-map-pin-btn svg{color:rgba(255,255,255,.7);}
+.wwb-map-pin-btn.active svg{color:#e53e3e;}
+.wwb-map-pin-btn:hover{background:rgba(0,0,0,.85);color:#fff;border-color:rgba(255,255,255,.45);}
+.wwb-map-pin-btn.active{background:rgba(255,255,255,.95);color:#111;border-color:#fff;font-weight:700;}
+
+
+.roadmap{margin-top:56px;position:relative;}
+.roadmap::before{content:'';position:absolute;left:50%;top:40px;bottom:40px;width:1px;background:linear-gradient(to bottom,var(--g3),var(--g8),var(--g3));transform:translateX(-50%);}
+.rm-step{display:grid;grid-template-columns:1fr 56px 1fr;align-items:start;margin-bottom:0;position:relative;}
+.rm-step:nth-child(odd) .rm-left{grid-column:1;text-align:right;padding-right:44px;}
+.rm-step:nth-child(odd) .rm-center{grid-column:2;}
+.rm-step:nth-child(odd) .rm-right{grid-column:3;padding-left:44px;opacity:0;pointer-events:none;}
+.rm-step:nth-child(even) .rm-left{grid-column:1;padding-right:44px;opacity:0;pointer-events:none;}
+.rm-step:nth-child(even) .rm-center{grid-column:2;}
+.rm-step:nth-child(even) .rm-right{grid-column:3;padding-left:44px;}
+.rm-center{display:flex;flex-direction:column;align-items:center;}
+.rm-node{width:48px;height:48px;border-radius:50%;background:var(--g8);display:flex;align-items:center;justify-content:center;border:3px solid var(--w);box-shadow:0 0 0 1px var(--g8);flex-shrink:0;}
+.rm-node svg{width:18px;height:18px;color:var(--w);}
+.rm-connector{width:1px;flex:1;min-height:52px;background:linear-gradient(to bottom,var(--g8),var(--g4));}
+.rm-step:last-child .rm-connector{display:none;}
+.rm-card{background:var(--w);border:1px solid var(--g3);border-radius:var(--r16);padding:24px;margin-bottom:48px;transition:all .3s;}
+.rm-card:hover{border-color:var(--g4);box-shadow:var(--sh2);}
+.rm-num{font-family:var(--ff);font-size:44px;font-weight:700;color:var(--g2);line-height:1;margin-bottom:6px;}
+.rm-icon{width:32px;height:32px;border-radius:var(--r8);background:var(--g1);border:1px solid var(--g3);display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.rm-icon svg{width:16px;height:16px;color:var(--g7);}
+.rm-title{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--g8);}
+.rm-desc{font-size:12.5px;color:var(--g5);line-height:1.65;}
+
+/* ════════════════════════════════════
+   EMI CALCULATOR
+════════════════════════════════════ */
+.emi-shell{background:var(--w);border:1px solid var(--g3);border-radius:var(--r24);padding:48px;margin-top:48px;}
+.emi-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.emi-field{margin-bottom:26px;}
+.emi-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g5);margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;}
+.emi-lbl-val{font-family:var(--ff);font-size:16px;font-weight:700;color:var(--g8);letter-spacing:0;text-transform:none;}
+.emi-slider{-webkit-appearance:none;appearance:none;width:100%;height:3px;background:var(--g2);outline:none;border-radius:2px;cursor:pointer;}
+.emi-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--g8);cursor:pointer;border:2px solid var(--w);box-shadow:var(--sh1);}
+.emi-scale{display:flex;justify-content:space-between;font-size:10px;color:var(--g5);margin-top:4px;}
+.emi-panel{background:var(--g8);border-radius:var(--r16);padding:36px;}
+.emi-panel-lbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px;}
+.emi-panel-num{font-family:var(--ff);font-size:clamp(32px,4vw,48px);font-weight:700;color:#fff;line-height:1;margin-bottom:4px;}
+.emi-panel-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:24px;}
+.emi-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.emi-row:last-child{border-bottom:none;}
+.emi-rl{font-size:12.5px;color:rgba(255,255,255,.4);}
+.emi-rv{font-size:12.5px;font-weight:700;color:#fff;}
+.emi-donut{width:110px;height:110px;margin:20px auto;position:relative;}
+.emi-donut svg{transform:rotate(-90deg);}
+.emi-donut-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,.35);}
+.emi-donut-pct{font-family:var(--ff);font-size:16px;font-weight:700;color:#fff;line-height:1;}
+
+/* ════════════════════════════════════
+   CTA SECTION
+════════════════════════════════════ */
+.cta-sec{background:var(--g8);padding:88px 0;position:relative;overflow:hidden;}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 80% 50%,rgba(255,255,255,.04) 0%,transparent 70%);}
+.cta-sec-in{position:relative;z-index:1;text-align:center;}
+.cta-sec-in .hd2{color:var(--w);}
+.cta-sec-in .lead{color:rgba(255,255,255,.55);}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px;}
+
+/* ════════════════════════════════════
+   MODALS
+════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--w);border-radius:var(--r24);padding:40px;max-width:480px;width:calc(100% - 40px);position:relative;transform:scale(.95) translateY(10px);transition:transform .3s;border:1px solid var(--g3);box-shadow:var(--sh3);}
+.modal-overlay.open .modal{transform:none;}
+.modal-close{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:50%;background:var(--g1);border:1px solid var(--g3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--g5);transition:background .2s;}
+.modal-close:hover{background:var(--g2);}
+.modal-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g5);margin-bottom:8px;}
+.modal-title{font-family:var(--ff);font-size:24px;font-weight:700;margin-bottom:5px;}
+.modal-sub{font-size:13px;color:var(--g5);margin-bottom:22px;}
+.modal-for{font-size:12.5px;color:var(--g8);font-weight:600;padding:9px 13px;background:var(--g1);border-radius:var(--r8);margin-bottom:18px;display:flex;align-items:center;gap:7px;border:1px solid var(--g3);}
+.modal-for svg{width:13px;height:13px;color:var(--g5);}
+.mf-field{margin-bottom:12px;}
+.mf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.mf-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g5);margin-bottom:6px;display:block;}
+.mf-input{width:100%;border:1.5px solid var(--g3);border-radius:var(--r8);padding:11px 14px;font-size:13.5px;color:var(--g8);transition:border-color .2s;background:var(--w);}
+.mf-input:focus{outline:none;border-color:var(--g8);}
+.mf-select{width:100%;border:1.5px solid var(--g3);border-radius:var(--r8);padding:11px 14px;font-size:13.5px;color:var(--g8);background:var(--w);cursor:pointer;}
+.mf-select:focus{outline:none;border-color:var(--g8);}
+.mf-submit{width:100%;padding:14px;background:var(--g8);color:var(--w);font-size:14px;font-weight:700;border-radius:var(--r8);border:none;cursor:pointer;transition:all .2s;margin-top:4px;}
+.mf-submit:hover{background:var(--g7);box-shadow:var(--sh2);}
+.mf-trust{display:flex;align-items:center;gap:5px;margin-top:10px;justify-content:center;font-size:11px;color:var(--g5);}
+.mf-trust svg{width:12px;height:12px;color:var(--g4);}
+/* Brochure modal */
+.bv-overlay{position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.bv-overlay.open{opacity:1;pointer-events:all;}
+.bv-modal{background:var(--w);border-radius:var(--r24);padding:40px;max-width:440px;width:calc(100% - 40px);position:relative;transform:scale(.96) translateY(8px);transition:transform .3s;border:1px solid var(--g3);box-shadow:var(--sh3);}
+.bv-overlay.open .bv-modal{transform:none;}
+.bv-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:var(--g1);border:1px solid var(--g3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--g5);}
+.bv-icon{width:50px;height:50px;border-radius:var(--r12);background:var(--g1);border:1px solid var(--g3);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.bv-icon svg{width:24px;height:24px;color:var(--g7);}
+.bv-title{font-family:var(--ff);font-size:22px;font-weight:700;margin-bottom:5px;}
+.bv-sub{font-size:13px;color:var(--g5);margin-bottom:20px;}
+.bv-project{font-size:12.5px;font-weight:600;color:var(--g8);background:var(--g1);border:1px solid var(--g3);padding:9px 13px;border-radius:var(--r8);margin-bottom:18px;display:flex;align-items:center;gap:7px;}
+.bv-project svg{width:13px;height:13px;color:var(--g5);}
+.bv-field{margin-bottom:12px;}
+.bv-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g5);margin-bottom:6px;display:block;}
+.bv-input{width:100%;border:1.5px solid var(--g3);border-radius:var(--r8);padding:11px 14px;font-size:13.5px;color:var(--g8);transition:border-color .2s;background:var(--w);}
+.bv-input:focus{outline:none;border-color:var(--g8);}
+.bv-submit{width:100%;padding:14px;background:var(--g8);color:var(--w);font-size:14px;font-weight:700;border-radius:var(--r8);border:none;cursor:pointer;transition:all .2s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.bv-submit:hover{background:var(--g7);box-shadow:var(--sh2);}
+.bv-note{font-size:11px;color:var(--g5);text-align:center;margin-top:8px;}
+
+/* ════════════════════════════════════
+   STICKY / FLOATERS
+════════════════════════════════════ */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:800;background:var(--w);border-top:1px solid var(--g3);padding:12px 20px;display:flex;gap:10px;align-items:center;box-shadow:0 -6px 24px rgba(0,0,0,.08);}
+.sticky-cta-text{flex:1;font-size:12.5px;font-weight:600;color:var(--g8);}
+.sticky-cta-btns{display:flex;gap:8px;}
+.scta-call{display:flex;align-items:center;gap:6px;background:var(--g1);color:var(--g8);font-size:12.5px;font-weight:600;padding:10px 16px;border-radius:var(--r8);border:1px solid var(--g3);transition:background .2s;}
+.scta-call:hover{background:var(--g2);}
+.scta-enq{background:var(--g8);color:var(--w);font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:var(--r8);border:none;cursor:pointer;transition:all .2s;}
+.scta-enq:hover{background:var(--g7);}
+.float-actions{position:fixed;right:20px;bottom:88px;display:flex;flex-direction:column;gap:10px;z-index:780;}
+.fa-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--sh2);transition:transform .2s,box-shadow .2s;text-decoration:none;position:relative;background:var(--g8);}
+.fa-btn:hover{transform:scale(1.1);box-shadow:var(--sh3);}
+.fa-wa{background:#333;}.fa-call{background:var(--g8);}.fa-chat{background:var(--g7);}
+.fa-btn svg{width:19px;height:19px;color:var(--w);}
+.fa-tip{position:absolute;right:54px;top:50%;transform:translateY(-50%);background:var(--g8);color:var(--w);font-size:11px;font-weight:600;padding:5px 10px;border-radius:var(--r8);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;}
+.fa-btn:hover .fa-tip{opacity:1;}
+.fa-badge{position:absolute;top:-3px;right:-3px;width:16px;height:16px;border-radius:50%;background:var(--w);color:var(--g8);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--g8);}
+
+/* ════════════════════════════════════
+   CHATBOT
+════════════════════════════════════ */
+.chatbot{position:fixed;right:20px;bottom:158px;z-index:790;width:330px;max-height:500px;background:var(--w);border-radius:var(--r16);box-shadow:var(--sh3);display:none;flex-direction:column;overflow:hidden;border:1px solid var(--g3);}
+.chatbot.open{display:flex;}
+.cb-head{background:var(--g8);padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.cb-av{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:var(--ff);font-size:15px;font-weight:700;color:var(--w);flex-shrink:0;}
+.cb-info{flex:1;}
+.cb-name{font-size:13.5px;font-weight:600;color:var(--w);}
+.cb-status{font-size:11px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:4px;}
+.cb-status::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.5);display:block;}
+.cb-x{color:rgba(255,255,255,.4);cursor:pointer;font-size:17px;line-height:1;padding:4px;}
+.cb-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;}
+.cm{display:flex;flex-direction:column;gap:4px;}
+.cm.bot{align-items:flex-start;}
+.cm.user{align-items:flex-end;}
+.cb-bubble{max-width:82%;padding:10px 13px;border-radius:12px;font-size:13px;line-height:1.55;}
+.cm.bot .cb-bubble{background:var(--g1);color:var(--g8);border-bottom-left-radius:3px;border:1px solid var(--g3);}
+.cm.user .cb-bubble{background:var(--g8);color:var(--w);border-bottom-right-radius:3px;}
+.cb-opts{display:flex;flex-direction:column;gap:5px;margin-top:4px;}
+.cb-opt{padding:8px 13px;border:1.5px solid var(--g3);border-radius:var(--r8);font-size:12.5px;font-weight:500;text-align:left;cursor:pointer;transition:all .2s;color:var(--g8);background:var(--w);}
+.cb-opt:hover{border-color:var(--g8);background:var(--g1);}
+.cb-typing{display:flex;align-items:center;gap:4px;padding:10px 13px;background:var(--g1);border-radius:12px;border-bottom-left-radius:3px;width:fit-content;border:1px solid var(--g3);}
+.cb-typing span{width:5px;height:5px;border-radius:50%;background:var(--g5);animation:typing-dot .9s ease-in-out infinite;}
+.cb-typing span:nth-child(2){animation-delay:.15s;}
+.cb-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes typing-dot{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+.cb-input-area{padding:10px;border-top:1px solid var(--g3);display:flex;gap:7px;}
+.cb-input{flex:1;border:1.5px solid var(--g3);border-radius:var(--r8);padding:9px 13px;font-size:13px;color:var(--g8);transition:border-color .2s;background:var(--w);}
+.cb-input:focus{outline:none;border-color:var(--g8);}
+.cb-send{width:36px;height:36px;border-radius:var(--r8);background:var(--g8);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;flex-shrink:0;transition:background .2s;}
+.cb-send:hover{background:var(--g7);}
+.cb-send svg{width:13px;height:13px;color:var(--w);}
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+footer{background:var(--g8);color:rgba(255,255,255,.6);padding:64px 0 0;}
+.footer-grid{max-width:1300px;margin:0 auto;padding:0 40px 48px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,.08);}
+.footer-logo{font-family:var(--ff);font-size:22px;font-weight:700;color:var(--w);display:block;margin-bottom:10px;}
+.footer-logo span{color:rgba(255,255,255,.45);}
+.footer-tagline{font-size:13.5px;color:rgba(255,255,255,.4);line-height:1.75;max-width:220px;margin-bottom:22px;}
+.footer-social{display:flex;gap:7px;}
+.soc{width:32px;height:32px;border-radius:var(--r8);background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .2s;cursor:pointer;font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.1);}
+.soc:hover{background:rgba(255,255,255,.15);color:var(--w);}
+.footer-col h5{font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-col a{font-size:13px;color:rgba(255,255,255,.45);transition:color .2s;cursor:pointer;}
+.footer-col a:hover{color:var(--w);}
+.footer-btm{max-width:1300px;margin:0 auto;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:rgba(255,255,255,.25);}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media(max-width:1080px){
+  .hero-in{grid-template-columns:1fr;}
+  .hero-form{display:none;}
+  .proof-grid{grid-template-columns:repeat(2,1fr);}
+  /* testi now handled in component */
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .roadmap::before{display:none;}
+  .rm-step{grid-template-columns:1fr;}
+  .rm-step .rm-left,.rm-step .rm-right{display:block;opacity:1;text-align:left;padding:0;grid-column:1;}
+  .rm-step .rm-center{display:none;}
+  .sc-arrow-l{left:8px;}
+  .sc-arrow-r{right:8px;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-tel{display:none;}
+  .nav-ham{display:flex;}
+  .wrap,.nav-in,.trust-in,.urgency-in{padding:0 20px;}
+  .cards-wrap{padding-left:20px;padding-right:20px;}
+  .sec,.sec-w{padding:60px 0;}
+  .proj-card{grid-template-columns:1fr;}
+  .pc-img img{min-height:220px;}
+  .comp-grid{grid-template-columns:1fr 1fr;}
+  /* wwb mobile handled via wwb media query */
+  .emi-grid{grid-template-columns:1fr;}
+  .emi-shell{padding:24px;}
+  .proof-grid{grid-template-columns:1fr 1fr;}
+  /* testi mobile in component */
+  .footer-grid{grid-template-columns:1fr;gap:32px;}
+  .lead-strip{padding:22px 20px;}
+  .ls-input{width:100%;}
+  .hero-cards-wrap{width:100%;max-width:360px;margin:0 auto;}
+}
+@media(max-width:480px){
+  .comp-grid{grid-template-columns:1fr;}
+  .hd1{font-size:40px;}
+  .hd2{font-size:30px;}
+  .hero-stats{gap:16px;}
+  .pc-actions{flex-direction:column;width:100%;}
+  .btn-visit,.btn-enquire,.btn-brochure{width:100%;justify-content:center;}
+}
+body{padding-bottom:70px;}
+</style>
+</head>
+<body>
+<!-- VEGAMARCON TOPBAR -->
+<style>
+#vmtb{
+  position:fixed;top:0;left:0;right:0;
+  height:32px;
+  background:#111;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3%;
+  z-index:99999;
+  box-sizing:border-box;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-family:'Outfit','Inter',system-ui,sans-serif;
+}
+.vmtb-left{display:flex;align-items:center;gap:0}
+.vmtb-logo{
+  font-family:Georgia,serif;font-size:.8rem;font-weight:500;
+  color:rgba(255,255,255,.7);text-decoration:none;
+  letter-spacing:.5px;padding-right:.75rem;margin-right:.75rem;
+  border-right:1px solid rgba(255,255,255,.12);
+  white-space:nowrap;
+}
+.vmtb-link{
+  font-size:.62rem;font-weight:500;letter-spacing:1.2px;
+  text-transform:uppercase;text-decoration:none;
+  padding:.2rem .55rem;transition:color .15s,background .15s;
+  white-space:nowrap;border-radius:3px;
+}
+.vmtb-link:hover{color:#fff!important;background:rgba(255,255,255,.1)!important}
+.vmtb-right{
+  font-size:.58rem;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,.25);white-space:nowrap;
+}
+@media(max-width:640px){
+  .vmtb-right{display:none}
+  .vmtb-link{padding:.2rem .4rem;font-size:.58rem}
+  .vmtb-logo{display:none}
+}
+@media(max-width:420px){
+  #vmtb a[href="construction.html"],
+  #vmtb a[href="digital.html"]{display:none}
+}
+</style>
+<div id="vmtb">
+  <div class="vmtb-left">
+    <a href="index.html" class="vmtb-logo">Vegamarcon</a>
+    <a href="index.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Home</a><a href="projects.html" class="vmtb-link" style="color:#fff;background:rgba(255,255,255,.12);border-radius:3px;">Properties</a><a href="interiors.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Interiors</a><a href="construction.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Construction</a><a href="digital.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Digital</a><a href="careers.html" class="vmtb-link" style="color:rgba(255,255,255,.5);">Careers</a>
+  </div>
+  <div class="vmtb-right">One group &middot; Five divisions</div>
+</div>
+<!-- END VEGAMARCON TOPBAR -->
+<style>
+/* VMTB nudge */
+nav#nav{top:32px!important}
+body{padding-top:32px}
+</style>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">Vega<span>marcon</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html" class="on">Projects</a>
+      <a href="interiors.html">Interiors</a>
+      <a href="construction.html">Construction</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="tel:+919876543210" class="nav-tel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 1.2a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.6 2.91.72a2 2 0 011.72 2.03z"/></svg>
+        +91 98765 43210
+      </a>
+      <button class="nav-cta" onclick="openModal('Nav CTA')">Book Site Visit</button>
+    </div>
+    <div class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-x" onclick="toggleMob()">✕</span>
+  <a href="index.html" onclick="toggleMob()">Home</a>
+  <a href="projects.html" onclick="toggleMob()">Projects</a>
+  <a href="interiors.html" onclick="toggleMob()">Interiors</a>
+  <a href="construction.html" onclick="toggleMob()">Construction</a>
+  <a href="index.html#contact" onclick="toggleMob()">Contact</a>
+  <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
+    <a href="tel:+919876543210" class="btn-outline" style="justify-content:center;">📞 Call Us</a>
+    <button class="btn-dark" style="justify-content:center;width:100%;" onclick="openModal('Mobile')">Book Site Visit</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     HERO — 3-IMAGE SLIDESHOW
+══════════════════════════════ -->
+<section class="hero">
+  <!-- 3 sliding background images -->
+  <div class="hero-slides">
+    <div class="hero-slide active"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+  </div>
+  <!-- Overlay -->
+  <div class="hero-overlay"></div>
+  <!-- Dot indicators -->
+  <div class="hero-dots">
+    <button class="hero-dot on" onclick="heroGoSlide(0)"></button>
+    <button class="hero-dot" onclick="heroGoSlide(1)"></button>
+    <button class="hero-dot" onclick="heroGoSlide(2)"></button>
+  </div>
+  <!-- Content -->
+  <div class="hero-in">
+    <div class="hero-left">
+      <div class="hero-kicker">RERA Registered · Bangalore</div>
+      <h1 class="hd1">Find Your<br><em>Dream Home</em><br>in Bangalore</h1>
+      <p class="lead">4 ongoing projects across Whitefield, Sarjapur, Bellandur &amp; Electronic City. Zero hidden charges. RERA protected. Delivered on time, every time.</p>
+      <div class="hero-btns">
+        <button class="btn-dark" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})">Explore Projects →</button>
+        <a href="tel:+919876543210" class="btn-ghost-w">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 1.2a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.6 2.91.72a2 2 0 011.72 2.03z"/></svg>
+          Call Now
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-v">12+</div><div class="hero-stat-l">Years Active</div></div>
+        <div><div class="hero-stat-v">500+</div><div class="hero-stat-l">Happy Families</div></div>
+        <div><div class="hero-stat-v">4.9★</div><div class="hero-stat-l">Google Rating</div></div>
+        <div><div class="hero-stat-v">100%</div><div class="hero-stat-l">On-Time Delivery</div></div>
+      </div>
+    </div>
+    <!-- Hero Card Rotator — Stacked -->
+    <div class="hero-cards-wrap">
+      <div class="hero-cards-scene" id="heroCardsScene">
+
+        <!-- Card 0 — Vega Heights -->
+        <div class="hero-sc-card" data-hf="0" data-state="active">
+          <div class="hero-sc-img">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=85" alt="Vega Heights">
+            <div class="hero-sc-img-fade"></div>
+            <div class="hero-sc-badge hero-sc-badge-dk"><svg width="10" height="10" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:3px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Most Popular</div>
+          </div>
+          <div class="hero-sc-body">
+            <div class="hero-sc-area">Whitefield</div>
+            <div class="hero-sc-name">Vega Heights</div>
+            <div class="hero-sc-loc">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              2 km from ITPL · G+12
+            </div>
+            <div class="hero-sc-specs">
+              <div class="hero-sc-spec"><span class="hero-sc-sv">2 &amp; 3</span><span class="hero-sc-sl">BHK</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">1,150–1,450</span><span class="hero-sc-sl">Sq Ft</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">Dec '26</span><span class="hero-sc-sl">Handover</span></div>
+            </div>
+            <div class="hero-sc-prog-wrap">
+              <div class="hero-sc-prog-lbl"><span>Construction Progress</span><span>72%</span></div>
+              <div class="hero-sc-prog-bar"><div class="hero-sc-prog-fill" style="width:72%"></div></div>
+            </div>
+            <div class="hero-sc-price-row">
+              <div>
+                <div class="hero-sc-price">₹85L – ₹1.2Cr</div>
+                <div class="hero-sc-price-sub">All-inclusive · No hidden charges</div>
+              </div>
+            </div>
+            <div class="hero-sc-actions">
+              <button class="hero-sc-btn-sec" onclick="openModal('Vega Heights - Site Visit')">Site Visit</button>
+              <button class="hero-sc-btn-pri" onclick="openModal('Vega Heights - Enquire')">Enquire Now →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 1 — Marcon Elite -->
+        <div class="hero-sc-card" data-hf="1" data-state="next">
+          <div class="hero-sc-img">
+            <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=700&q=85" alt="Marcon Elite">
+            <div class="hero-sc-img-fade"></div>
+            <div class="hero-sc-badge hero-sc-badge-md">8 Units Left</div>
+          </div>
+          <div class="hero-sc-body">
+            <div class="hero-sc-area">Sarjapur Road</div>
+            <div class="hero-sc-name">Marcon Elite</div>
+            <div class="hero-sc-loc">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Near Wipro · G+8
+            </div>
+            <div class="hero-sc-specs">
+              <div class="hero-sc-spec"><span class="hero-sc-sv">2</span><span class="hero-sc-sl">BHK</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">950–1,100</span><span class="hero-sc-sl">Sq Ft</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">Jun '26</span><span class="hero-sc-sl">Handover</span></div>
+            </div>
+            <div class="hero-sc-prog-wrap">
+              <div class="hero-sc-prog-lbl"><span>Construction Progress</span><span>88%</span></div>
+              <div class="hero-sc-prog-bar"><div class="hero-sc-prog-fill" style="width:88%"></div></div>
+            </div>
+            <div class="hero-sc-price-row">
+              <div>
+                <div class="hero-sc-price">₹62L – ₹78L</div>
+                <div class="hero-sc-price-sub">Limited units · Book fast</div>
+              </div>
+            </div>
+            <div class="hero-sc-actions">
+              <button class="hero-sc-btn-sec" onclick="openModal('Marcon Elite - Site Visit')">Site Visit</button>
+              <button class="hero-sc-btn-pri" onclick="openModal('Marcon Elite - Enquire')">Book Now →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 — Vega Greens -->
+        <div class="hero-sc-card" data-hf="2" data-state="next2">
+          <div class="hero-sc-img">
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=85" alt="Vega Greens">
+            <div class="hero-sc-img-fade"></div>
+            <div class="hero-sc-badge hero-sc-badge-md"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:3px"><path d="M12 22V12M12 12C12 12 8 8 4 8c0 0 2 6 8 4M12 12C12 12 16 8 20 8c0 0-2 6-8 4"/></svg>New Launch</div>
+          </div>
+          <div class="hero-sc-body">
+            <div class="hero-sc-area">Bellandur</div>
+            <div class="hero-sc-name">Vega Greens Ph II</div>
+            <div class="hero-sc-loc">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Outer Ring Road · G+14
+            </div>
+            <div class="hero-sc-specs">
+              <div class="hero-sc-spec"><span class="hero-sc-sv">2 &amp; 3</span><span class="hero-sc-sl">BHK</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">1,200–1,600</span><span class="hero-sc-sl">Sq Ft</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">Mar '28</span><span class="hero-sc-sl">Handover</span></div>
+            </div>
+            <div class="hero-sc-prog-wrap">
+              <div class="hero-sc-prog-lbl"><span>Construction Progress</span><span>12%</span></div>
+              <div class="hero-sc-prog-bar"><div class="hero-sc-prog-fill" style="width:12%"></div></div>
+            </div>
+            <div class="hero-sc-price-row">
+              <div>
+                <div class="hero-sc-price">₹92L – ₹1.35Cr</div>
+                <div class="hero-sc-price-sub">Pre-launch pricing · Lock rate now</div>
+              </div>
+            </div>
+            <div class="hero-sc-actions">
+              <button class="hero-sc-btn-sec" onclick="openModal('Vega Greens - Site Visit')">Site Visit</button>
+              <button class="hero-sc-btn-pri" onclick="openModal('Vega Greens - Enquire')">Book Now →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 — Marcon Vista -->
+        <div class="hero-sc-card" data-hf="3" data-state="hidden">
+          <div class="hero-sc-img">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=85" alt="Marcon Vista">
+            <div class="hero-sc-img-fade"></div>
+            <div class="hero-sc-badge hero-sc-badge-dk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg>94% Done</div>
+          </div>
+          <div class="hero-sc-body">
+            <div class="hero-sc-area">Electronic City</div>
+            <div class="hero-sc-name">Marcon Vista</div>
+            <div class="hero-sc-loc">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Near Infosys · G+6
+            </div>
+            <div class="hero-sc-specs">
+              <div class="hero-sc-spec"><span class="hero-sc-sv">1 &amp; 2</span><span class="hero-sc-sl">BHK</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">620–980</span><span class="hero-sc-sl">Sq Ft</span></div>
+              <div class="hero-sc-spec"><span class="hero-sc-sv">Sep '26</span><span class="hero-sc-sl">Handover</span></div>
+            </div>
+            <div class="hero-sc-prog-wrap">
+              <div class="hero-sc-prog-lbl"><span>Construction Progress</span><span>94%</span></div>
+              <div class="hero-sc-prog-bar"><div class="hero-sc-prog-fill" style="width:94%"></div></div>
+            </div>
+            <div class="hero-sc-price-row">
+              <div>
+                <div class="hero-sc-price">₹42L – ₹68L</div>
+                <div class="hero-sc-price-sub">Move-in ready · Home loan available</div>
+              </div>
+            </div>
+            <div class="hero-sc-actions">
+              <button class="hero-sc-btn-sec" onclick="openModal('Marcon Vista - Site Visit')">Site Visit</button>
+              <button class="hero-sc-btn-pri" onclick="openModal('Marcon Vista - Enquire')">Enquire Now →</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /scene -->
+      <!-- Arrows -->
+      <button class="hero-cards-arrow hero-cards-arrow-l" onclick="heroCardPrev()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="hero-cards-arrow hero-cards-arrow-r" onclick="heroCardNext()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <!-- Dots -->
+      <div class="hero-cards-dots" id="heroCardsDots">
+        <button class="hero-cards-dot on" onclick="heroCardGo(0)"></button>
+        <button class="hero-cards-dot" onclick="heroCardGo(1)"></button>
+        <button class="hero-cards-dot" onclick="heroCardGo(2)"></button>
+        <button class="hero-cards-dot" onclick="heroCardGo(3)"></button>
+      </div>
+    </div><!-- /hero-cards-wrap -->
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-in">
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      <strong>BBMP</strong> Plan Approved · All Projects
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      <strong>Transparent</strong> Pricing · No Hidden Charges
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#f5c518"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <strong>4.9 Stars</strong> · 180+ Verified Google Reviews
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <strong>500+</strong> Homes Delivered Since 2010
+    </div>
+  </div>
+</div>
+
+<!-- showcase section removed -->
+
+<!-- URGENCY BAR -->
+<div class="urgency">
+  <div class="urgency-in">
+    <div class="urgency-dot"></div>
+    <div class="urgency-items">
+      <div class="urgency-item"><strong>8 units left</strong> <span>Marcon Elite · Sarjapur Road · Jun 2026</span></div>
+      <div class="urgency-item" style="opacity:.3">·</div>
+      <div class="urgency-item"><strong>Pre-launch price</strong> <span>Vega Greens Ph II · Closing soon</span></div>
+      <div class="urgency-item" style="opacity:.3">·</div>
+      <div class="urgency-item"><strong>94% complete</strong> <span>Marcon Vista · Move in Sep 2026</span></div>
+    </div>
+    <button class="urgency-cta" onclick="openModal('Urgency Bar')">Enquire Now</button>
+  </div>
+</div>
+
+<!-- PROJECT TABS -->
+<div class="tab-shell" id="tabShell">
+  <div class="tab-in">
+    <div class="tabs">
+      <div class="tab on" id="tab-btn-ongoing" onclick="switchTab('ongoing')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Ongoing Projects <span class="tab-badge">4</span>
+      </div>
+      <div class="tab" id="tab-btn-completed" onclick="switchTab('completed')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Completed <span class="tab-badge" style="background:var(--g4);">8</span>
+      </div>
+    </div>
+    <div class="tab-sort">
+      <span>Sort by:</span>
+      <select onchange="sortCards(this.value)">
+        <option value="default">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="completion">% Complete</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- ONGOING PROJECTS -->
+<div class="proj-list on" id="tab-ongoing">
+  <div class="cards-wrap">
+
+    <!-- Card 1 -->
+    <div class="proj-card featured" data-r data-progress="72" data-price="8500000">
+      <div class="pc-img" style="position:relative;">
+        <div class="feat-ribbon"><svg width="10" height="10" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:3px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Most Popular</div>
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=85" alt="Vega Heights">
+        <div class="pc-badge pc-badge-dk">Under Construction</div>
+        <div class="pc-gallery-cnt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>12 Photos</div>
+      </div>
+      <div class="pc-info">
+        <div>
+          <div class="pc-name">Vega Heights</div>
+          <div class="pc-loc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Whitefield, Bangalore · 2 km from ITPL</div>
+          <div class="pc-specs">
+            <div class="pc-spec"><div class="pc-spec-v">2 &amp; 3</div><div class="pc-spec-l">BHK</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">1,150–1,450</div><div class="pc-spec-l">Sq Ft</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">G+12</div><div class="pc-spec-l">Floors</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">96</div><div class="pc-spec-l">Units</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">Dec '26</div><div class="pc-spec-l">Handover</div></div>
+          </div>
+          <div class="pc-amenities">
+            <span class="pill">RERA Registered</span><span class="pill">Club House</span><span class="pill">Covered Parking</span><span class="pill">24×7 Security</span><span class="pill">Pool &amp; Gym</span>
+          </div>
+          <div class="pc-progress">
+            <div class="prog-top"><span>Construction Progress</span><span class="prog-pct">72%</span></div>
+            <div class="prog-track"><div class="prog-fill" style="width:0%" data-target="72"></div></div>
+          </div>
+        </div>
+        <div class="pc-bottom">
+          <div>
+            <div class="pc-price">₹85L – ₹1.2Cr</div>
+            <div class="pc-price-sub">All-inclusive · No hidden charges</div>
+            <div class="pc-emi">✓ EMI from ₹58,000/mo · Home loan available</div>
+          </div>
+          <div class="pc-actions">
+            <button class="btn-brochure" onclick="openBrochure('Vega Heights')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Brochure</button>
+            <button class="btn-visit" onclick="openModal('Vega Heights - Site Visit')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Site Visit</button>
+            <button class="btn-enquire" onclick="openModal('Vega Heights - Enquire')">Enquire Now →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="proj-card" data-r style="--d:80ms" data-progress="88" data-price="6200000">
+      <div class="pc-img" style="position:relative;">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=85" alt="Marcon Elite">
+        <div class="pc-badge pc-badge-dk">Under Construction</div>
+        <div class="pc-scarcity">Only 8 units left!</div>
+        <div class="pc-gallery-cnt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>8 Photos</div>
+      </div>
+      <div class="pc-info">
+        <div>
+          <div class="pc-name">Marcon Elite</div>
+          <div class="pc-loc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Sarjapur Road, Bangalore · Near Wipro</div>
+          <div class="pc-specs">
+            <div class="pc-spec"><div class="pc-spec-v">2</div><div class="pc-spec-l">BHK</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">950–1,100</div><div class="pc-spec-l">Sq Ft</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">G+8</div><div class="pc-spec-l">Floors</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">64</div><div class="pc-spec-l">Units</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">Jun '26</div><div class="pc-spec-l">Handover</div></div>
+          </div>
+          <div class="pc-amenities">
+            <span class="pill">RERA Registered</span><span class="pill">Gym &amp; Pool</span><span class="pill">EV Charging</span><span class="pill">Only 8 Left</span>
+          </div>
+          <div class="pc-progress">
+            <div class="prog-top"><span>Construction Progress</span><span class="prog-pct">88%</span></div>
+            <div class="prog-track"><div class="prog-fill" style="width:0%" data-target="88"></div></div>
+          </div>
+        </div>
+        <div class="pc-bottom">
+          <div>
+            <div class="pc-price">₹62L – ₹78L</div>
+            <div class="pc-price-sub">All-inclusive · Limited units remaining</div>
+            <div class="pc-emi">✓ EMI from ₹42,000/mo · Home loan available</div>
+          </div>
+          <div class="pc-actions">
+            <button class="btn-brochure" onclick="openBrochure('Marcon Elite')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Brochure</button>
+            <button class="btn-visit" onclick="openModal('Marcon Elite - Site Visit')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Site Visit</button>
+            <button class="btn-enquire" onclick="openModal('Marcon Elite - Enquire')">Book Now →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Card 3 -->
+    <div class="proj-card" data-r style="--d:100ms" data-progress="12" data-price="9200000">
+      <div class="pc-img" style="position:relative;">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85" alt="Vega Greens">
+        <div class="pc-badge pc-badge-md"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:3px"><path d="M12 22V12M12 12C12 12 8 8 4 8c0 0 2 6 8 4M12 12C12 12 16 8 20 8c0 0-2 6-8 4"/></svg>New Launch</div>
+        <div class="pc-gallery-cnt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>5 Photos</div>
+      </div>
+      <div class="pc-info">
+        <div>
+          <div class="pc-name">Vega Greens Phase II</div>
+          <div class="pc-loc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Bellandur, Bangalore · Near Outer Ring Road</div>
+          <div class="pc-specs">
+            <div class="pc-spec"><div class="pc-spec-v">2 &amp; 3</div><div class="pc-spec-l">BHK</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">1,200–1,600</div><div class="pc-spec-l">Sq Ft</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">G+14</div><div class="pc-spec-l">Floors</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">120</div><div class="pc-spec-l">Units</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">Mar '28</div><div class="pc-spec-l">Handover</div></div>
+          </div>
+          <div class="pc-amenities">
+            <span class="pill">RERA Registered</span><span class="pill">Pre-launch Price</span><span class="pill">Sky Deck</span><span class="pill">3-Tier Security</span>
+          </div>
+          <div class="pc-progress">
+            <div class="prog-top"><span>Construction Progress</span><span class="prog-pct">12%</span></div>
+            <div class="prog-track"><div class="prog-fill" style="width:0%" data-target="12"></div></div>
+          </div>
+        </div>
+        <div class="pc-bottom">
+          <div>
+            <div class="pc-price">₹92L – ₹1.35Cr</div>
+            <div class="pc-price-sub">Pre-launch pricing · Lock rate now</div>
+            <div class="pc-emi">✓ EMI from ₹62,000/mo · Home loan available</div>
+          </div>
+          <div class="pc-actions">
+            <button class="btn-brochure" onclick="openBrochure('Vega Greens Phase II')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Brochure</button>
+            <button class="btn-visit" onclick="openModal('Vega Greens - Site Visit')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Site Visit</button>
+            <button class="btn-enquire" onclick="openModal('Vega Greens Ph II - Enquire')">Book Now →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="proj-card" data-r style="--d:160ms" data-progress="94" data-price="4200000">
+      <div class="pc-img" style="position:relative;">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=85" alt="Marcon Vista">
+        <div class="pc-badge pc-badge-dk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg>94% Done</div>
+        <div class="pc-gallery-cnt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>10 Photos</div>
+      </div>
+      <div class="pc-info">
+        <div>
+          <div class="pc-name">Marcon Vista</div>
+          <div class="pc-loc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Electronic City Phase 1 · Near Infosys</div>
+          <div class="pc-specs">
+            <div class="pc-spec"><div class="pc-spec-v">1 &amp; 2</div><div class="pc-spec-l">BHK</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">620–980</div><div class="pc-spec-l">Sq Ft</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">G+6</div><div class="pc-spec-l">Floors</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">48</div><div class="pc-spec-l">Units</div></div>
+            <div class="pc-spec"><div class="pc-spec-v">Sep '26</div><div class="pc-spec-l">Handover</div></div>
+          </div>
+          <div class="pc-amenities">
+            <span class="pill">RERA Registered</span><span class="pill">Metro Connectivity</span><span class="pill">Ready in 5 Months</span>
+          </div>
+          <div class="pc-progress">
+            <div class="prog-top"><span>Construction Progress</span><span class="prog-pct">94%</span></div>
+            <div class="prog-track"><div class="prog-fill" style="width:0%" data-target="94"></div></div>
+          </div>
+        </div>
+        <div class="pc-bottom">
+          <div>
+            <div class="pc-price">₹42L – ₹68L</div>
+            <div class="pc-price-sub">All-inclusive · Home loan available</div>
+            <div class="pc-emi">✓ EMI from ₹30,000/mo · Move-in ready soon</div>
+          </div>
+          <div class="pc-actions">
+            <button class="btn-brochure" onclick="openBrochure('Marcon Vista')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Brochure</button>
+            <button class="btn-visit" onclick="openModal('Marcon Vista - Site Visit')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Site Visit</button>
+            <button class="btn-enquire" onclick="openModal('Marcon Vista - Enquire')">Enquire Now →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMPLETED PROJECTS -->
+<div class="proj-list" id="tab-completed">
+  <div class="wrap" style="padding-top:48px;padding-bottom:48px;">
+    <div class="comp-grid">
+      <div class="comp-card" data-r><img class="comp-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=85" alt=""><div class="comp-overlay"></div><div class="comp-sold">✓ Sold Out</div><div class="comp-rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:2px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>4.9</div><div class="comp-info"><div class="comp-name">Vega Heights Phase I</div><div class="comp-meta">Whitefield · 72 Units · Delivered 2023</div></div></div>
+      <div class="comp-card" data-r style="--d:60ms"><img class="comp-img" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=700&q=85" alt=""><div class="comp-overlay"></div><div class="comp-sold">✓ Sold Out</div><div class="comp-rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:2px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>4.8</div><div class="comp-info"><div class="comp-name">Marcon Elite Phase I</div><div class="comp-meta">Sarjapur · 56 Units · Delivered 2023</div></div></div>
+      <div class="comp-card" data-r style="--d:120ms"><img class="comp-img" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=85" alt=""><div class="comp-overlay"></div><div class="comp-sold">✓ Sold Out</div><div class="comp-rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:2px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>5.0</div><div class="comp-info"><div class="comp-name">Vega Greens Phase I</div><div class="comp-meta">Bellandur · 84 Units · Delivered 2022</div></div></div>
+      <div class="comp-card" data-r><img class="comp-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=85" alt=""><div class="comp-overlay"></div><div class="comp-sold">✓ Sold Out</div><div class="comp-rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:2px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>4.9</div><div class="comp-info"><div class="comp-name">Marcon Royale</div><div class="comp-meta">Indiranagar · 36 Units · Delivered 2021</div></div></div>
+      <div class="comp-card" data-r style="--d:60ms"><img class="comp-img" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=85" alt=""><div class="comp-overlay"></div><div class="comp-sold">✓ Sold Out</div><div class="comp-rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:2px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>4.8</div><div class="comp-info"><div class="comp-name">Vega Residency</div><div class="comp-meta">Koramangala · 60 Units · Delivered 2020</div></div></div>
+      <div class="comp-card" data-r style="--d:120ms"><img class="comp-img" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=85" alt=""><div class="comp-overlay"></div><div class="comp-sold">✓ Sold Out</div><div class="comp-rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="#f5c518" style="display:inline;vertical-align:middle;margin-right:2px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>4.9</div><div class="comp-info"><div class="comp-name">Marcon Terrace</div><div class="comp-meta">Marathahalli · 40 Units · Delivered 2019</div></div></div>
+    </div>
+    <div style="text-align:center;margin-top:36px;" data-r>
+      <p style="font-size:14px;color:var(--g5);margin-bottom:20px;">All 8 completed projects delivered on time with 4.9 star average across 180+ verified reviews.</p>
+      <button class="btn-dark" onclick="openModal('Completed - Next Project')">Register for Next Project →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF + TESTIMONIALS — HORIZONTAL SLIDER -->
+<section class="testi-sec">
+  <div class="testi-wrap">
+
+    <!-- Header -->
+    <div class="testi-header">
+      <div class="testi-header-left">
+        <div class="eyebrow">What Homebuyers Say</div>
+        <h2 class="testi-hed">Trusted by 500+<br>Families Across<br>Bangalore</h2>
+        <p class="testi-sub">Real stories from real homeowners — verified Google reviews.</p>
+      </div>
+      <div>
+        <div class="testi-rating-badge">
+          <div>
+            <div class="testi-rating-stars">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="testi-rating-num">4.9</div>
+            <div class="testi-rating-lbl">180+ Google Reviews</div>
+          </div>
+        </div>
+        <!-- Mini proof stats -->
+        <div style="display:flex;gap:24px;margin-top:16px;padding-left:4px;">
+          <div><div style="font-family:var(--ff);font-size:20px;font-weight:700;color:var(--w);">500+</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;">Happy Families</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+          <div><div style="font-family:var(--ff);font-size:20px;font-weight:700;color:var(--w);">12+</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;">Projects</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+          <div><div style="font-family:var(--ff);font-size:20px;font-weight:700;color:var(--w);">8L+</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;">Sq Ft Sold</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider pages: each page is 3 cards -->
+    <div id="testiSlider">
+
+      <!-- Page 0 -->
+      <div class="testi-slider-shell testi-page" data-page="0">
+        <div class="testi-card featured">
+          <div class="testi-tag">Top Review</div>
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-text">"Vegamarcon made our first home purchase completely stress-free. The pricing was 100% transparent, and they helped us with the entire home loan process. Handed over 15 days before the committed date — something unheard of in Bangalore real estate."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">R</div>
+            <div>
+              <div class="testi-name">Rahul &amp; Priya Sharma</div>
+              <div class="testi-role">Software Engineer, Wipro</div>
+              <div class="testi-project">Vega Heights Phase I · Whitefield</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-text">"Booked Marcon Elite after one site visit. No hidden charges at the end. Their home loan tie-up with HDFC got us approval in 4 working days. Highly recommend for IT corridor buyers."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div>
+              <div class="testi-name">Arun Mehta</div>
+              <div class="testi-role">Senior Manager, TCS</div>
+              <div class="testi-project">Marcon Elite · Sarjapur Road</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-text">"We were NRI buyers worried about managing a purchase from Dubai. Vegamarcon's team handled everything — legal docs, loan, registration. The entire purchase was done in 3 weeks. Seamless."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">Suresh &amp; Kavitha Nair</div>
+              <div class="testi-role">NRI Buyers, Dubai</div>
+              <div class="testi-project">Vega Greens Phase I · Bellandur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 1 -->
+      <div class="testi-slider-shell testi-page" data-page="1" style="display:none;">
+        <div class="testi-card featured">
+          <div class="testi-tag">First-Time Buyer</div>
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-text">"The RERA registration number was shared upfront before I even asked. No pressure sales — they gave me 2 weeks to decide. Got the keys exactly on the promised date. Build quality genuinely surprised me."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">D</div>
+            <div>
+              <div class="testi-name">Deepika Reddy</div>
+              <div class="testi-role">Product Manager, Amazon</div>
+              <div class="testi-project">Marcon Vista · Electronic City</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-text">"Site visit was professional — no pushy tactics. Monthly construction updates via WhatsApp kept us informed throughout. This is what transparent real estate should look like."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">K</div>
+            <div>
+              <div class="testi-name">Karthik &amp; Meena Iyer</div>
+              <div class="testi-role">Chartered Accountant</div>
+              <div class="testi-project">Vega Heights · Whitefield</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testi-text">"Compared 6 builders before deciding. Vegamarcon was the only one who gave a cost sheet breakdown without me asking. Post-handover support team responded within 24 hours every single time."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">V</div>
+            <div>
+              <div class="testi-name">Vikram Shetty</div>
+              <div class="testi-role">Engineering Lead, Infosys</div>
+              <div class="testi-project">Marcon Elite · Sarjapur Road</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /testiSlider -->
+
+    <!-- Footer: dots + nav -->
+    <div class="testi-footer">
+      <div class="testi-progress-wrap">
+        <button class="testi-prog-dot on" onclick="testiGo(0)"></button>
+        <button class="testi-prog-dot" onclick="testiGo(1)"></button>
+      </div>
+      <div class="testi-nav">
+        <button class="testi-nav-btn" onclick="testiPrev()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="testi-nav-btn" onclick="testiNext()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHERE WE BUILD — REDESIGNED -->
+<section class="wwb-sec" id="where-we-build">
+  <div class="wwb-inner">
+
+    <!-- Left: Real Map -->
+    <div class="wwb-map" style="position:relative;overflow:hidden;min-height:640px;background:#1a1a1a;">
+      <!-- Real Google Maps embed centered on Bangalore -->
+      <iframe
+        id="wwbMapFrame"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d124426.42384868!2d77.6309!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+        style="position:absolute;inset:0;width:100%;height:100%;border:none;filter:grayscale(1) invert(1) contrast(0.9) brightness(0.85);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+      <!-- Dark overlay to blend with section -->
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.38);pointer-events:none;z-index:2;"></div>
+      <!-- Gradient toward right panel -->
+      <div style="position:absolute;top:0;right:0;bottom:0;width:80px;background:linear-gradient(to right,transparent,#0f0f0f);z-index:3;pointer-events:none;"></div>
+
+      <!-- Map header overlay -->
+      <div class="wwb-map-head" style="z-index:5;position:absolute;top:0;left:0;right:0;padding:40px 40px 0;">
+        <div class="wwb-map-eyebrow">Where We Build</div>
+        <h2 class="wwb-map-title">Strategic<br>Locations Across<br>Bangalore</h2>
+        <p class="wwb-map-sub">Carefully chosen corridors where infrastructure, employment, and liveability converge.</p>
+      </div>
+
+      <!-- Map pin buttons that update iframe -->
+      <div style="position:absolute;bottom:28px;left:24px;z-index:6;display:flex;flex-wrap:wrap;gap:7px;max-width:calc(100% - 100px);">
+        <button class="wwb-map-pin-btn active" data-loc="whitefield" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15551!2d77.7499!3d12.9698!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin" onclick="wwbMapSelect(this,'whitefield')"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg> Whitefield</button>
+        <button class="wwb-map-pin-btn" data-loc="sarjapur" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15560!2d77.6954!3d12.9090!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin" onclick="wwbMapSelect(this,'sarjapur')"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg> Sarjapur Road</button>
+        <button class="wwb-map-pin-btn" data-loc="bellandur" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15554!2d77.6768!3d12.9267!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin" onclick="wwbMapSelect(this,'bellandur')"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg> Bellandur</button>
+        <button class="wwb-map-pin-btn" data-loc="electronic-city" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15564!2d77.6599!3d12.8456!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin" onclick="wwbMapSelect(this,'electronic-city')"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg> Electronic City</button>
+        <button class="wwb-map-pin-btn" data-loc="hsr" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15554!2d77.6389!3d12.9116!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin" onclick="wwbMapSelect(this,'hsr')"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg> HSR Layout</button>
+        <button class="wwb-map-pin-btn" data-loc="koramangala" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15553!2d77.6195!3d12.9352!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin" onclick="wwbMapSelect(this,'koramangala')"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg> Koramangala</button>
+      </div>
+    </div>
+
+    <!-- Right: Detail Panel -->
+    <div class="wwb-detail">
+      <div class="wwb-tabs">
+        <div class="wwb-tab active" data-loc="whitefield" onclick="wwbSelect('whitefield',this)">
+          <div class="wwb-tab-num">01</div>
+          <div class="wwb-tab-info">
+            <div class="wwb-tab-name">Whitefield</div>
+            <div class="wwb-tab-status">2 Active Projects</div>
+          </div>
+          <div class="wwb-tab-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <div class="wwb-tab" data-loc="sarjapur" onclick="wwbSelect('sarjapur',this)">
+          <div class="wwb-tab-num">02</div>
+          <div class="wwb-tab-info">
+            <div class="wwb-tab-name">Sarjapur Road</div>
+            <div class="wwb-tab-status">1 Active Project</div>
+          </div>
+          <div class="wwb-tab-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <div class="wwb-tab" data-loc="bellandur" onclick="wwbSelect('bellandur',this)">
+          <div class="wwb-tab-num">03</div>
+          <div class="wwb-tab-info">
+            <div class="wwb-tab-name">Bellandur</div>
+            <div class="wwb-tab-status">1 Active Project</div>
+          </div>
+          <div class="wwb-tab-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <div class="wwb-tab" data-loc="electronic-city" onclick="wwbSelect('electronic-city',this)">
+          <div class="wwb-tab-num">04</div>
+          <div class="wwb-tab-info">
+            <div class="wwb-tab-name">Electronic City</div>
+            <div class="wwb-tab-status">1 Active Project</div>
+          </div>
+          <div class="wwb-tab-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <div class="wwb-tab" data-loc="hsr" onclick="wwbSelect('hsr',this)">
+          <div class="wwb-tab-num">05</div>
+          <div class="wwb-tab-info">
+            <div class="wwb-tab-name">HSR Layout</div>
+            <div class="wwb-tab-status">Upcoming</div>
+          </div>
+          <div class="wwb-tab-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <div class="wwb-tab" data-loc="koramangala" onclick="wwbSelect('koramangala',this)">
+          <div class="wwb-tab-num">06</div>
+          <div class="wwb-tab-info">
+            <div class="wwb-tab-name">Koramangala</div>
+            <div class="wwb-tab-status">Upcoming</div>
+          </div>
+          <div class="wwb-tab-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </div>
+
+      <!-- Whitefield Panel -->
+      <div class="wwb-panel active" data-panel="whitefield">
+        <div class="wwb-panel-header">
+          <div class="wwb-panel-area">East Bangalore</div>
+          <div class="wwb-panel-name">Whitefield</div>
+          <div class="wwb-panel-tagline">Bangalore's largest IT corridor. Home to ITPL, EPIP Zone, and over 400 tech companies — with metro connectivity now complete.</div>
+        </div>
+        <div class="wwb-stats">
+          <div class="wwb-stat"><div class="wwb-stat-v">2</div><div class="wwb-stat-l">Active Projects</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">28%</div><div class="wwb-stat-l">Price Growth (3yr)</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">G+12</div><div class="wwb-stat-l">Max Height</div></div>
+        </div>
+        <div class="wwb-highlights">
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>2 km from ITPL Tech Park — walkable for IT professionals</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Purple Line Metro station within 1.2 km</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Top international schools, hospitals, and malls nearby</div>
+        </div>
+        <div class="wwb-tags"><span class="wwb-tag">ITPL</span><span class="wwb-tag">EPIP Zone</span><span class="wwb-tag">Metro</span><span class="wwb-tag">IT Hub</span></div>
+        <div class="wwb-cta"><button class="wwb-cta-btn" onclick="switchTab('ongoing');document.getElementById('tab-ongoing').scrollIntoView({behavior:'smooth'})">View Whitefield Projects →</button></div>
+      </div>
+
+      <!-- Sarjapur Panel -->
+      <div class="wwb-panel" data-panel="sarjapur">
+        <div class="wwb-panel-header">
+          <div class="wwb-panel-area">South-East Bangalore</div>
+          <div class="wwb-panel-name">Sarjapur Road</div>
+          <div class="wwb-panel-tagline">A premier tech corridor connecting Whitefield to Electronic City. Wipro and RMZ campuses drive perennial demand.</div>
+        </div>
+        <div class="wwb-stats">
+          <div class="wwb-stat"><div class="wwb-stat-v">1</div><div class="wwb-stat-l">Active Project</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">22%</div><div class="wwb-stat-l">Price Growth (3yr)</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">8</div><div class="wwb-stat-l">Units Remaining</div></div>
+        </div>
+        <div class="wwb-highlights">
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Wipro campus and RMZ Ecoworld within 2 km</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>High-demand school belt — Indus, Candor, Greenwood High</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>⚠️ Only 8 units remaining — inventory closing fast</div>
+        </div>
+        <div class="wwb-tags"><span class="wwb-tag">Wipro</span><span class="wwb-tag">RMZ</span><span class="wwb-tag">School Belt</span><span class="wwb-tag">Limited Stock</span></div>
+        <div class="wwb-cta"><button class="wwb-cta-btn" onclick="switchTab('ongoing');document.getElementById('tab-ongoing').scrollIntoView({behavior:'smooth'})">View Sarjapur Project →</button></div>
+      </div>
+
+      <!-- Bellandur Panel -->
+      <div class="wwb-panel" data-panel="bellandur">
+        <div class="wwb-panel-header">
+          <div class="wwb-panel-area">Outer Ring Road</div>
+          <div class="wwb-panel-name">Bellandur</div>
+          <div class="wwb-panel-tagline">Premium lakeside living on Bangalore's busiest tech ring road. New launch pricing — highest ROI potential in the portfolio.</div>
+        </div>
+        <div class="wwb-stats">
+          <div class="wwb-stat"><div class="wwb-stat-v">1</div><div class="wwb-stat-l">Active Project</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">35%</div><div class="wwb-stat-l">Projected Growth</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">G+14</div><div class="wwb-stat-l">Premium Towers</div></div>
+        </div>
+        <div class="wwb-highlights">
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Outer Ring Road with direct access to all tech parks</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Eco Space, Bagmane Tech Park — 10-min drive</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>New launch — lock pre-launch pricing before rates increase</div>
+        </div>
+        <div class="wwb-tags"><span class="wwb-tag">ORR</span><span class="wwb-tag">Eco Space</span><span class="wwb-tag">New Launch</span><span class="wwb-tag">Lake Views</span></div>
+        <div class="wwb-cta"><button class="wwb-cta-btn" onclick="switchTab('ongoing');document.getElementById('tab-ongoing').scrollIntoView({behavior:'smooth'})">View Bellandur Project →</button></div>
+      </div>
+
+      <!-- Electronic City Panel -->
+      <div class="wwb-panel" data-panel="electronic-city">
+        <div class="wwb-panel-header">
+          <div class="wwb-panel-area">South Bangalore</div>
+          <div class="wwb-panel-name">Electronic City</div>
+          <div class="wwb-panel-tagline">Bangalore's most affordable IT corridor. Infosys HQ, Wipro SEZ, and NICE Road access — 94% complete and near move-in ready.</div>
+        </div>
+        <div class="wwb-stats">
+          <div class="wwb-stat"><div class="wwb-stat-v">1</div><div class="wwb-stat-l">Active Project</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">94%</div><div class="wwb-stat-l">Construction Done</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">Sep'26</div><div class="wwb-stat-l">Handover</div></div>
+        </div>
+        <div class="wwb-highlights">
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Infosys headquarters and Wipro SEZ in the same zone</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>NICE Road flyover — seamless Mysore Road connectivity</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Best value entry in the portfolio — from ₹42L</div>
+        </div>
+        <div class="wwb-tags"><span class="wwb-tag">Infosys</span><span class="wwb-tag">Metro Soon</span><span class="wwb-tag">NICE Road</span><span class="wwb-tag">Ready Soon</span></div>
+        <div class="wwb-cta"><button class="wwb-cta-btn" onclick="switchTab('ongoing');document.getElementById('tab-ongoing').scrollIntoView({behavior:'smooth'})">View Electronic City Project →</button></div>
+      </div>
+
+      <!-- HSR Panel -->
+      <div class="wwb-panel" data-panel="hsr">
+        <div class="wwb-panel-header">
+          <div class="wwb-panel-area">Central South</div>
+          <div class="wwb-panel-name">HSR Layout</div>
+          <div class="wwb-panel-tagline">One of Bangalore's most premium residential sectors. BDA-planned layout with excellent schools, hospitals, and social infrastructure.</div>
+        </div>
+        <div class="wwb-stats">
+          <div class="wwb-stat"><div class="wwb-stat-v">1</div><div class="wwb-stat-l">Upcoming Project</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">2027</div><div class="wwb-stat-l">Expected Launch</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">BDA</div><div class="wwb-stat-l">Approved Layout</div></div>
+        </div>
+        <div class="wwb-highlights">
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>BDA-planned sector layout with wide roads and greenery</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>World-class hospitals, Tier-1 schools, and restaurants</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Register interest now to access pre-launch pricing</div>
+        </div>
+        <div class="wwb-tags"><span class="wwb-tag">BDA Layout</span><span class="wwb-tag">Hospitals</span><span class="wwb-tag">Schools</span><span class="wwb-tag">Pre-launch</span></div>
+        <div class="wwb-cta"><button class="wwb-cta-btn" onclick="openModal('HSR Layout Upcoming')">Register Interest →</button></div>
+      </div>
+
+      <!-- Koramangala Panel -->
+      <div class="wwb-panel" data-panel="koramangala">
+        <div class="wwb-panel-header">
+          <div class="wwb-panel-area">Central Bangalore</div>
+          <div class="wwb-panel-name">Koramangala</div>
+          <div class="wwb-panel-tagline">Bangalore's startup capital and premium residential hub. Highest rental yields and unmatched social infrastructure in the city.</div>
+        </div>
+        <div class="wwb-stats">
+          <div class="wwb-stat"><div class="wwb-stat-v">1</div><div class="wwb-stat-l">Upcoming Project</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">6–7%</div><div class="wwb-stat-l">Avg Rental Yield</div></div>
+          <div class="wwb-stat"><div class="wwb-stat-v">2027</div><div class="wwb-stat-l">Expected Launch</div></div>
+        </div>
+        <div class="wwb-highlights">
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Startup ecosystem — 1,000+ funded startups within 3 km</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Highest rental demand in Bangalore — consistently low vacancy</div>
+          <div class="wwb-highlight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Metro connectivity planned — long-term price appreciation</div>
+        </div>
+        <div class="wwb-tags"><span class="wwb-tag">Central</span><span class="wwb-tag">Startups</span><span class="wwb-tag">High Yield</span><span class="wwb-tag">Metro Soon</span></div>
+        <div class="wwb-cta"><button class="wwb-cta-btn" onclick="openModal('Koramangala Upcoming')">Register Interest →</button></div>
+      </div>
+
+    </div><!-- /wwb-detail -->
+  </div><!-- /wwb-inner -->
+</section>
+
+<!-- EMI CALCULATOR -->
+<section class="sec-w">
+  <div class="wrap">
+    <div data-r><div class="eyebrow">Plan Your Finances</div><h2 class="hd2">EMI Calculator</h2><p class="lead" style="max-width:500px;margin-top:10px;">Estimate your monthly payment instantly. Our team can help arrange home loans with HDFC, SBI &amp; ICICI.</p></div>
+    <div class="emi-shell">
+      <div class="emi-grid">
+        <div>
+          <div class="emi-field"><div class="emi-lbl"><span>Loan Amount</span><span class="emi-lbl-val" id="loanAmt">₹60 L</span></div><input type="range" class="emi-slider" id="loanSlider" min="2000000" max="15000000" step="100000" value="6000000" oninput="calcEMI()"><div class="emi-scale"><span>₹20L</span><span>₹1.5Cr</span></div></div>
+          <div class="emi-field"><div class="emi-lbl"><span>Interest Rate</span><span class="emi-lbl-val" id="rateAmt">8.5%</span></div><input type="range" class="emi-slider" id="rateSlider" min="6" max="15" step="0.1" value="8.5" oninput="calcEMI()"><div class="emi-scale"><span>6%</span><span>15%</span></div></div>
+          <div class="emi-field"><div class="emi-lbl"><span>Loan Tenure</span><span class="emi-lbl-val" id="tenureAmt">20 Years</span></div><input type="range" class="emi-slider" id="tenureSlider" min="5" max="30" step="1" value="20" oninput="calcEMI()"><div class="emi-scale"><span>5 Yrs</span><span>30 Yrs</span></div></div>
+          <button class="btn-dark" style="width:100%;justify-content:center;padding:14px;" onclick="openModal('Home Loan Help')">Get Home Loan Help →</button>
+        </div>
+        <div class="emi-panel">
+          <div class="emi-panel-lbl">MONTHLY EMI</div>
+          <div class="emi-panel-num" id="emiResult">₹52,000</div>
+          <div class="emi-panel-sub">Estimated monthly payment</div>
+          <div class="emi-donut">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <circle cx="55" cy="55" r="48" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/>
+              <circle id="donutCircle" cx="55" cy="55" r="48" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="10" stroke-dasharray="301.6" stroke-dashoffset="100" stroke-linecap="round"/>
+            </svg>
+            <div class="emi-donut-label"><div class="emi-donut-pct" id="intPct">33%</div><div>Interest</div></div>
+          </div>
+          <div class="emi-row"><span class="emi-rl">Loan Amount</span><span class="emi-rv" id="loanAmtSm">₹60 L</span></div>
+          <div class="emi-row"><span class="emi-rl">Total Interest</span><span class="emi-rv" id="totalInt">₹64.8 L</span></div>
+          <div class="emi-row"><span class="emi-rl">Total Payment</span><span class="emi-rv" id="totalPay">₹1.25 Cr</span></div>
+          <div class="emi-row"><span class="emi-rl">Rate</span><span class="emi-rv" id="rateSm">8.5% p.a.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-sec">
+  <div class="wrap cta-sec-in">
+    <div class="eyebrow" style="justify-content:center;color:rgba(255,255,255,.35);">Ready to Move Forward</div>
+    <h2 class="hd2" style="color:#fff;">Your Dream Home<br>is One Call Away</h2>
+    <p class="lead" style="color:rgba(255,255,255,.45);max-width:480px;margin:14px auto 0;">Talk to our advisors — zero pressure, zero brokerage, full transparency. We'll help you find the right fit.</p>
+    <div class="cta-btns">
+      <button class="btn-outline" style="background:var(--w);color:var(--g8);" onclick="openModal('CTA Main')">Book a Free Site Visit</button>
+      <a href="tel:+919876543210" class="btn-ghost-w">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 1.2a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.6 2.91.72a2 2 0 011.72 2.03z"/></svg>
+        Call +91 98765 43210
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-logo">Vega<span>marcon</span></a>
+      <div class="footer-tagline">Building trust, one home at a time. RERA-registered projects across Bangalore since 2010.</div>
+      <div class="footer-social">
+        <a class="soc" href="#" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a class="soc" href="#" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="soc" href="#" aria-label="YouTube">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+        <a class="soc" href="#" aria-label="LinkedIn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Projects</h5><ul><li><a>Vega Heights</a></li><li><a>Marcon Elite</a></li><li><a>Vega Greens Ph II</a></li><li><a>Marcon Vista</a></li><li><a>Completed Projects</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a>About Us</a></li><li><a>Our Story</a></li><li><a>Careers</a></li><li><a>Media</a></li><li><a>Contact</a></li></ul></div>
+    <div class="footer-col"><h5>Resources</h5><ul><li><a>Home Loan Guide</a></li><li><a>RERA Info</a></li><li><a>EMI Calculator</a></li><li><a>Brochures</a></li><li><a>Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="footer-btm"><span>© 2025 Vegamarcon Developers Pvt Ltd · All rights reserved</span><span>RERA Reg. No. PRM/KA/RERA/1251</span></div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-close" onclick="closeModal()">✕</div>
+    <div class="modal-tag">Free Consultation</div>
+    <div class="modal-title" id="modalTitle">Book a Free Site Visit</div>
+    <div class="modal-sub" id="modalSub">Our team will call you within 2 hours to schedule.</div>
+    <div class="modal-for" id="modalFor" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span id="modalForText"></span></div>
+    <div class="mf-row">
+      <div class="mf-field"><label class="mf-lbl">Name</label><input class="mf-input" id="mf-name" placeholder="Your full name"></div>
+      <div class="mf-field"><label class="mf-lbl">Phone</label><input class="mf-input" id="mf-phone" placeholder="+91 XXXXX XXXXX"></div>
+    </div>
+    <div class="mf-field"><label class="mf-lbl">Project Interest</label><select class="mf-select"><option>Vega Heights (Whitefield)</option><option>Marcon Elite (Sarjapur)</option><option>Vega Greens Ph II (Bellandur)</option><option>Marcon Vista (Elec. City)</option></select></div>
+    <div class="mf-field"><label class="mf-lbl">Message (optional)</label><input class="mf-input" placeholder="Any specific questions?"></div>
+    <button class="mf-submit" id="mf-submit" onclick="submitModal()">Confirm My Site Visit →</button>
+    <div class="mf-trust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>No spam · No broker fees · 100% free</div>
+  </div>
+</div>
+
+<!-- BROCHURE MODAL -->
+<div class="bv-overlay" id="bvOverlay" onclick="closeBvOutside(event)">
+  <div class="bv-modal">
+    <div class="bv-close" onclick="closeBv()">✕</div>
+    <div class="bv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+    <div class="bv-title">Download Brochure</div>
+    <div class="bv-sub">Share your details to receive the brochure pack instantly</div>
+    <div class="bv-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span id="bvProjectName">Project</span></div>
+    <div class="bv-field"><label class="bv-lbl">Your Name</label><input class="bv-input" id="bv-name" placeholder="Full name"></div>
+    <div class="bv-field"><label class="bv-lbl">Phone Number</label><input class="bv-input" id="bv-phone" placeholder="+91 XXXXX XXXXX"></div>
+    <button class="bv-submit" id="bvSubmit" onclick="submitBrochure()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Brochure</button>
+    <div class="bv-note">Free · Sent immediately · No spam</div>
+  </div>
+</div>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta" style="display:none;">
+  <div class="sticky-cta-text">Interested? Talk to our team today.</div>
+  <div class="sticky-cta-btns">
+    <a href="tel:+919876543210" class="scta-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 1.2a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.6 2.91.72a2 2 0 011.72 2.03z"/></svg>Call</a>
+    <button class="scta-enq" onclick="openModal('Sticky CTA')">Enquire Now</button>
+  </div>
+</div>
+
+<!-- FLOAT BUTTONS -->
+<div class="float-actions">
+  <a href="https://wa.me/919876543210" class="fa-btn fa-wa" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><div class="fa-tip">WhatsApp Us</div></a>
+  <a href="tel:+919876543210" class="fa-btn fa-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:19px;height:19px;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 1.2a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.6 2.91.72a2 2 0 011.72 2.03z"/></svg><div class="fa-tip">Call Us</div></a>
+  <div class="fa-btn fa-chat" onclick="toggleChat()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:19px;height:19px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div class="fa-badge" id="chatBadge">1</div><div class="fa-tip">Chat with us</div></div>
+</div>
+
+<!-- CHATBOT -->
+<div class="chatbot" id="chatbot">
+  <div class="cb-head">
+    <div class="cb-av">V</div>
+    <div class="cb-info"><div class="cb-name">Vegamarcon Assistant</div><div class="cb-status">Online — replies instantly</div></div>
+    <div class="cb-x" onclick="toggleChat()">✕</div>
+  </div>
+  <div class="cb-body" id="chatBody"></div>
+  <div class="cb-input-area">
+    <input class="cb-input" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="cb-send" onclick="sendChat()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<script>
+/* ─── NAV ─── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20);
+  const sc=document.getElementById('stickyCta');
+  if(sc)sc.style.display=window.scrollY>600?'flex':'none';
+});
+function toggleMob(){document.getElementById('mobMenu').classList.toggle('open');}
+
+/* ─── TESTIMONIAL PAGE SLIDER ─── */
+(function(){
+  const TOTAL=2;
+  let cur=0;
+  function render(next){
+    document.querySelectorAll('.testi-page').forEach(p=>{p.style.display='none';});
+    document.querySelector('.testi-page[data-page="'+next+'"]').style.display='grid';
+    document.querySelectorAll('.testi-prog-dot').forEach((d,i)=>d.classList.toggle('on',i===next));
+    cur=next;
+  }
+  window.testiGo=function(n){render(n);};
+  window.testiNext=function(){render((cur+1)%TOTAL);};
+  window.testiPrev=function(){render((cur-1+TOTAL)%TOTAL);};
+  // Auto-advance
+  let t=setInterval(()=>render((cur+1)%TOTAL),6000);
+  document.getElementById('testiSlider').addEventListener('mouseenter',()=>clearInterval(t));
+  document.getElementById('testiSlider').addEventListener('mouseleave',()=>{t=setInterval(()=>render((cur+1)%TOTAL),6000);});
+})();
+
+
+(function(){
+  const TOTAL=4;
+  const STATES=['active','next','next2','hidden'];
+  let hIdx=0,hTimer;
+  const cards=document.querySelectorAll('.hero-sc-card');
+  function hRender(){
+    cards.forEach((c,i)=>{
+      const offset=(i-hIdx+TOTAL)%TOTAL;
+      c.setAttribute('data-state', offset<STATES.length ? STATES[offset] : 'hidden');
+    });
+    document.querySelectorAll('.hero-cards-dot').forEach((d,i)=>d.classList.toggle('on',i===hIdx));
+  }
+  function hStart(){hTimer=setInterval(()=>{hIdx=(hIdx+1)%TOTAL;hRender();},3500);}
+  function hReset(){clearInterval(hTimer);hStart();}
+  window.heroCardNext=function(){hIdx=(hIdx+1)%TOTAL;hRender();hReset();};
+  window.heroCardPrev=function(){hIdx=(hIdx-1+TOTAL)%TOTAL;hRender();hReset();};
+  window.heroCardGo=function(i){hIdx=i;hRender();hReset();};
+  hRender();hStart();
+})();
+
+/* ─── REVEAL ON SCROLL ─── */
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('[data-r]').forEach(el=>ro.observe(el));
+
+/* ─── PROGRESS BARS ─── */
+const pObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const f=e.target.querySelector('.prog-fill');if(f){f.style.width=f.dataset.target+'%';pObs.unobserve(e.target);}};});},{threshold:.3});
+document.querySelectorAll('.proj-card').forEach(el=>pObs.observe(el));
+
+/* ─── TABS ─── */
+function scrollToProjects(){document.getElementById('tabShell').scrollIntoView({behavior:'smooth'});}
+function switchTab(t){
+  document.querySelectorAll('.proj-list').forEach(l=>l.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+t).classList.add('on');
+  document.getElementById('tab-btn-'+t).classList.add('on');
+}
+function sortCards(v){
+  const wrap=document.querySelector('.cards-wrap');
+  const cards=[...wrap.querySelectorAll('.proj-card')];
+  if(v==='price-asc')cards.sort((a,b)=>+a.dataset.price-+b.dataset.price);
+  else if(v==='price-desc')cards.sort((a,b)=>+b.dataset.price-+a.dataset.price);
+  else if(v==='completion')cards.sort((a,b)=>+b.dataset.progress-+a.dataset.progress);
+  cards.forEach(c=>wrap.appendChild(c));
+}
+
+/* ─── WHERE WE BUILD ─── */
+function wwbSelect(loc,el){
+  // Deactivate all tabs, pins, panels
+  document.querySelectorAll('.wwb-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.wwb-pin').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.wwb-panel').forEach(p=>p.classList.remove('active'));
+  // Activate matching tab, pin, panel
+  document.querySelectorAll('.wwb-tab[data-loc="'+loc+'"]').forEach(t=>t.classList.add('active'));
+  document.querySelectorAll('.wwb-pin[data-loc="'+loc+'"]').forEach(p=>p.classList.add('active'));
+  const panel=document.querySelector('.wwb-panel[data-panel="'+loc+'"]');
+  if(panel)panel.classList.add('active');
+}
+
+
+(function(){
+  const slides=document.querySelectorAll('.hero-slide');
+  const dots=document.querySelectorAll('.hero-dot');
+  let cur=0,timer=null;
+  window.heroGoSlide=function(n){
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('on');
+    cur=n;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('on');
+  };
+  function next(){heroGoSlide((cur+1)%slides.length);}
+  function start(){timer=setInterval(next,4500);}
+  function stop(){clearInterval(timer);}
+  const hero=document.querySelector('.hero');
+  if(hero){hero.addEventListener('mouseenter',stop);hero.addEventListener('mouseleave',start);}
+  start();
+})();
+
+/* showcase rotation removed */
+
+/* ─── MODAL ─── */
+function openModal(ctx){
+  const title=document.getElementById('modalTitle'),sub=document.getElementById('modalSub');
+  const forEl=document.getElementById('modalFor'),forText=document.getElementById('modalForText');
+  const submitBtn=document.getElementById('mf-submit');
+  if(ctx.includes('Loan')||ctx.includes('loan')){title.textContent='Get Home Loan Help';sub.textContent='We work with HDFC, SBI, ICICI & more. Pre-approval in 4 working days.';submitBtn.textContent='Request Loan Consultation →';}
+  else if(ctx.includes('Brochure')||ctx.includes('brochure')){title.textContent='Get Brochure Pack';sub.textContent='Floor plans, pricing sheets and RERA documents sent instantly.';submitBtn.textContent='Send Brochures Now →';}
+  else{title.textContent='Book a Free Site Visit';sub.textContent='Our team will call you within 2 hours to schedule.';submitBtn.textContent='Confirm My Site Visit →';}
+  const projects=['Vega Heights','Marcon Elite','Vega Greens','Marcon Vista'];
+  const matched=projects.find(p=>ctx.includes(p));
+  if(matched){forEl.style.display='flex';forText.textContent='For: '+matched;}
+  else{forEl.style.display='none';}
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeBv();}});
+function submitModal(){
+  const name=document.getElementById('mf-name').value.trim(),phone=document.getElementById('mf-phone').value.trim();
+  if(!name||!phone){alert('Please enter your name and phone number.');return;}
+  const btn=document.getElementById('mf-submit');
+  btn.textContent='✓ Submitted! We\'ll call you within 2 hours.';btn.style.background='#333';btn.disabled=true;
+  setTimeout(()=>{closeModal();btn.textContent='Confirm My Site Visit →';btn.style.background='';btn.disabled=false;},2500);
+}
+
+/* ─── BROCHURE ─── */
+let curBrochure='';
+function openBrochure(p){curBrochure=p;document.getElementById('bvProjectName').textContent=p;document.getElementById('bv-name').value='';document.getElementById('bv-phone').value='';const btn=document.getElementById('bvSubmit');btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Brochure';btn.style.background='';btn.disabled=false;document.getElementById('bvOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeBv(){document.getElementById('bvOverlay').classList.remove('open');document.body.style.overflow='';}
+function closeBvOutside(e){if(e.target===document.getElementById('bvOverlay'))closeBv();}
+function submitBrochure(){
+  const name=document.getElementById('bv-name').value.trim(),phone=document.getElementById('bv-phone').value.trim();
+  if(!name){alert('Please enter your name.');return;}if(!phone||phone.length<10){alert('Please enter a valid phone number.');return;}
+  const btn=document.getElementById('bvSubmit');btn.textContent='✓ Preparing download...';btn.style.background='#333';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='✓ Downloading...';const l=document.createElement('a');l.href='data:application/pdf;base64,JVBERi0xLjQ=';l.download=curBrochure.replace(/\s+/g,'-')+'-Brochure.pdf';l.click();setTimeout(()=>{closeBv();btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Brochure';btn.style.background='';btn.disabled=false;},1200);},1000);
+}
+
+/* ─── HERO FORM ─── */
+function submitHeroForm(){
+  const name=document.getElementById('hc-name').value.trim(),phone=document.getElementById('hc-phone').value.trim();
+  if(!name||!phone){alert('Please enter your name and phone number.');return;}
+  const btn=document.querySelector('.hf-submit');btn.textContent='✓ We\'ll call you within 2 hours!';btn.style.background='#333';
+  setTimeout(()=>{btn.textContent='Get Free Callback →';btn.style.background='';},3000);
+}
+
+/* ─── LEAD STRIP ─── */
+function submitLeadStrip(){const p=document.getElementById('ls-phone').value.trim();if(!p){alert('Enter your WhatsApp number.');return;}const btn=document.querySelector('.ls-btn');btn.textContent='✓ Sent!';btn.style.background='#333';setTimeout(()=>{btn.textContent='Send Brochures →';btn.style.background='';},2500);}
+
+/* ─── EMI CALCULATOR ─── */
+function fmtINR(n){if(n>=10000000)return '₹'+(n/10000000).toFixed(2)+' Cr';if(n>=100000)return '₹'+(n/100000).toFixed(2)+' L';return '₹'+n.toLocaleString('en-IN');}
+function calcEMI(){
+  const P=+document.getElementById('loanSlider').value,r=+document.getElementById('rateSlider').value/(12*100),n=+document.getElementById('tenureSlider').value*12;
+  const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),total=emi*n,interest=total-P;
+  document.getElementById('loanAmt').textContent=fmtINR(P);document.getElementById('rateAmt').textContent=(+document.getElementById('rateSlider').value).toFixed(1)+'%';
+  document.getElementById('tenureAmt').textContent=document.getElementById('tenureSlider').value+' Year'+(+document.getElementById('tenureSlider').value>1?'s':'');
+  document.getElementById('emiResult').textContent='₹'+Math.round(emi).toLocaleString('en-IN');
+  document.getElementById('loanAmtSm').textContent=fmtINR(P);document.getElementById('totalInt').textContent=fmtINR(Math.round(interest));document.getElementById('totalPay').textContent=fmtINR(Math.round(total));
+  document.getElementById('rateSm').textContent=(+document.getElementById('rateSlider').value).toFixed(1)+'% p.a.';
+  const pct=interest/total,circ=301.6;document.getElementById('donutCircle').style.strokeDashoffset=circ*(1-pct);document.getElementById('intPct').textContent=Math.round(pct*100)+'%';
+}
+calcEMI();
+
+/* ─── CHATBOT ─── */
+let chatOpen=false,collectingLead=false,leadData={};
+const flows={
+  welcome:{bot:"Hi! 👋 Looking to buy a flat in Bangalore? What are you looking for?",opts:[{l:'🏠 Browse Projects',v:'browse'},{l:'💰 Check My Budget',v:'budget'},{l:'📅 Book Site Visit',v:'visit'},{l:'🏦 Home Loan Help',v:'loan'}]},
+  browse:{bot:"We have 4 ongoing RERA-registered projects. Which area interests you?",opts:[{l:'Whitefield',v:'wf'},{l:'Sarjapur Road',v:'sr'},{l:'Bellandur',v:'bl'},{l:'Electronic City',v:'ec'}]},
+  budget:{bot:"Let me help you find projects in your budget:",opts:[{l:'₹40L – ₹65L',v:'b1'},{l:'₹65L – ₹1Cr',v:'b2'},{l:'Above ₹1Cr',v:'b3'}]},
+  visit:{bot:"Our site visits are free and fully at your convenience. Share your name to get started:",input:true},
+  loan:{bot:"We work with HDFC, SBI, ICICI & more. Pre-approval in 4 working days. Share your name:",input:true},
+  wf:{bot:"Vega Heights — 2 & 3 BHK from ₹85L, G+12, 72% done. Excellent ITPL connectivity. Share your name:",input:true},
+  sr:{bot:"Marcon Elite — 2 BHK from ₹62L, 88% done. ⚠️ Only 8 units left! Share your name:",input:true},
+  bl:{bot:"Vega Greens Phase II — new launch from ₹92L! Lock pre-launch rate now. Share your name:",input:true},
+  ec:{bot:"Marcon Vista — 1 & 2 BHK from ₹42L, 94% done, ready Sep 2026! Share your name:",input:true},
+  b1:{bot:"Marcon Vista (₹42L–68L) fits perfectly — 94% done, ready soon. Share your name:",input:true},
+  b2:{bot:"Marcon Elite (₹62L–78L) and Vega Heights (₹85L–1.2Cr) are great fits. Share your name:",input:true},
+  b3:{bot:"Vega Greens Ph II (₹92L–1.35Cr) — premium new launch with pre-launch pricing. Share your name:",input:true},
+};
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('chatbot').classList.toggle('open',chatOpen);document.getElementById('chatBadge').style.display='none';if(chatOpen&&!document.getElementById('chatBody').children.length)startChat();}
+function startChat(){collectingLead=false;leadData={};addBot(flows.welcome.bot);setTimeout(()=>addOpts(flows.welcome.opts),700);}
+function addBot(txt,delay=0){const body=document.getElementById('chatBody');const t=document.createElement('div');t.className='cm bot';t.innerHTML='<div class="cb-typing"><span></span><span></span><span></span></div>';body.appendChild(t);body.scrollTop=body.scrollHeight;setTimeout(()=>{t.innerHTML=`<div class="cb-bubble">${txt}</div>`;body.scrollTop=body.scrollHeight;},delay+600);}
+function addUser(txt){const body=document.getElementById('chatBody');const m=document.createElement('div');m.className='cm user';m.innerHTML=`<div class="cb-bubble">${txt}</div>`;body.appendChild(m);body.scrollTop=body.scrollHeight;}
+function addOpts(opts){const body=document.getElementById('chatBody');const w=document.createElement('div');w.className='cm bot';w.innerHTML=`<div class="cb-opts">${opts.map(o=>`<button class="cb-opt" onclick="selectOpt('${o.v}','${o.l}')">${o.l}</button>`).join('')}</div>`;body.appendChild(w);body.scrollTop=body.scrollHeight;}
+function selectOpt(v,l){document.querySelectorAll('.cb-opts').forEach(e=>e.parentElement.remove());addUser(l);const flow=flows[v];if(!flow)return;addBot(flow.bot,100);if(flow.opts)setTimeout(()=>addOpts(flow.opts),1000);if(flow.input){collectingLead=true;leadData={interest:v,stage:'name'};document.getElementById('chatInput').placeholder='Type your name...';}}
+function sendChat(){const inp=document.getElementById('chatInput');const txt=inp.value.trim();if(!txt)return;addUser(txt);inp.value='';if(collectingLead){if(leadData.stage==='name'){leadData.name=txt;leadData.stage='phone';inp.placeholder='Your phone number...';addBot(`Thanks ${txt}! 😊 And your phone number?`,200);}else if(leadData.stage==='phone'){leadData.phone=txt;collectingLead=false;inp.placeholder='Type a message...';addBot(`Our team will call ${leadData.name} at ${txt} within 2 hours. 🙏`,200);}}else{addBot("You can call us at +91 98765 43210 or share your number for a callback!",200);}}
+</script>
+</body>
+</html>
